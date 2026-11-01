@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="SM-logo.png">
+<link rel="apple-touch-icon" href="SM-logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,9 +29,10 @@
   <button type="button" data-f="ctrl" aria-pressed="false">Optimal control</button>
   <button type="button" data-f="eco" aria-pressed="false">Ecology</button>
 </div>
-<p class="count" id="count" aria-live="polite">26 journal articles</p>
+<p class="count" id="count" aria-live="polite">26 journal articles and 2 conference papers</p>
 <!-- To add a paper: copy one <li ...>...</li>, paste it at the top of the right year, and edit it.
-     data-t topics: frac, space, delay, ctrl, eco (separate with spaces) -->
+     data-t topics: frac, space, delay, ctrl, eco (separate with spaces).
+     Conference papers below use the same topics. -->
 <div id="publist">
 <div class="year"><div class="y">2027</div><ul>
 <li data-t="space delay"><span class="ti">Impact of incubation delay and spatial diffusion on epidemic dynamics: Bifurcations and pattern formation in an SIR model with non-linear incidence</span><span class="au"><b>S. Majee</b>, S. Jana, R. Anand, J. Ramprabhakar, S. M. Venthan, N. Thakkar</span><span class="ve">Mathematics and Computers in Simulation 251 (2027) 854&ndash;872<a href="https://doi.org/10.1016/j.matcom.2026.08.035" target="_blank" rel="noopener">DOI</a></span></li>
@@ -70,13 +73,15 @@
 <li data-t="frac"><span class="ti">Complex dynamics of a fractional-order SIR system in the context of COVID-19</span><span class="au"><b>S. Majee</b>, S. Adak, S. Jana, M. Mandal, T. K. Kar</span><span class="ve">Journal of Applied Mathematics and Computing 68 (2022) 4051&ndash;4074<a href="https://doi.org/10.1007/s12190-021-01681-z" target="_blank" rel="noopener">DOI</a></span></li>
 </ul></div>
 </div>
+<div id="conflist">
 <h3 style="margin-top:48px">Conference proceedings</h3>
 <div class="year"><div class="y">2025</div><ul>
-<li><span class="ti">Dynamical study of the spread of monkeypox including optimal vaccination and treatment with cost-effectiveness</span><span class="au"><b>S. Majee</b>, S. Jana, T. K. Kar</span><span class="ve">Mathematical Analysis and Applications in Biological Phenomena through Modelling, Springer Proceedings in Mathematics &amp; Statistics (2025) 147&ndash;156<a href="https://link.springer.com/chapter/10.1007/978-981-97-9194-1_11" target="_blank" rel="noopener">Link</a></span></li>
+<li data-t="ctrl"><span class="ti">Dynamical study of the spread of monkeypox including optimal vaccination and treatment with cost-effectiveness</span><span class="au"><b>S. Majee</b>, S. Jana, T. K. Kar</span><span class="ve">Mathematical Analysis and Applications in Biological Phenomena through Modelling, Springer Proceedings in Mathematics &amp; Statistics (2025) 147&ndash;156<a href="https://link.springer.com/chapter/10.1007/978-981-97-9194-1_11" target="_blank" rel="noopener">Link</a></span></li>
 </ul></div>
 <div class="year"><div class="y">2022</div><ul>
-<li><span class="ti">Growth of single species population: A novel approach</span><span class="au"><b>S. Majee</b>, S. Jana, A. Khatua, T. K. Kar</span><span class="ve">Nonlinear Dynamics and Applications, Springer Proceedings in Complexity (2022) 907&ndash;915<a href="https://link.springer.com/chapter/10.1007/978-3-030-99792-2_76" target="_blank" rel="noopener">Link</a></span></li>
+<li data-t="eco"><span class="ti">Growth of single species population: A novel approach</span><span class="au"><b>S. Majee</b>, S. Jana, A. Khatua, T. K. Kar</span><span class="ve">Nonlinear Dynamics and Applications, Springer Proceedings in Complexity (2022) 907&ndash;915<a href="https://link.springer.com/chapter/10.1007/978-3-030-99792-2_76" target="_blank" rel="noopener">Link</a></span></li>
 </ul></div>
+</div>
 <p class="small muted" style="margin-top:24px">Softcopies of any paper are available by <a href="mailto:suvankarmajee2@gmail.com">email</a>. Citation counts are on <a href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
 </div>
 </main>
