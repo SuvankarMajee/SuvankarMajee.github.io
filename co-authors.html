@@ -18,27 +18,210 @@
 <div class="banner page"><canvas id="rd" aria-hidden="true"></canvas>
   <div class="banner-in"><p class="crumb">Research &amp; publications</p><h1>Co-authors</h1></div></div>
 <main id="content">
-<div class="narrow">
-<p>Researchers I have published with, ordered by the number of joint papers (journal articles and conference papers). Two different co-authors publish as S. Jana; their joint papers are counted together here.</p>
-<ul class="cols">
-  <li>S. Jana<span>28 joint papers</span></li>
-  <li>Tapan Kumar Kar<span>24 joint papers</span></li>
-  <li>S. Barman<span>12 joint papers</span></li>
-  <li>S. Adak<span>6 joint papers</span></li>
-  <li>D. K. Das<span>4 joint papers</span></li>
-  <li>A. Khatua<span>4 joint papers</span></li>
-  <li>R. Anand<span>3 joint papers</span></li>
-  <li>S. Patra<span>3 joint papers</span></li>
-  <li>J. Ramprabhakar<span>3 joint papers</span></li>
-  <li>A. De<span>2 joint papers</span></li>
-  <li>M. Mandal<span>2 joint papers</span></li>
-  <li>S. Rit<span>2 joint papers</span></li>
-  <li>B. Bhunia<span>1 joint paper</span></li>
-  <li>R. Majumder<span>1 joint paper</span></li>
-  <li>Juan J. Nieto<span>1 joint paper</span></li>
-  <li>N. Thakkar<span>1 joint paper</span></li>
-  <li>S. M. Venthan<span>1 joint paper</span></li>
-</ul>
+<div>
+<style>
+  body{background:#fff}
+  .ca-wrap{max-width:920px;margin:auto;font-family:Arial, sans-serif}
+  .ca-row{display:flex;gap:16px;align-items:flex-start}
+  .ca-years{width:180px;flex:none;max-height:520px;overflow:auto;border:1px solid #e0e0e0;border-radius:8px;padding:10px;font-size:15px}
+  .ca-years label{display:flex;align-items:center;gap:8px;cursor:pointer}
+  #chordWrap{position:relative;flex:1;min-width:0;max-width:700px;border:1px solid #eee;border-radius:8px;margin-top:30px}
+  #chordSvg{display:block;width:100%;height:auto;overflow:visible}
+  .ca-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:50px 0 0;max-width:none}
+  @media (max-width:760px){
+    .ca-row{flex-direction:column}
+    .ca-years{width:100%;max-height:none}
+    #yearFilters{flex-direction:row!important;flex-wrap:wrap;gap:6px 18px!important}
+    #chordWrap{width:100%;margin-top:6px}
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
+<div class="ca-wrap">
+  <p style="text-align:center;max-width:none;margin:0 0 24px;font-family:var(--serif);font-size:19px;color:#202124;">Researchers I have worked with.</p>
+  <h3 style="text-align:center;margin:10px 0 16px;color:#202124;font-weight:600;font-family:Arial, sans-serif;font-size:22px;">
+    Co-author Chord Diagram*
+  </h3>
+
+  <div class="ca-row">
+    <!-- Year filter -->
+    <div class="ca-years">
+      <div style="font-weight:600;margin-bottom:8px;">🔎 Years</div>
+      <div id="yearFilters" style="display:flex;flex-direction:column;gap:6px;"></div>
+    </div>
+
+    <!-- Chart area -->
+    <div id="chordWrap">
+      <svg id="chordSvg" viewBox="0 0 700 520" role="img" aria-label="Chord diagram of co-authorships"></svg>
+      <div id="tooltip"
+           style="position:absolute;pointer-events:none;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 8px;font-size:12px;color:#333;box-shadow:0 2px 8px rgba(0,0,0,.1);opacity:0;white-space:nowrap;">
+      </div>
+    </div>
+  </div>
+</div>
+<p class="ca-note">*Last updated on 10/04/2026.</p>
+
+<!-- D3 -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+/* ===================== YOUR DATA =====================
+   One entry per paper: { year: 2025, authors: ["Alice", "Bob", "Carol"] }
+   Each pair of co-authors in a paper increments their link count by 1.
+   Write each person's name the same way every time.
+*/
+const papers = [
+  {year: 2022, authors:["S. Majee", "S. Jana", "A. Khatua", "T. K. Kar"]},
+  {year: 2022, authors:["S. Majee", "S. Adak", "S. Jana", "M. Mandal", "T. K. Kar"]},
+  {year: 2022, authors:["S. Majee", "S. Jana", "D. K. Das", "T. K. Kar"]},
+  {year: 2022, authors:["S. Adak", "R. Majumder", "S. Majee", "S. Jana", "T. K. Kar"]},
+  {year: 2022, authors:["M. Mandal", "S. Jana", "S. Majee", "A. Khatua", "T. K. Kar"]},
+  {year: 2023, authors:["S. Majee", "S. Jana", "S. Barman", "T. K. Kar"]},
+  {year: 2023, authors:["S. Majee", "S. Jana", "T. K. Kar"]},
+  {year: 2023, authors:["S. Majee", "S. Barman", "A. Khatua", "T. K. Kar", "S. Jana"]},
+  {year: 2023, authors:["S. Majee", "S. Jana", "T. K. Kar", "S. Barman", "D. K. Das"]},
+  {year: 2023, authors:["S. Majee", "T. K. Kar", "S. Jana", "D. K. Das", "J. J. Nieto"]},
+  {year: 2024, authors:["S. Barman", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2024, authors:["S. Majee", "S. Jana", "T. K. Kar", "B. Bhunia"]},
+  {year: 2024, authors:["S. Barman", "S. Jana", "S. Majee", "D. K. Das", "T. K. Kar"]},
+  {year: 2024, authors:["S. Barman", "S. Jana", "S. Majee", "A. Khatua", "T. K. Kar"]},
+  {year: 2024, authors:["S. Adak", "S. Barman", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2024, authors:["S. Barman", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2025, authors:["S. Patra", "S. Jana", "S. Adak", "S. Majee", "T. K. Kar"]},
+  {year: 2025, authors:["S. Majee", "S. Jana", "T. K. Kar", "Anand R.", "J. Ramprabhakar"]},
+  {year: 2025, authors:["S. Barman", "S. Majee", "S. Patra", "S. Jana", "T. K. Kar"]},
+  {year: 2025, authors:["Shymashree Jana", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2025, authors:["S. Majee", "S. Jana", "T. K. Kar"]},
+  {year: 2026, authors:["S. Patra", "S. Jana", "S. Adak", "S. Barman", "S. Majee", "T. K. Kar"]},
+  {year: 2026, authors:["S. Majee", "S. Jana", "Anand R.", "J. Ramprabhakar"]},
+  {year: 2026, authors:["S. Adak", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2026, authors:["S. Rit", "S. Jana", "A. De", "S. Majee", "S. Barman"]},
+];
+
+/* ============== CONFIG ============== */
+const W = 700, H = 520;
+const innerR = Math.min(W, H)*0.38;
+const outerR = innerR + 16;
+const svg = d3.select("#chordSvg")
+  .append("g").attr("transform", `translate(${W/2},${H/2})`);
+const tooltip = d3.select("#tooltip");
+const wrapNode = document.getElementById("chordWrap");
+const color = d3.scaleOrdinal(d3.schemeTableau10);
+
+/* ============== UTILITIES ============== */
+function getYears(data){ return Array.from(new Set(data.map(d=>d.year))).sort((a,b)=>b-a); }
+
+function buildMatrix(data){
+  const authors = Array.from(new Set(data.flatMap(d => d.authors))).sort(d3.ascending);
+  const idx = new Map(authors.map((a,i)=>[a,i]));
+  const n = authors.length;
+  const M = Array.from({length:n}, ()=>Array(n).fill(0));
+  data.forEach(p=>{
+    const A = p.authors.map(a=>idx.get(a)).filter(i=>i!==undefined);
+    for(let i=0;i<A.length;i++){
+      for(let j=i+1;j<A.length;j++){
+        M[A[i]][A[j]] += 1;
+        M[A[j]][A[i]] += 1;
+      }
+    }
+  });
+  return {authors, matrix:M};
+}
+
+/* ============== RENDER ============== */
+function render(selectedYears){
+  const filtered = papers.filter(p => selectedYears.has(p.year));
+  const {authors, matrix} = buildMatrix(filtered);
+
+  svg.selectAll("*").remove();
+
+  if (authors.length === 0){
+    svg.append("text").attr("text-anchor","middle").attr("y",4)
+      .style("fill","#666").text("Tick at least one year to see co-authorships");
+    return;
+  }
+
+  const chord = d3.chord()
+    .padAngle(0.02)
+    .sortSubgroups(d3.descending)
+    (matrix.map(row => row.map(v=>v)));
+
+  const arc = d3.arc().innerRadius(innerR).outerRadius(outerR);
+  const ribbon = d3.ribbon().radius(innerR);
+
+  // Groups (author arcs)
+  const group = svg.append("g")
+    .selectAll("g")
+    .data(chord.groups)
+    .join("g");
+
+  group.append("path")
+    .attr("class", "arc")
+    .attr("d", arc)
+    .attr("fill", d => color(d.index))
+    .attr("stroke", "#333")
+    .attr("stroke-width", 0.6)
+    .attr("opacity", 0.85);
+
+  // Author labels
+  group.append("text")
+    .each(d => d.angle = (d.startAngle + d.endAngle)/2)
+    .attr("dy",".35em")
+    .attr("transform", d => `
+      rotate(${d.angle * 180/Math.PI - 90})
+      translate(${outerR + 10})
+      ${d.angle > Math.PI ? "rotate(180)" : ""}
+    `)
+    .style("font-size","11px")
+    .style("fill","#1f1f1f")
+    .attr("text-anchor", d => d.angle > Math.PI ? "end" : "start")
+    .text(d => authors[d.index]);
+
+  // Chords (links)
+  const ribbons = svg.append("g")
+    .attr("fill-opacity", 0.6)
+    .selectAll("path")
+    .data(chord)
+    .join("path")
+      .attr("class", "ribbon")
+      .attr("d", ribbon)
+      .attr("fill", d => color(d.source.index))
+      .attr("stroke", "#bbb")
+      .on("mousemove", (event,d) => {
+        const [x, y] = d3.pointer(event, wrapNode);
+        tooltip.style("opacity",1)
+               .style("left", (x+15)+"px")
+               .style("top",  (y+15)+"px")
+               .html(`<strong>${authors[d.source.index]}</strong> ↔ <strong>${authors[d.target.index]}</strong><br/>Co-authored papers: <strong>${d.source.value}</strong>`);
+      })
+      .on("mouseleave", ()=> tooltip.style("opacity",0));
+
+  // Hover an author: highlight that author's links
+  group.on("mouseover", (event,d)=>{
+      const i = d.index;
+      ribbons.attr("opacity", p => (p.source.index===i || p.target.index===i) ? 1 : 0.08);
+    })
+    .on("mouseout", ()=> ribbons.attr("opacity", 1));
+}
+
+/* ============== YEAR FILTER UI ============== */
+const years = getYears(papers);
+const selected = new Set(years); // all on by default
+const yWrap = d3.select("#yearFilters");
+years.forEach(y=>{
+  const id = "y_"+y;
+  const row = yWrap.append("label").attr("for", id);
+  row.append("input")
+    .attr("type","checkbox")
+    .attr("id", id).property("checked", true)
+    .on("change", function(){
+      if(this.checked) selected.add(y); else selected.delete(y);
+      render(selected);
+    });
+  row.append("span").text(y);
+});
+render(selected);
+</script>
+
 </div>
 </main>
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
