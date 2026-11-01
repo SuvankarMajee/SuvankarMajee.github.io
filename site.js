@@ -76,7 +76,7 @@ const MENU = [
   const cv = document.getElementById('rd'); if (!cv) return;
   const ctx = cv.getContext('2d');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const Du = 1.0, Dv = 0.5, F = 0.0545, k = 0.062, MAX = 9000;
+  const Du = 1.0, Dv = 0.5, F = 0.03, k = 0.06, MAX = 15000;
   let W, H, u, v, u2, v2, img, steps = 0, running = true, visible = true;
 
   function size(){
