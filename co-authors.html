@@ -27,6 +27,10 @@
   .ca-years label{display:flex;align-items:center;gap:8px;cursor:pointer}
   #chordWrap{position:relative;flex:1;min-width:0;max-width:700px;border:1px solid #eee;border-radius:8px;margin-top:30px}
   #chordSvg{display:block;width:100%;height:auto;overflow:visible}
+  .ca-toggle{max-width:920px;margin:14px auto 0;font-family:var(--sans)}
+  .ca-toggle>summary{font-size:13px}
+  .tl-table summary::before,.ca-toggle>summary::before{content:"\25B8  "}
+  .tl-table[open]>summary::before,.ca-toggle[open]>summary::before{content:"\25BE  "}
   .ca-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:50px 0 0;max-width:none}
   @media (max-width:760px){
     .ca-row{flex-direction:column}
@@ -84,7 +88,9 @@
   <details class="tl-table"><summary>Show the numbers as a table</summary><div id="tlTable"></div></details>
 </section>
 
-<div class="ca-wrap" style="margin-top:80px">
+<details class="tl-table ca-toggle">
+<summary>Show the chord diagram</summary>
+<div class="ca-wrap" style="margin-top:24px">
   <h3 style="text-align:center;margin:10px 0 16px;color:#202124;font-weight:600;font-family:Arial, sans-serif;font-size:22px;">
     Co-author Chord Diagram*
   </h3>
@@ -105,6 +111,7 @@
     </div>
   </div>
 </div>
+</details>
 <p class="ca-note">*Last updated on 10/04/2026.</p>
 
 <script>
