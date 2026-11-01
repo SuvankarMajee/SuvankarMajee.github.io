@@ -22,142 +22,186 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 <style>
   body{background:#fff}
-  .cm{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;font-family:"Times New Roman",Times,serif;color:#222}
-  .cm h2{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:28px;text-align:center;color:#222;margin:0 0 22px;letter-spacing:0}
-  .gs-table{width:100%;border-collapse:collapse;font-size:19px;text-align:center}
-  .gs-table thead th{background:#F2F2F2;font-weight:700;padding:3px 0;border-top:2px solid #D0D0D0;border-bottom:1px solid #D0D0D0}
-  .gs-table td{padding:7px 0}
-  .gs-table tbody tr:last-child td{border-bottom:2px solid #D0D0D0;padding-bottom:10px}
-  .cm-chart{position:relative}
-  .cm-chart svg{display:block;width:100%;height:auto;overflow:visible}
-  .sc-card{background:#fff;border:1px solid #E6E6E6;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:4px 14px 14px}
-  .cm-link{display:block;text-align:center;font-family:"Times New Roman",Times,serif;font-weight:700;font-size:19px;color:#1A73E8;text-decoration:none;margin-top:18px}
-  .cm-link:hover{text-decoration:underline;color:#1A73E8}
-  .cm-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:70px 0 0}
-  .cm-tip{position:absolute;pointer-events:none;background:#222;color:#fff;font:13px/1.35 Arial,sans-serif;padding:5px 8px;border-radius:3px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0}
-  @media (max-width:900px){.cm{grid-template-columns:1fr;gap:48px}.cm h2{font-size:24px}}
+  .cm{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;font-family:"Times New Roman",Times,serif;color:#202124;font-size:18px}
+  .cm h2{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:28px;letter-spacing:0}
+  .mbox{width:100%;max-width:550px;height:350px;margin:auto;border:1px solid #eee;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.04);overflow:hidden;background:#fff;box-sizing:border-box}
+  .gsbox{display:flex;flex-direction:column;padding:10px 14px 10px}
+  .gsbox table{font-size:17px}
+  .gsbox td{padding:4px!important}
+  .gsbox .gs-chart{position:relative;flex:1;min-height:0}
+  .cm h2{margin:0 0 15px!important}
+  .cm-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:60px 0 0;max-width:none}
+  @media (max-width:900px){.cm{grid-template-columns:1fr;gap:40px}.cm h2{font-size:24px}}
+  @media (max-width:560px){.mbox{height:auto}.gsbox .gs-chart{flex:none;height:220px}#scopusModule{height:auto!important}#scopusSummary{height:auto!important;gap:18px!important;padding:0 10px 10px}#scopusSummary>div>div:first-child{font-size:22px!important}}
 </style>
 
-<div class="cm">
-  <!-- ============ Google Scholar ============ -->
-  <section>
-    <h2>Google Scholar Citation Metrics*</h2>
-    <table class="gs-table">
-      <thead><tr><th></th><th>All</th><th id="gs-since">Since 2020</th></tr></thead>
-      <tbody id="gs-table"></tbody>
-    </table>
-    <div class="cm-chart" id="gs-chart"></div>
-    <a class="cm-link" href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener">View full profile on Google Scholar</a>
-  </section>
+<!-- Chart.js (loaded once for both charts) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.js"></script>
 
-  <!-- ============ Scopus ============ -->
-  <section>
-    <h2>Scopus Citation Metrics*</h2>
-    <div class="sc-card"><div class="cm-chart" id="sc-chart"></div></div>
-    <a class="cm-link" href="https://www.scopus.com/authid/detail.uri?authorId=57418706300" target="_blank" rel="noopener">View full profile on Scopus</a>
-  </section>
+<div class="cm">
+
+<!-- ===================== GOOGLE SCHOLAR ===================== -->
+<section>
+<h2 style="text-align:center; margin-bottom:15px; color:#202124;">
+  Google Scholar Citation Metrics*
+</h2>
+
+<div class="mbox gsbox">
+<table style="width:100%; border-collapse:collapse; margin-top:0; text-align:center; border-top:2px solid #ccc; border-bottom:2px solid #ccc;">
+  <tr style="background-color:#f2f2f2; border-bottom:1px solid #ccc;">
+    <th></th>
+    <th>All</th>
+    <th>Since 2020</th>
+  </tr>
+  <tr>
+    <td style="padding:6px;">Citations</td>
+    <td style="padding:6px;">521</td>
+    <td style="padding:6px;">520</td>
+  </tr>
+  <tr>
+    <td style="padding:6px;">h-index</td>
+    <td style="padding:6px;">13</td>
+    <td style="padding:6px;">13</td>
+  </tr>
+  <tr>
+    <td style="padding:6px;">i10-index</td>
+    <td style="padding:6px;">14</td>
+    <td style="padding:6px;">14</td>
+  </tr>
+</table>
+<div style="text-align:center; margin:8px 0 4px;">
+  <span style="display:inline-block; width:16px; height:10px; background-color:rgba(128, 128, 128, 0.8);"></span>
+  Citations per Year
 </div>
-<p class="cm-note" id="cm-note"></p>
+
+<!-- Chart Container -->
+<div class="gs-chart">
+  <canvas id="citationsChart"></canvas>
+</div>
+</div>
+
+<p style="text-align:center; margin-top:8px;">
+  <a href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener" style="text-decoration:none; color:#1a73e8; font-weight:bold;">
+    View full profile on Google Scholar
+  </a>
+</p>
+</section>
+
+<!-- ===================== SCOPUS ===================== -->
+<section>
+<h2 style="text-align:center; margin-bottom:15px; color:#202124;">
+  Scopus Citation Metrics*
+</h2>
+
+<div id="scopusModule" class="mbox" style="font-family:Arial, sans-serif; padding-top:8px;">
+  <!-- Summary row -->
+  <div id="scopusSummary"
+       style="height:56px; display:flex; justify-content:center; align-items:flex-start; gap:40px;">
+    <div style="text-align:center;">
+      <div style="font-size:26px; font-weight:600; color:#202124;">438</div>
+      <div style="font-size:13px; color:#555;">Citations by <strong>234</strong> documents</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:26px; font-weight:600; color:#202124;">26</div>
+      <div style="font-size:13px; color:#555;">Documents</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:26px; font-weight:600; color:#202124;">13</div>
+      <div style="font-size:13px; color:#555;">h-index</div>
+    </div>
+  </div>
+
+  <!-- Chart area -->
+  <div id="scopusChartWrap" style="position:relative; width:100%; height:270px; padding:0 8px 8px; box-sizing:border-box;">
+    <canvas id="docCitationChart"></canvas>
+  </div>
+</div>
+
+<p style="text-align:center; margin-top:8px;">
+  <a href="https://www.scopus.com/authid/detail.uri?authorId=57418706300" target="_blank" rel="noopener"
+     style="text-decoration:none; color:#0066cc; font-weight:bold;">
+     View full profile on Scopus
+  </a>
+</p>
+</section>
+</div>
+
+<p class="cm-note">*Last updated on 10/09/2026.</p>
 
 <script>
-/* =====================================================================
-   EDIT YOUR NUMBERS HERE. Everything on this page is drawn from this block.
-   ===================================================================== */
-const CITATIONS = {
-  updated: '10/09/2026',
-  scholar: {
-    sinceLabel: 'Since 2020',
-    all:   { citations: 521, h: 13, i10: 14 },
-    since: { citations: 520, h: 13, i10: 14 },
-    perYear: { 2021: 2, 2022: 6, 2023: 51, 2024: 86, 2025: 196, 2026: 174 }
+/* ---------- Google Scholar: citations per year ---------- */
+new Chart(document.getElementById('citationsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+    datasets: [{
+      label: 'Citations',
+      data: [3, 7, 51, 86, 195, 173],                    // <-- your data
+      backgroundColor: 'rgba(128, 128, 128, 0.8)',
+    }]
   },
-  scopus: {
-    citations: 438, citingDocuments: 234, documents: 26, h: 13,
-    documentsPerYear: { 2022: 5, 2023: 4, 2024: 3, 2025: 9, 2026: 5, 2027: 0 },
-    citationsPerYear: { 2022: 5, 2023: 43, 2024: 77, 2025: 162, 2026: 143, 2027: 2 }
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#333' } },
+      y: { beginAtZero: true, grid: { display: false }, ticks: { color: '#333' } }
+    },
+    plugins: { legend: { display: false } }
   }
-};
+});
 
-(function(){
-  const C = CITATIONS, S = C.scholar, P = C.scopus, NS = 'http://www.w3.org/2000/svg';
-  const AR = 'font-family="Arial,Helvetica,sans-serif"';
-  document.getElementById('cm-note').textContent = '*Last updated on ' + C.updated + '.';
-  document.getElementById('gs-since').textContent = S.sinceLabel;
-  document.getElementById('gs-table').innerHTML = [['Citations','citations'],['h-index','h'],['i10-index','i10']]
-    .map(([l,k]) => `<tr><td>${l}</td><td>${S.all[k]}</td><td>${S.since[k]}</td></tr>`).join('');
-
-  const niceMax = (m, step) => Math.max(step, Math.ceil(m / step) * step);
-  function tipFor(el){ const t = document.createElement('div'); t.className = 'cm-tip'; el.appendChild(t); return t; }
-  function hover(el, svg, tip, items){                  // items: [{x, y, w, html}]
-    items.forEach(it => {
-      const r = document.createElementNS(NS, 'rect');
-      Object.entries({x: it.x, y: it.top, width: it.w, height: it.h, fill: 'transparent'}).forEach(([a,v]) => r.setAttribute(a, v));
-      const show = () => { const k = el.clientWidth / svg.viewBox.baseVal.width;
-        tip.innerHTML = it.html; tip.style.left = it.cx*k + 'px'; tip.style.top = (it.cy*k - 8) + 'px'; tip.style.opacity = 1; };
-      r.addEventListener('mouseenter', show); r.addEventListener('touchstart', show, {passive:true});
-      r.addEventListener('mouseleave', () => tip.style.opacity = 0);
-      svg.appendChild(r);
-    });
+/* ---------- Scopus: documents (bars, left axis) + citations (line, right axis) ---------- */
+new Chart(document.getElementById('docCitationChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2022', '2023', '2024', '2025', '2026', '2027'],
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Documents',
+        data: [5, 4, 3, 9, 5, 0],                        // <-- your data
+        backgroundColor: 'rgba(0, 102, 204, 0.7)',
+        yAxisID: 'yDocs',
+        pointStyle: 'rect'
+      },
+      {
+        type: 'line',
+        label: 'Citations',
+        data: [7, 44, 77, 163, 144, 3],                  // <-- your data
+        borderColor: 'rgba(10, 10, 60, 0.9)',
+        backgroundColor: 'rgba(10, 10, 60, 0.9)',
+        yAxisID: 'yCite',
+        tension: 0,
+        borderWidth: 2,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: 'rgba(10, 10, 60, 0.9)',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointStyle: 'circle'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      yDocs: { type: 'linear', position: 'left', beginAtZero: true,
+               title: { display: true, text: 'Documents' }, ticks: { stepSize: 2, color: '#333' }, grid: { display: false } },
+      yCite: { type: 'linear', position: 'right', beginAtZero: true,
+               title: { display: true, text: 'Citations' }, ticks: { stepSize: 40, color: '#333' }, grid: { display: false } },
+      x:     { ticks: { color: '#333' }, grid: { display: false } }
+    },
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { usePointStyle: true } },
+      tooltip: {
+        enabled: true, mode: 'index', usePointStyle: true,
+        callbacks: { labelPointStyle: (ctx) => ({ pointStyle: ctx.dataset.label === 'Citations' ? 'circle' : 'rect', rotation: 0 }) }
+      }
+    }
   }
-
-  /* ---------- Google Scholar: grey bars, legend on top ---------- */
-  (function(){
-    const el = document.getElementById('gs-chart'), ys = Object.keys(S.perYear), vs = Object.values(S.perYear);
-    const W = 690, H = 290, L = 42, R = 8, T = 50, B = 34, iw = W-L-R, ih = H-T-B;
-    const max = niceMax(Math.max(...vs), 40), step = iw / ys.length, bw = step * 0.72;
-    let s = `<svg xmlns="${NS}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Google Scholar citations per year">`;
-    s += `<rect x="${W/2-82}" y="18" width="20" height="12" fill="#999"/><text x="${W/2-56}" y="29" font-family="Times New Roman,Times,serif" font-size="19" fill="#222">Citations per Year</text>`;
-    for (let t = 0; t <= max; t += 40){ const y = T + ih - t/max*ih;
-      s += `<text x="${L-14}" y="${y+5}" text-anchor="end" ${AR} font-size="14" fill="#444">${t}</text>`; }
-    s += `<line x1="${L}" x2="${L}" y1="${T}" y2="${T+ih}" stroke="#ccc"/><line x1="${L}" x2="${W-R}" y1="${T+ih}" y2="${T+ih}" stroke="#ccc"/>`;
-    const items = [];
-    vs.forEach((v,i) => { const x = L + step*i + (step-bw)/2, h = v/max*ih, y = T+ih-h;
-      s += `<rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="#999"/>`;
-      s += `<text x="${x+bw/2}" y="${H-8}" text-anchor="middle" ${AR} font-size="14" fill="#333">${ys[i]}</text>`;
-      items.push({x: L+step*i, top: T, w: step, h: ih, cx: x+bw/2, cy: y, html: `${ys[i]}: ${v} citations`}); });
-    s += '</svg>'; el.innerHTML = s;
-    hover(el, el.querySelector('svg'), tipFor(el), items);
-  })();
-
-  /* ---------- Scopus: headline numbers, documents (bars, left axis) + citations (line, right axis) ---------- */
-  (function(){
-    const el = document.getElementById('sc-chart'), ys = Object.keys(P.documentsPerYear);
-    const dv = Object.values(P.documentsPerYear), cv = ys.map(y => P.citationsPerYear[y] ?? 0);
-    const W = 690, H = 440, L = 64, R = 74, T = 104, B = 80, iw = W-L-R, ih = H-T-B;
-    const dmax = niceMax(Math.max(...dv), 2) < 10 ? 10 : niceMax(Math.max(...dv), 2);
-    const cmax = niceMax(Math.max(...cv), 40) < 200 ? 200 : niceMax(Math.max(...cv), 40);
-    const step = iw / ys.length, bw = step * 0.72;
-    let s = `<svg xmlns="${NS}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Scopus documents and citations per year">`;
-    // headline numbers
-    [[W*0.33, P.citations, `Citations by <tspan font-weight="700">${P.citingDocuments}</tspan> documents`],
-     [W*0.605, P.documents, 'Documents'], [W*0.775, P.h, 'h-index']].forEach(([x, n, lab]) => {
-      s += `<text x="${x}" y="40" text-anchor="middle" ${AR} font-size="32" font-weight="700" fill="#222">${n}</text>`;
-      s += `<text x="${x}" y="66" text-anchor="middle" ${AR} font-size="16" fill="#444">${lab}</text>`; });
-    // axes
-    for (let t = 0; t <= dmax; t += dmax/5){ const y = T + ih - t/dmax*ih;
-      s += `<text x="${L-14}" y="${y+5}" text-anchor="end" ${AR} font-size="14" fill="#333">${t}</text>`; }
-    for (let t = 0; t <= cmax; t += cmax/5){ const y = T + ih - t/cmax*ih;
-      s += `<text x="${W-R+14}" y="${y+5}" ${AR} font-size="14" fill="#333">${t}</text>`; }
-    s += `<line x1="${L}" x2="${L}" y1="${T}" y2="${T+ih}" stroke="#ddd"/><line x1="${W-R}" x2="${W-R}" y1="${T}" y2="${T+ih}" stroke="#ddd"/>`;
-    s += `<text transform="translate(18 ${T+ih/2}) rotate(-90)" text-anchor="middle" ${AR} font-size="14" fill="#555">Documents</text>`;
-    s += `<text transform="translate(${W-12} ${T+ih/2}) rotate(90)" text-anchor="middle" ${AR} font-size="14" fill="#555">Citations</text>`;
-    // bars
-    dv.forEach((v,i) => { const x = L + step*i + (step-bw)/2, h = v/dmax*ih;
-      s += `<rect x="${x}" y="${T+ih-h}" width="${bw}" height="${h}" fill="#4A90D9"/>`;
-      s += `<text x="${x+bw/2}" y="${T+ih+30}" text-anchor="middle" ${AR} font-size="14" fill="#333">${ys[i]}</text>`; });
-    // line
-    const pts = cv.map((v,i) => [L + step*i + step/2, T + ih - v/cmax*ih]);
-    s += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="#2B2D5C" stroke-width="2"/>`;
-    pts.forEach(([x,y]) => s += `<circle cx="${x}" cy="${y}" r="5" fill="#fff" stroke="#2B2D5C" stroke-width="2"/>`);
-    // legend
-    const ly = H - 18;
-    s += `<rect x="${W/2-118}" y="${ly-12}" width="14" height="14" fill="#4A90D9"/><text x="${W/2-98}" y="${ly}" ${AR} font-size="15" fill="#555">Documents</text>`;
-    s += `<circle cx="${W/2+30}" cy="${ly-5}" r="10" fill="#fff" stroke="#2B2D5C" stroke-width="2.5"/><text x="${W/2+44}" y="${ly}" ${AR} font-size="15" fill="#555">Citations</text>`;
-    s += '</svg>'; el.innerHTML = s;
-    hover(el, el.querySelector('svg'), tipFor(el), ys.map((y,i) => ({x: L+step*i, top: T, w: step, h: ih,
-      cx: L+step*i+step/2, cy: Math.min(pts[i][1], T+ih-dv[i]/dmax*ih), html: `${y}: ${dv[i]} documents, ${cv[i]} citations`})));
-  })();
-})();
+});
 </script>
 
 </div>
