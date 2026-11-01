@@ -27,6 +27,9 @@ const MENU = [
 ];
 
 (function buildMenu(){
+  if (!document.querySelector('link[rel="icon"]')){            // tab icon on every page
+    const l = document.createElement('link'); l.rel = 'icon'; l.type = 'image/png'; l.href = 'SM-logo.png'; document.head.appendChild(l);
+  }
   const here = location.pathname.split('/').pop() || 'index.html';
   const caret = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
   let html = '';
@@ -41,7 +44,7 @@ const MENU = [
     }
   });
   const bar = document.getElementById('topbar');
-  bar.innerHTML = `<div class="topbar-in"><a class="brand" href="index.html"><i>SM</i>Suvankar Majee</a>
+  bar.innerHTML = `<div class="topbar-in"><a class="brand" href="index.html"><i class="logo"><img src="SM-logo.png" alt="" onerror="this.parentNode.classList.add('nologo');this.remove()"></i>Suvankar Majee</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul class="menu" id="menu">${html}</ul></div>`;
 
@@ -76,7 +79,7 @@ const MENU = [
   const cv = document.getElementById('rd'); if (!cv) return;
   const ctx = cv.getContext('2d');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const Du = 1.0, Dv = 0.5, F = 0.03, k = 0.06, MAX = 15000;
+  const Du = 1.0, Dv = 0.5, F = 0.0545, k = 0.062, MAX = 9000;
   let W, H, u, v, u2, v2, img, steps = 0, running = true, visible = true;
 
   function size(){
