@@ -41,53 +41,61 @@
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 
-<p style="text-align:center;max-width:none;margin:0 0 30px;font-size:19px;color:#202124;">Researchers I have worked with.</p>
+<p style="text-align:left;max-width:none;margin:0 0 30px;font-size:19px;color:#202124;">My co-authors and how we are connected through our papers.</p>
 <style>
   .tlc{max-width:920px;margin:0 auto;font-family:var(--sans)}
   .tlc h3{font-family:Arial,sans-serif;text-align:center;font-size:22px;font-weight:600;color:#202124;margin:0 0 6px}
-  .tlc .how{text-align:center;font-size:14px;color:var(--muted);margin:0 auto 22px;max-width:62ch}
-  .tl-grid{--label:150px;--total:minmax(120px,1.7fr);position:relative}
-  .tl-row{display:grid;grid-template-columns:var(--label) repeat(var(--ny),minmax(0,1fr)) var(--total);align-items:center;min-height:34px;border-bottom:1px solid #EEF1F0}
-  .tl-row.head{min-height:30px;border-bottom:1px solid #C9D3D1;font-size:13px;color:var(--muted);font-weight:500}
-  .tl-row.head div{text-align:center}
-  .tl-row.head .t{text-align:left;padding-left:10px}
-  .tl-name{font-size:14.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px}
-  .tl-cell{display:flex;justify-content:center;align-items:center;height:34px;position:relative}
-  .tl-cell.on::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #CFE3DE;z-index:0}
-  .tl-cell.first::before{left:50%}
-  .tl-cell.last::before{right:50%}
-  .tl-cell.first.last::before{display:none}
-  .tl-dot{position:relative;z-index:1;width:calc(var(--s) * min(26px, 5.2vw));height:calc(var(--s) * min(26px, 5.2vw));border-radius:50%;background:#0E7C7B;box-shadow:0 0 0 2px #fff;cursor:default}
-  .tl-dot:focus-visible{outline:2px solid #10203A;outline-offset:2px}
-  .tl-total{display:flex;align-items:center;gap:8px;padding-left:10px}
-  .tl-bar{height:12px;background:#10203A;border-radius:0 4px 4px 0;min-width:3px}
-  .tl-total span{font-size:13.5px;color:var(--ink);font-variant-numeric:tabular-nums}
-  .tl-row:hover{background:#F6F9F8}
-  .tl-key{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
-  .tl-key i{display:inline-block;border-radius:50%;background:#0E7C7B;vertical-align:middle;margin-right:6px}
-  .tl-key b{display:inline-block;width:26px;height:10px;background:#10203A;border-radius:0 3px 3px 0;vertical-align:middle;margin-right:6px}
-  .tl-tip{position:absolute;pointer-events:none;background:#10203A;color:#fff;font-size:12.5px;line-height:1.35;padding:6px 9px;border-radius:4px;white-space:nowrap;transform:translate(-50%,calc(-100% - 10px));opacity:0;z-index:5}
+  .tlc .how{text-align:center;font-size:14px;color:var(--muted);margin:0 auto 14px;max-width:64ch}
+  #net{position:relative;display:flex;justify-content:center}
+  #net svg{display:block;max-width:100%;height:auto}
+  #net g[tabindex]:focus{outline:none}
+  #net g[tabindex]:focus circle{stroke:#10203A;stroke-width:3}
+  #net{border:1px solid #EEF1F0;border-radius:8px;overflow:hidden}
+  #net svg{cursor:grab}
+  #net svg:active{cursor:grabbing}
+  .zbtns{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:4px;z-index:4}
+  .zbtns button{width:32px;height:32px;border:1px solid #D9E0DE;background:#fff;border-radius:6px;font:500 18px/1 Arial,sans-serif;color:#10203A;cursor:pointer}
+  .zbtns button:hover{border-color:#0E7C7B;color:#0E7C7B}
+  @media (max-width:600px){#net{padding-bottom:46px}.zbtns{top:auto;bottom:8px;right:50%;transform:translateX(50%);flex-direction:row;gap:8px}}
+  .zhint{text-align:center;font-size:12.5px;color:var(--muted);margin:8px auto 0;max-width:none}
+  #netTip{position:absolute;pointer-events:none;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 9px;font:12.5px/1.4 Arial,sans-serif;color:#333;box-shadow:0 2px 8px rgba(0,0,0,.1);opacity:0;transform:translate(-50%,-100%);white-space:nowrap;z-index:5}
+  .net-key{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted);margin-top:6px}
+  .net-key span{display:flex;align-items:center;gap:7px}
+  .net-key i{display:inline-block;border-radius:50%}
   .tl-table{margin-top:12px;font-size:13px}
   .tl-table summary{cursor:pointer;color:var(--teal);font-weight:500;text-align:center;list-style:none}
+  .tl-table summary::-webkit-details-marker{display:none}
   .tl-table table{border-collapse:collapse;margin:10px auto 0;font-variant-numeric:tabular-nums}
   .tl-table th,.tl-table td{padding:4px 10px;border-bottom:1px solid #EEF1F0;text-align:center}
   .tl-table th:first-child,.tl-table td:first-child{text-align:left}
-  @media (max-width:600px){
-    .tl-grid{--label:96px;--total:minmax(64px,1.2fr)}
-    .tl-name{font-size:12.5px}
-    .tl-row.head{font-size:11px}
-    .tl-total span{font-size:12px}
-  }
 </style>
 
-<section class="tlc" aria-labelledby="tl-h">
-  <h3 id="tl-h">Collaborations Over Time*</h3>
-  <p class="how">Each row is a co-author, ordered by when we first published together. Dots show joint papers in each year (larger dot, more papers); the bar on the right is the total.</p>
-  <div class="tl-grid" id="tlGrid"></div>
-  <div class="tl-key" id="tlKey"></div>
-  <details class="tl-table"><summary>Show the numbers as a table</summary><div id="tlTable"></div></details>
+<section class="tlc" aria-labelledby="net-h">
+  <h3 id="net-h">Co-author Network Graph*</h3>
+  <p class="how">Hover over or tap a name to see that person&rsquo;s connections.</p>
+  <div id="net"><div id="netTip"></div>
+    <div class="zbtns" role="group" aria-label="Zoom">
+      <button type="button" id="zIn" aria-label="Zoom in">+</button>
+      <button type="button" id="zOut" aria-label="Zoom out">&minus;</button>
+      <button type="button" id="zReset" aria-label="Reset zoom">&#8634;</button>
+    </div>
+  </div>
+  <p class="zhint">Zoom with the + and &minus; buttons, Ctrl + scroll or a two-finger pinch. Drag to move around.</p>
+  <!--
+  <div class="net-key">
+    <span><i style="width:14px;height:14px;background:#10203A"></i>Me</span>
+    <span><i style="width:12px;height:12px;background:#0E7C7B"></i>Co-author</span>
+    <span><svg width="24" height="4" aria-hidden="true"><line x1="1" y1="2" x2="23" y2="2" stroke="#10203A" stroke-opacity=".6" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/></svg>My papers with that co-author</span>
+    <span><i style="width:22px;height:3px;border-radius:0;background:#9FB4B8"></i>Co-authors who published together</span>
+  </div>
+  -->
+  <details class="tl-table"><summary>Show the numbers as a table</summary>
+  <h2 style="text-align:center;margin:10px 0 16px;color:#202124;font-weight:600;font-family:Arial, sans-serif;font-size:22px;">
+    Collaborations Over Time
+  </h2>
+    <div id="netTable"></div></details>
 </section>
-
+  
 <details class="tl-table ca-toggle">
 <summary>Show the chord diagram</summary>
 <div class="ca-wrap" style="margin-top:24px">
@@ -153,65 +161,118 @@ const papers = [
 ];
 
 </script>
-<script>
-/* ============== COLLABORATION TIMELINE (reads the same `papers` list) ============== */
-(function(){
-  const grid = document.getElementById('tlGrid');
-  const years = Array.from(new Set(papers.map(p => p.year))).sort((a,b) => a-b);
-  const span = []; for (let y = years[0]; y <= years[years.length-1]; y++) span.push(y);
-
-  // count joint papers per co-author per year
-  const by = new Map();
-  papers.forEach(p => new Set(p.authors).forEach(a => {
-    if (a === ME) return;
-    if (!by.has(a)) by.set(a, {name:a, years:{}, total:0});
-    const r = by.get(a); r.years[p.year] = (r.years[p.year] || 0) + 1; r.total++;
-  }));
-  const rows = [...by.values()].map(r => {
-    const ys = Object.keys(r.years).map(Number); r.first = Math.min(...ys); r.lastY = Math.max(...ys); return r;
-  }).sort((a,b) => a.first - b.first || b.total - a.total || a.name.localeCompare(b.name));
-
-  const maxCell = Math.max(...rows.flatMap(r => Object.values(r.years)));
-  const maxTot  = Math.max(...rows.map(r => r.total));
-  const size = c => Math.max(0.32, Math.sqrt(c / maxCell));            // dot area ∝ count
-  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
-  grid.style.setProperty('--ny', span.length);
-
-  let h = '<div class="tl-row head"><div></div>' + span.map(y => `<div>${y}</div>`).join('') + '<div class="t">Total</div></div>';
-  rows.forEach(r => {
-    h += `<div class="tl-row"><div class="tl-name" title="${r.name}">${r.name}</div>`;
-    span.forEach(y => {
-      const c = r.years[y] || 0, on = y >= r.first && y <= r.lastY;
-      const cls = 'tl-cell' + (on ? ' on' : '') + (y === r.first ? ' first' : '') + (y === r.lastY ? ' last' : '');
-      h += `<div class="${cls}">` + (c ? `<span class="tl-dot" tabindex="0" style="--s:${size(c)}" data-tip="<b>${r.name}</b><br>${y}: ${plural(c,'joint paper')}" aria-label="${r.name}, ${y}: ${plural(c,'joint paper')}"></span>` : '') + '</div>';
-    });
-    h += `<div class="tl-total"><div class="tl-bar" style="width:calc(${r.total / maxTot} * (100% - 34px))"></div><span>${r.total}</span></div></div>`;
-  });
-  grid.innerHTML = h;
-
-  // size key
-  const keys = [...new Set([1, Math.round(maxCell/2), maxCell])].filter(k => k >= 1);
-  document.getElementById('tlKey').innerHTML =
-    keys.map(k => { const d = (size(k)*24).toFixed(1); return `<span><i style="width:${d}px;height:${d}px"></i>${plural(k,'paper')} in a year</span>`; }).join('') +
-    '<span><b></b>total joint papers</span>';
-
-  // tooltip
-  const tip = document.createElement('div'); tip.className = 'tl-tip'; grid.appendChild(tip);
-  const show = el => { const g = grid.getBoundingClientRect(), e = el.getBoundingClientRect();
-    tip.innerHTML = el.dataset.tip; tip.style.left = (e.left + e.width/2 - g.left) + 'px'; tip.style.top = (e.top - g.top) + 'px'; tip.style.opacity = 1; };
-  grid.querySelectorAll('.tl-dot').forEach(d => {
-    d.addEventListener('mouseenter', () => show(d)); d.addEventListener('focus', () => show(d));
-    d.addEventListener('mouseleave', () => tip.style.opacity = 0); d.addEventListener('blur', () => tip.style.opacity = 0);
-  });
-
-  // table view
-  document.getElementById('tlTable').innerHTML = '<table><tr><th>Co-author</th>' + span.map(y => `<th>${y}</th>`).join('') + '<th>Total</th></tr>' +
-    rows.map(r => `<tr><td>${r.name}</td>` + span.map(y => `<td>${r.years[y] || ''}</td>`).join('') + `<td><b>${r.total}</b></td></tr>`).join('') + '</table>';
-})();
-</script>
 
 <!-- D3 -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+/* ============== CO-AUTHOR NETWORK GRAPH (reads the same `papers` list) ============== */
+(function(){
+  const box = document.getElementById('net'), tip = document.getElementById('netTip');
+  const count = new Map(), links = new Map(), perYear = new Map();
+  papers.forEach(p => {
+    const a = [...new Set(p.authors)];
+    a.forEach(x => {
+      count.set(x, (count.get(x) || 0) + 1);
+      if (x !== ME){ if (!perYear.has(x)) perYear.set(x, {}); const y = perYear.get(x); y[p.year] = (y[p.year] || 0) + 1; }
+    });
+    for (let i = 0; i < a.length; i++) for (let j = i + 1; j < a.length; j++){
+      if (a[i] === ME || a[j] === ME) continue;                 // you are on every paper: drawn as faint spokes instead
+      const k = [a[i], a[j]].sort().join('|'); links.set(k, (links.get(k) || 0) + 1);
+    }
+  });
+  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+
+  function draw(){
+    box.querySelector('svg')?.remove();
+    const W = Math.max(330, box.clientWidth), H = W < 600 ? Math.round(W * 1.15) : 540;
+    const R = Math.min(W, H) / 2 - (W < 600 ? 30 : 40);
+    const k = Math.min(1, W / 680);
+    const nodes = [...count.keys()].map(id => ({id, n: count.get(id)}));
+    const edges = [...links].map(([key, w]) => { const [s, t] = key.split('|'); return {source: s, target: t, w}; });
+    const r = d => d.id === ME ? 22 * k + 4 : (4 + Math.sqrt(d.n) * 3.2) * (0.6 + 0.4 * k);
+    const maxN = Math.max(...nodes.filter(d => d.id !== ME).map(d => d.n));
+    const fs = W < 600 ? 10.5 : 12.5, est = d => d.id.length * fs * 0.55;           // rough label width
+    const me = nodes.find(d => d.id === ME); me.fx = W/2; me.fy = H/2;
+
+    const sim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(edges).id(d => d.id).distance(R * 0.42))
+      .force('charge', d3.forceManyBody().strength(-520 * k))
+      .force('collide', d3.forceCollide(d => d.id === ME ? r(d) + 10 : Math.max(r(d) + 8, est(d) / 2 + 6)).strength(1).iterations(3))
+      .force('radial', d3.forceRadial(d => d.id === ME ? 0 : R * (1 - 0.6 * Math.sqrt(d.n / maxN)), W/2, H/2).strength(0.3))
+      .stop();
+    for (let i = 0; i < 400; i++) sim.tick();                    // fixed number of steps: same layout every visit
+    nodes.forEach(d => { const h = d.id === ME ? 0 : est(d) / 2; d.x = Math.max(h + 4, Math.min(W - h - 4, d.x)); d.y = Math.max(16, Math.min(H - 30, d.y)); });
+
+    // crop to the drawing: centre it horizontally and trim empty space above and below
+    const x0 = d3.min(nodes, d => d.x - (d.id === ME ? r(d) : Math.max(r(d), est(d)/2))), x1 = d3.max(nodes, d => d.x + (d.id === ME ? r(d) : Math.max(r(d), est(d)/2)));
+    const y0 = d3.min(nodes, d => d.y - r(d)), y1 = d3.max(nodes, d => d.y + r(d) + fs + 6);
+    const dx = (W - (x1 - x0)) / 2 - x0, dy = 12 - y0, Hc = Math.round(y1 - y0 + 24);
+    nodes.forEach(d => { d.x += dx; d.y += dy; });
+    const cx = W/2 + dx, cy = H/2 + dy;
+    const svg = d3.select(box).insert('svg', ':first-child').attr('viewBox', `0 0 ${W} ${Hc}`).attr('width', W).attr('height', Hc)
+      .attr('role', 'img').attr('aria-label', 'Network of co-authors: circle size shows joint papers, lines join co-authors who published together');
+    const gz = svg.append('g');
+    const spoke = gz.append('g').selectAll('line').data(nodes.filter(d => d.id !== ME)).join('line')
+      .attr('x1', cx).attr('y1', cy).attr('x2', d => d.x).attr('y2', d => d.y)
+      .attr('stroke', '#10203A').attr('stroke-opacity', 0.45).attr('stroke-width', 1.4).attr('stroke-dasharray', '5 4')
+      .attr('stroke-linecap', 'round');
+    const link = gz.append('g').selectAll('line').data(edges).join('line')
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y)
+      .attr('stroke', '#9FB4B8').attr('stroke-opacity', 0.7).attr('stroke-width', d => 0.8 + Math.sqrt(d.w) * 1.1);
+    const node = gz.append('g').selectAll('g').data(nodes).join('g')
+      .attr('transform', d => `translate(${d.x},${d.y})`).attr('tabindex', d => d.id === ME ? null : 0);
+    node.append('circle').attr('r', r).attr('fill', d => d.id === ME ? '#10203A' : '#0E7C7B').attr('stroke', '#fff').attr('stroke-width', 2);
+    node.filter(d => d.id !== ME).append('text').text(d => d.id).attr('text-anchor','middle').attr('dy', d => r(d) + fs + 2)
+      .attr('font-family','Arial, sans-serif').attr('font-size', fs).attr('stroke','#fff').attr('stroke-width',3).attr('stroke-linejoin','round').attr('fill','#fff');
+    node.append('text').text(d => d.id === ME ? 'Suvankar' : d.id)
+      .attr('text-anchor', 'middle')
+      .attr('dy', d => d.id === ME ? 4 : r(d) + fs + 2)
+      .attr('font-family', 'Arial, sans-serif').attr('font-size', d => d.id === ME ? 12 : fs)
+      .attr('fill', d => d.id === ME ? '#fff' : '#1B2533');
+
+    const neighbours = d => new Set(edges.filter(l => l.source === d || l.target === d).map(l => l.source === d ? l.target : l.source));
+    const on = (e, d) => {
+      if (d.id === ME) return;
+      const nb = neighbours(d);
+      link.attr('stroke-opacity', l => (l.source === d || l.target === d) ? 1 : 0.06);
+      spoke.attr('stroke-opacity', n => n === d ? 0.9 : 0.1);
+      node.attr('opacity', n => n === d || n.id === ME || nb.has(n) ? 1 : 0.22);
+      const yrs = Object.entries(perYear.get(d.id)).map(([y, c]) => `${y}: ${c}`).join(', ');
+      tip.innerHTML = `<strong>${d.id}</strong><br>${plural(d.n, 'joint paper')} with you<br><span style="color:#666">${yrs}</span>`;
+      const b = box.getBoundingClientRect(), c = e.currentTarget.querySelector('circle').getBoundingClientRect();
+      tip.style.left = (c.left + c.width/2 - b.left) + 'px'; tip.style.top = (c.top - b.top - 8) + 'px'; tip.style.opacity = 1;
+    };
+    const off = () => { link.attr('stroke-opacity', 0.7); spoke.attr('stroke-opacity', 0.45); node.attr('opacity', 1); tip.style.opacity = 0; };
+    node.on('mouseenter', on).on('focus', on).on('mouseleave', off).on('blur', off);
+
+    /* zoom and pan */
+    let K = 1;
+    zoom = d3.zoom().scaleExtent([0.7, 4])
+      .wheelDelta(e => -e.deltaY * (e.deltaMode === 1 ? 0.05 : e.deltaMode ? 1 : 0.002))   // gentle Ctrl + scroll steps
+      .filter(e => {
+        if (e.type === 'wheel') return e.ctrlKey || e.metaKey;           // plain scrolling keeps scrolling the page
+        if (e.type === 'touchstart') return e.touches.length > 1 || K > 1; // one finger scrolls the page unless zoomed in
+        return !e.button;
+      })
+      .on('zoom', e => { K = e.transform.k; gz.attr('transform', e.transform); tip.style.opacity = 0; });
+    svgSel = svg.call(zoom).style('touch-action', 'pan-x pan-y');
+  }
+  let zoom, svgSel;
+  document.getElementById('zIn').onclick    = () => svgSel.transition().duration(250).call(zoom.scaleBy, 1.5);
+  document.getElementById('zOut').onclick   = () => svgSel.transition().duration(250).call(zoom.scaleBy, 1/1.5);
+  document.getElementById('zReset').onclick = () => svgSel.transition().duration(300).call(zoom.transform, d3.zoomIdentity);
+  draw();
+  let t, lastW = box.clientWidth;
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { if (box.clientWidth !== lastW){ lastW = box.clientWidth; draw(); } }, 200); });
+
+  /* table view: co-author × year */
+  const years = [...new Set(papers.map(p => p.year))].sort((a,b) => a-b);
+  const rows = [...perYear.entries()].map(([name, ys]) => ({name, ys, total: count.get(name), first: Math.min(...Object.keys(ys).map(Number))}))
+    .sort((a,b) => b.total - a.total || a.first - b.first || a.name.localeCompare(b.name));
+  document.getElementById('netTable').innerHTML = '<table><tr><th>Co-author</th>' + years.map(y => `<th>${y}</th>`).join('') + '<th>Total</th></tr>' +
+    rows.map(r => `<tr><td>${r.name}</td>` + years.map(y => `<td>${r.ys[y] || ''}</td>`).join('') + `<td><b>${r.total}</b></td></tr>`).join('') + '</table>';
+})();
+</script>
 <script>
 /* ============== CONFIG ============== */
 const W = 700, H = 520;
