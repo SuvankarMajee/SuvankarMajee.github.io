@@ -37,8 +37,54 @@
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 
-<div class="ca-wrap">
-  <p style="text-align:center;max-width:none;margin:0 0 24px;font-family:var(--serif);font-size:19px;color:#202124;">Researchers I have worked with.</p>
+<p style="text-align:center;max-width:none;margin:0 0 30px;font-size:19px;color:#202124;">Researchers I have worked with.</p>
+<style>
+  .tlc{max-width:920px;margin:0 auto;font-family:var(--sans)}
+  .tlc h3{font-family:Arial,sans-serif;text-align:center;font-size:22px;font-weight:600;color:#202124;margin:0 0 6px}
+  .tlc .how{text-align:center;font-size:14px;color:var(--muted);margin:0 auto 22px;max-width:62ch}
+  .tl-grid{--label:150px;--total:minmax(120px,1.7fr);position:relative}
+  .tl-row{display:grid;grid-template-columns:var(--label) repeat(var(--ny),minmax(0,1fr)) var(--total);align-items:center;min-height:34px;border-bottom:1px solid #EEF1F0}
+  .tl-row.head{min-height:30px;border-bottom:1px solid #C9D3D1;font-size:13px;color:var(--muted);font-weight:500}
+  .tl-row.head div{text-align:center}
+  .tl-row.head .t{text-align:left;padding-left:10px}
+  .tl-name{font-size:14.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:10px}
+  .tl-cell{display:flex;justify-content:center;align-items:center;height:34px;position:relative}
+  .tl-cell.on::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #CFE3DE;z-index:0}
+  .tl-cell.first::before{left:50%}
+  .tl-cell.last::before{right:50%}
+  .tl-cell.first.last::before{display:none}
+  .tl-dot{position:relative;z-index:1;width:calc(var(--s) * min(26px, 5.2vw));height:calc(var(--s) * min(26px, 5.2vw));border-radius:50%;background:#0E7C7B;box-shadow:0 0 0 2px #fff;cursor:default}
+  .tl-dot:focus-visible{outline:2px solid #10203A;outline-offset:2px}
+  .tl-total{display:flex;align-items:center;gap:8px;padding-left:10px}
+  .tl-bar{height:12px;background:#10203A;border-radius:0 4px 4px 0;min-width:3px}
+  .tl-total span{font-size:13.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .tl-row:hover{background:#F6F9F8}
+  .tl-key{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
+  .tl-key i{display:inline-block;border-radius:50%;background:#0E7C7B;vertical-align:middle;margin-right:6px}
+  .tl-key b{display:inline-block;width:26px;height:10px;background:#10203A;border-radius:0 3px 3px 0;vertical-align:middle;margin-right:6px}
+  .tl-tip{position:absolute;pointer-events:none;background:#10203A;color:#fff;font-size:12.5px;line-height:1.35;padding:6px 9px;border-radius:4px;white-space:nowrap;transform:translate(-50%,calc(-100% - 10px));opacity:0;z-index:5}
+  .tl-table{margin-top:12px;font-size:13px}
+  .tl-table summary{cursor:pointer;color:var(--teal);font-weight:500;text-align:center;list-style:none}
+  .tl-table table{border-collapse:collapse;margin:10px auto 0;font-variant-numeric:tabular-nums}
+  .tl-table th,.tl-table td{padding:4px 10px;border-bottom:1px solid #EEF1F0;text-align:center}
+  .tl-table th:first-child,.tl-table td:first-child{text-align:left}
+  @media (max-width:600px){
+    .tl-grid{--label:96px;--total:minmax(64px,1.2fr)}
+    .tl-name{font-size:12.5px}
+    .tl-row.head{font-size:11px}
+    .tl-total span{font-size:12px}
+  }
+</style>
+
+<section class="tlc" aria-labelledby="tl-h">
+  <h3 id="tl-h">Collaborations over time</h3>
+  <p class="how">Each row is a co-author, ordered by when we first published together. Dots show joint papers in each year (larger dot, more papers); the bar on the right is the total.</p>
+  <div class="tl-grid" id="tlGrid"></div>
+  <div class="tl-key" id="tlKey"></div>
+  <details class="tl-table"><summary>Show the numbers as a table</summary><div id="tlTable"></div></details>
+</section>
+
+<div class="ca-wrap" style="margin-top:80px">
   <h3 style="text-align:center;margin:10px 0 16px;color:#202124;font-weight:600;font-family:Arial, sans-serif;font-size:22px;">
     Co-author Chord Diagram*
   </h3>
@@ -61,15 +107,17 @@
 </div>
 <p class="ca-note">*Last updated on 10/04/2026.</p>
 
-<!-- D3 -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script>
 /* ===================== YOUR DATA =====================
    One entry per paper: { year: 2025, authors: ["Alice", "Bob", "Carol"] }
-   Each pair of co-authors in a paper increments their link count by 1.
+   Both charts on this page are drawn from this one list.
    Write each person's name the same way every time.
 */
+const ME = "S. Majee";   // your own name, exactly as written in the list
 const papers = [
+  {year: 2027, authors:["S. Majee", "S. Jana", "Anand R.", "J. Ramprabhakar", "S. M. Venthan", "N. Thakkar"]},
+  {year: 2026, authors:["Shymashree Jana", "S. Jana", "S. Majee", "T. K. Kar"]},
+  {year: 2026, authors:["S. Rit", "S. Majee", "S. Barman", "A. De", "S. Jana"]},
   {year: 2022, authors:["S. Majee", "S. Jana", "A. Khatua", "T. K. Kar"]},
   {year: 2022, authors:["S. Majee", "S. Adak", "S. Jana", "M. Mandal", "T. K. Kar"]},
   {year: 2022, authors:["S. Majee", "S. Jana", "D. K. Das", "T. K. Kar"]},
@@ -97,6 +145,67 @@ const papers = [
   {year: 2026, authors:["S. Rit", "S. Jana", "A. De", "S. Majee", "S. Barman"]},
 ];
 
+</script>
+<script>
+/* ============== COLLABORATION TIMELINE (reads the same `papers` list) ============== */
+(function(){
+  const grid = document.getElementById('tlGrid');
+  const years = Array.from(new Set(papers.map(p => p.year))).sort((a,b) => a-b);
+  const span = []; for (let y = years[0]; y <= years[years.length-1]; y++) span.push(y);
+
+  // count joint papers per co-author per year
+  const by = new Map();
+  papers.forEach(p => new Set(p.authors).forEach(a => {
+    if (a === ME) return;
+    if (!by.has(a)) by.set(a, {name:a, years:{}, total:0});
+    const r = by.get(a); r.years[p.year] = (r.years[p.year] || 0) + 1; r.total++;
+  }));
+  const rows = [...by.values()].map(r => {
+    const ys = Object.keys(r.years).map(Number); r.first = Math.min(...ys); r.lastY = Math.max(...ys); return r;
+  }).sort((a,b) => a.first - b.first || b.total - a.total || a.name.localeCompare(b.name));
+
+  const maxCell = Math.max(...rows.flatMap(r => Object.values(r.years)));
+  const maxTot  = Math.max(...rows.map(r => r.total));
+  const size = c => Math.max(0.32, Math.sqrt(c / maxCell));            // dot area ∝ count
+  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+  grid.style.setProperty('--ny', span.length);
+
+  let h = '<div class="tl-row head"><div></div>' + span.map(y => `<div>${y}</div>`).join('') + '<div class="t">Total</div></div>';
+  rows.forEach(r => {
+    h += `<div class="tl-row"><div class="tl-name" title="${r.name}">${r.name}</div>`;
+    span.forEach(y => {
+      const c = r.years[y] || 0, on = y >= r.first && y <= r.lastY;
+      const cls = 'tl-cell' + (on ? ' on' : '') + (y === r.first ? ' first' : '') + (y === r.lastY ? ' last' : '');
+      h += `<div class="${cls}">` + (c ? `<span class="tl-dot" tabindex="0" style="--s:${size(c)}" data-tip="<b>${r.name}</b><br>${y}: ${plural(c,'joint paper')}" aria-label="${r.name}, ${y}: ${plural(c,'joint paper')}"></span>` : '') + '</div>';
+    });
+    h += `<div class="tl-total"><div class="tl-bar" style="width:calc(${r.total / maxTot} * (100% - 34px))"></div><span>${r.total}</span></div></div>`;
+  });
+  grid.innerHTML = h;
+
+  // size key
+  const keys = [...new Set([1, Math.round(maxCell/2), maxCell])].filter(k => k >= 1);
+  document.getElementById('tlKey').innerHTML =
+    keys.map(k => { const d = (size(k)*24).toFixed(1); return `<span><i style="width:${d}px;height:${d}px"></i>${plural(k,'paper')} in a year</span>`; }).join('') +
+    '<span><b></b>total joint papers</span>';
+
+  // tooltip
+  const tip = document.createElement('div'); tip.className = 'tl-tip'; grid.appendChild(tip);
+  const show = el => { const g = grid.getBoundingClientRect(), e = el.getBoundingClientRect();
+    tip.innerHTML = el.dataset.tip; tip.style.left = (e.left + e.width/2 - g.left) + 'px'; tip.style.top = (e.top - g.top) + 'px'; tip.style.opacity = 1; };
+  grid.querySelectorAll('.tl-dot').forEach(d => {
+    d.addEventListener('mouseenter', () => show(d)); d.addEventListener('focus', () => show(d));
+    d.addEventListener('mouseleave', () => tip.style.opacity = 0); d.addEventListener('blur', () => tip.style.opacity = 0);
+  });
+
+  // table view
+  document.getElementById('tlTable').innerHTML = '<table><tr><th>Co-author</th>' + span.map(y => `<th>${y}</th>`).join('') + '<th>Total</th></tr>' +
+    rows.map(r => `<tr><td>${r.name}</td>` + span.map(y => `<td>${r.years[y] || ''}</td>`).join('') + `<td><b>${r.total}</b></td></tr>`).join('') + '</table>';
+})();
+</script>
+
+<!-- D3 -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
 /* ============== CONFIG ============== */
 const W = 700, H = 520;
 const innerR = Math.min(W, H)*0.38;
