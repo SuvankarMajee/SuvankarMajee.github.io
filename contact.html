@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="SM-logo.png">
+<link rel="apple-touch-icon" href="SM-logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,20 +20,71 @@
 <div class="banner page"><canvas id="rd" aria-hidden="true"></canvas>
   <div class="banner-in"><h1>Contact</h1></div></div>
 <main id="content">
-<div>
-<div class="contact">
-  <div>
-    <h2>Dr. Suvankar Majee</h2>
-    <address>Institute Postdoctoral Fellow<br>Department of Mathematics<br>Indian Institute of Technology Kanpur<br>Kanpur, Uttar Pradesh 208016, India</address>
-    <p style="margin-top:16px"><a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></p>
-  </div>
-  <ul class="cards" style="grid-template-columns:1fr">
-    <li><a href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener"><b>Google Scholar</b><span>Publications and citations</span></a></li>
-    <li><a href="https://orcid.org/0000-0002-7470-4831" target="_blank" rel="noopener"><b>ORCID</b><span>0000-0002-7470-4831</span></a></li>
-    <li><a href="https://www.researchgate.net/profile/Suvankar-Majee-2" target="_blank" rel="noopener"><b>ResearchGate</b><span>Suvankar Majee</span></a></li>
-    <li><a href="https://www.linkedin.com/in/dr-suvankar-majee-95169328b/" target="_blank" rel="noopener"><b>LinkedIn</b><span>Dr. Suvankar Majee</span></a></li>
+<div class="narrow">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/brands.min.css">
+<style>
+  .ct{max-width:none}
+  .place{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:56px 0 0}
+  .pl-item{margin:0;min-width:0}
+  .frame{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#E3EAE8}
+  .frame iframe,.frame img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block}
+  .pl-cap{font-family:var(--sans);font-size:13.5px;color:var(--muted);margin:8px 0 0}
+  @media (max-width:760px){.place{grid-template-columns:1fr;gap:24px}}
+  .ct address{font-style:normal;font-size:20px;line-height:1.7;color:var(--ink)}
+  .ct address b{font-weight:600;color:var(--navy)}
+  .ct .mail{font-size:20px;margin:14px 0 0}
+  .ct h2{font-size:26px;margin:52px 0 22px}
+  .icons{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:22px 26px}
+  .icons a{display:flex;flex-direction:column;align-items:center;gap:8px;width:96px;text-decoration:none;color:var(--ink);font-family:var(--sans);font-size:13.5px;text-align:center;line-height:1.3}
+  .icons .ic{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--rule);font-size:34px;transition:transform .15s,border-color .15s}
+  .icons a:hover .ic,.icons a:focus-visible .ic{transform:translateY(-2px);border-color:currentColor}
+  .icons a:hover{color:var(--navy)}
+  @media (prefers-reduced-motion:reduce){.icons .ic{transition:none}.icons a:hover .ic{transform:none}}
+    @media (max-width:600px){.ct address,.ct .mail{font-size:18px}.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 8px}.icons a{width:auto}}
+</style>
+
+<div class="ct">
+  <address>
+    <b>Dr. Suvankar Majee</b><br>
+    Post Doctoral Fellow<br>
+    Department of Mathematics<br>
+    Indian Institute of Technology, Kanpur<br>
+    Uttar Pradesh-208016, India
+  </address>
+  <p class="mail">Email: <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></p>
+
+  <h2>To visit my profile, click on the icon:</h2>
+  <ul class="icons">
+    <li><a href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-google-scholar" style="color:#4285F4" aria-hidden="true"></i></span>Google Scholar</a></li>
+    <li><a href="https://www.researchgate.net/profile/Suvankar-Majee-2" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-researchgate" style="color:#00CCBB" aria-hidden="true"></i></span>ResearchGate</a></li>
+    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57418706300" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-scopus" style="color:#E9711C" aria-hidden="true"></i></span>Scopus</a></li>
+    <li><a href="https://orcid.org/0000-0002-7470-4831" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-orcid" style="color:#A6CE39" aria-hidden="true"></i></span>ORCID</a></li>
+    <li><a href="https://www.linkedin.com/in/dr-suvankar-majee-95169328b/" target="_blank" rel="noopener"><span class="ic"><i class="fa-brands fa-linkedin-in" style="color:#0A66C2" aria-hidden="true"></i></span>LinkedIn</a></li>
+    <li><a href="https://www.webofscience.com/wos/author/record/JNQ-9995-2023" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-clarivate" style="color:#5E33BF" aria-hidden="true"></i></span>Web of Science</a></li>
   </ul>
+
+  <!-- Map and institute photo, side by side (stacked on phones).
+       The photo is iitk.png next to this file; if it is missing, the copy on the Google Site is used. -->
+  <div class="place">
+    <div class="pl-item">
+      <div class="frame map">
+        <iframe src="https://www.google.com/maps?q=26.512325,80.233334&amp;z=14&amp;hl=en&amp;output=embed"
+                title="Map: Department of Mathematics, IIT Kanpur" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <p class="pl-cap"><a href="https://www.google.com/maps?q=26.512325,80.233334&amp;z=16" target="_blank" rel="noopener">Open in Google Maps</a></p>
+    </div>
+    <figure class="pl-item">
+      <div class="frame">
+        <img src="iitk.png" alt="Indian Institute of Technology Kanpur" loading="lazy"
+             onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://sites.google.com/sitesv-images-rt/AMxu72sgyeB7GXNKi8VvVIBVAa1rGAlc2Swt5zh3WVuXfypSzyzV8wyp-u0-owsIhsQfi-aIVd3K9X3zsqSZUJHuYYkC8KfsWuXVsQKV3cXCJ6AQ_NXIv_L3bz1mjp8oQE9bSEVBkfnh6ubVeIGB58-Iz4liu1BxNyAKwaSjk5lveglzXtYMmotfXq19cYExGZe2xXPnL4H9b1givlP8CWkL5WiwfU_0eeuU-vnWAK7KoQk=w1280';}else{this.closest('.pl-item').remove();}">
+      </div>
+      <figcaption class="pl-cap">Indian Institute of Technology Kanpur</figcaption>
+    </figure>
+  </div>
 </div>
+
 </div>
 </main>
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
