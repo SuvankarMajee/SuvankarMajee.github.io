@@ -29,7 +29,17 @@
   <button type="button" data-f="ctrl" aria-pressed="false">Optimal control</button>
   <button type="button" data-f="eco" aria-pressed="false">Ecology</button>
 </div>
-<p class="count" id="count" aria-live="polite">26 journal articles and 2 conference papers</p>
+<p class="count" id="count" aria-live="polite"></p>
+<script>
+/* Count the papers on this page and show the total (runs once the whole page has loaded) */
+document.addEventListener('DOMContentLoaded', function () {
+  var j = document.querySelectorAll('#publist li').length;     // journal articles
+  var c = document.querySelectorAll('#conflist li').length;    // conference papers
+  var t = j + ' journal article' + (j === 1 ? '' : 's');
+  if (c) t += ' and ' + c + ' conference paper' + (c === 1 ? '' : 's');
+  document.getElementById('count').textContent = t;
+});
+</script>
 <!-- To add a paper: copy one <li ...>...</li>, paste it at the top of the right year, and edit it.
      data-t topics: frac, space, delay, ctrl, eco (separate with spaces).
      Conference papers below use the same topics. -->
