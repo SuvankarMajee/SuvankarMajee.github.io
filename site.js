@@ -8,6 +8,7 @@ const MENU = [
   ['Home', 'index.html'],
   ['Achievements', [
     ['Education', 'education.html'],
+    ['Experience', 'experience.html'],
     ['Achievements', 'achievements.html']]],
   ['Research', [
     ['Research interest', 'research-interest.html'],
@@ -156,4 +157,24 @@ const MENU = [
     years.forEach(y => y.classList.toggle('hidden', !y.querySelector('li:not(.hidden)')));
     count.textContent = f === 'all' ? all : `${n} ${label[f]} journal article${n === 1 ? '' : 's'}`;
   }));
+})();
+
+/* ---------- 4. Recent publications on the home page (read from publications.html) ---------- */
+(function(){
+  const list = document.getElementById('recent-pubs'); if (!list) return;
+  const n = parseInt(list.dataset.count, 10) || 4;
+  fetch('publications.html')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const journal = [...doc.querySelectorAll('#publist li')];
+      const all = [...doc.querySelectorAll('main .year li')];
+      list.innerHTML = '';
+      journal.slice(0, n).forEach(li => { const c = document.importNode(li, true); c.removeAttribute('data-t'); list.appendChild(c); });
+      const conf = all.length - journal.length, link = document.getElementById('all-pubs');
+      if (link) link.textContent = `See all ${journal.length} journal articles` + (conf > 0 ? ` and ${conf} conference paper${conf === 1 ? '' : 's'}` : '');
+    })
+    .catch(() => {
+      list.innerHTML = '<li class="muted">Recent papers are listed on the <a href="publications.html">Publications</a> page.</li>';
+    });
 })();
