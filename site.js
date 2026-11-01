@@ -144,18 +144,31 @@ const MENU = [
   if (rs) rs.addEventListener('click', () => { seed(); if (reduce) settle(4000); });
 })();
 
-/* ---------- 3. Publication filter ---------- */
+/* ---------- 3. Publication filter (journal articles and conference proceedings) ---------- */
 (function(){
   const btns = document.querySelectorAll('.filters button'); if (!btns.length) return;
-  const items = document.querySelectorAll('#publist li'), years = document.querySelectorAll('#publist .year');
-  const count = document.getElementById('count'), all = count.textContent;
+  const groups = ['#publist', '#conflist'].map(sel => document.querySelector(sel)).filter(Boolean);
+  const count = document.getElementById('count');
   const label = {frac:'fractional-order', space:'spatio-temporal', delay:'time-delay', ctrl:'optimal-control', eco:'ecology'};
+  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
   btns.forEach(b => b.addEventListener('click', () => {
-    const f = b.dataset.f; let n = 0;
+    const f = b.dataset.f, shown = [];
     btns.forEach(x => x.setAttribute('aria-pressed', x === b));
-    items.forEach(li => { const on = f === 'all' || (li.dataset.t || '').split(' ').includes(f); li.classList.toggle('hidden', !on); if (on) n++; });
-    years.forEach(y => y.classList.toggle('hidden', !y.querySelector('li:not(.hidden)')));
-    count.textContent = f === 'all' ? all : `${n} ${label[f]} journal article${n === 1 ? '' : 's'}`;
+    groups.forEach(g => {
+      let n = 0;
+      g.querySelectorAll('li').forEach(li => {
+        const on = f === 'all' || (li.dataset.t || '').split(' ').includes(f);
+        li.classList.toggle('hidden', !on); if (on) n++;
+      });
+      g.querySelectorAll('.year').forEach(y => y.classList.toggle('hidden', !y.querySelector('li:not(.hidden)')));
+      if (g.id === 'conflist') g.classList.toggle('hidden', n === 0);   // hide the heading when no conference paper matches
+      shown.push(n);
+    });
+    const [j, c = 0] = shown, topic = f === 'all' ? '' : label[f] + ' ';
+    const parts = [];
+    if (j) parts.push(plural(j, topic + 'journal article'));
+    if (c) parts.push(plural(c, (parts.length ? '' : topic) + 'conference paper'));
+    count.textContent = parts.length ? parts.join(' and ') : 'No papers on this topic yet';
   }));
 })();
 
