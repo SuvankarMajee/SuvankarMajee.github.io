@@ -222,14 +222,15 @@ const papers = [
     const node = gz.append('g').selectAll('g').data(nodes).join('g')
       .attr('transform', d => `translate(${d.x},${d.y})`).attr('tabindex', d => d.id === ME ? null : 0);
     node.append('circle').attr('r', r).attr('fill', d => d.id === ME ? '#10203A' : '#0E7C7B').attr('stroke', '#fff').attr('stroke-width', 2);
-    node.filter(d => d.id !== ME).append('text').text(d => d.id).attr('text-anchor','middle').attr('dy', d => r(d) + fs + 2)
-      .attr('font-family','Arial, sans-serif').attr('font-size', fs).attr('stroke','#fff').attr('stroke-width',3).attr('stroke-linejoin','round').attr('fill','#fff');
-    node.append('text').text(d => d.id === ME ? 'Suvankar' : d.id)
-      .attr('text-anchor', 'middle')
-      .attr('dy', d => d.id === ME ? 4 : r(d) + fs + 2)
-      .attr('font-family', 'Arial, sans-serif').attr('font-size', d => d.id === ME ? 12 : fs)
-      .attr('fill', d => d.id === ME ? '#fff' : '#1B2533');
-
+    const ME_LABEL = 'Suvankar Majee';                             // name shown under the centre circle
+    const label = d => d.id === ME ? ME_LABEL : d.id;
+    node.append('text').text(label).attr('text-anchor', 'middle').attr('dy', d => r(d) + fs + 2)    // white halo
+      .attr('font-family', 'Arial, sans-serif').attr('font-size', fs).attr('font-weight', d => d.id === ME ? 700 : 400)
+      .attr('stroke', '#fff').attr('stroke-width', 3).attr('stroke-linejoin', 'round').attr('fill', '#fff');
+    node.append('text').text(label).attr('text-anchor', 'middle').attr('dy', d => r(d) + fs + 2)    // the name itself
+      .attr('font-family', 'Arial, sans-serif').attr('font-size', fs).attr('font-weight', d => d.id === ME ? 700 : 400)
+      .attr('fill', d => d.id === ME ? '#10203A' : '#1B2533');
+    
     const neighbours = d => new Set(edges.filter(l => l.source === d || l.target === d).map(l => l.source === d ? l.target : l.source));
     const on = (e, d) => {
       if (d.id === ME) return;
