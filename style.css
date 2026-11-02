@@ -16,7 +16,10 @@ a:hover{color:var(--navy)}
 .skip:focus{left:8px}
 
 /* ---------- Top bar & menu ---------- */
-.topbar{position:sticky;top:0;z-index:20;background:rgba(16,32,58,.97);color:#fff;font-family:var(--sans);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:transparent;color:#fff;font-family:var(--sans);transition:background-color .25s,box-shadow .25s}
+.topbar.solid{background:rgba(16,32,58,.97);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.topbar:not(.solid) .brand,.topbar:not(.solid) .menu>li>a,.topbar:not(.solid) .menu>li>button{text-shadow:0 1px 3px rgba(4,12,24,.75),0 0 12px rgba(4,12,24,.5)}
+@media (prefers-reduced-motion:reduce){.topbar{transition:none}}
 .topbar-in{max-width:1180px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{color:#fff;text-decoration:none;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px;white-space:nowrap}
 .brand:hover{color:#fff}
@@ -56,7 +59,7 @@ a:hover{color:var(--navy)}
 .banner canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
 .banner.home{min-height:540px;display:flex;align-items:flex-end}
 .banner.home canvas{-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 62%)}
-.banner.page{min-height:210px;display:flex;align-items:flex-end}
+.banner.page{min-height:250px;display:flex;align-items:flex-end}
 .banner.page canvas{-webkit-mask-image:linear-gradient(90deg,transparent 10%,rgba(0,0,0,.3) 45%,#000 80%);mask-image:linear-gradient(90deg,transparent 10%,rgba(0,0,0,.3) 45%,#000 80%)}
 .banner-in{position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto;padding:0 28px 34px;pointer-events:none}
 .banner-in a,.banner-in button{pointer-events:auto}

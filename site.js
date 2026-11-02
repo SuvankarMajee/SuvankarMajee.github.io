@@ -66,7 +66,14 @@ const MENU = [
   });
   // On phones, open the group that contains the current page
   menu.querySelectorAll('li.here > button').forEach(b => { if (!wide()){ b.parentElement.classList.add('open'); b.setAttribute('aria-expanded', 'true'); } });
-  burger.addEventListener('click', () => { const s = menu.classList.toggle('show'); burger.setAttribute('aria-expanded', s); burger.textContent = s ? 'Close' : 'Menu'; });
+  // Transparent bar over the banner; solid once the banner has scrolled away (or the phone menu is open)
+  const banner = document.querySelector('.banner');
+  const paint = () => {
+    const limit = banner ? banner.offsetHeight - bar.offsetHeight : 10;
+    bar.classList.toggle('solid', window.scrollY > limit || menu.classList.contains('show'));
+  };
+  addEventListener('scroll', paint, {passive: true}); addEventListener('resize', paint); paint();
+  burger.addEventListener('click', () => { const s = menu.classList.toggle('show'); burger.setAttribute('aria-expanded', s); burger.textContent = s ? 'Close' : 'Menu'; paint(); });
   document.addEventListener('click', e => { if (wide() && !bar.contains(e.target)) closeAll(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 
