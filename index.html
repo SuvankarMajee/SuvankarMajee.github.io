@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="SM-logo.png">
 <link rel="apple-touch-icon" href="SM-logo.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,7 +43,30 @@
 <div class="banner home">
   <canvas id="rd" aria-hidden="true"></canvas>
   <div class="banner-in">
-    <h1>Suvankar Majee</h1>
+    <style>
+      /* Name animation: each letter forms out of a blur, like a pattern emerging */
+      @keyframes form-in{
+        0%  {opacity:0;filter:blur(10px);color:#7FD1BE;transform:translateY(.25em) scale(1.15)}
+        60% {opacity:1;filter:blur(1px);color:#7FD1BE}
+        100%{opacity:1;filter:none;color:inherit;transform:none}
+      }
+      .name-anim .ch{display:inline-block;opacity:0;animation:form-in .9s cubic-bezier(.2,.7,.3,1) forwards}
+      .name-anim .w{display:inline-block;white-space:nowrap}
+      @media (prefers-reduced-motion:reduce){.name-anim .ch{opacity:1;animation:none}}
+    </style>
+    <h1 id="myname" aria-label="Suvankar Majee">Suvankar Majee</h1>
+    <script>
+    (function(){
+      var h = document.getElementById('myname'); if (!h) return;
+      var words = h.textContent.trim().split(/\s+/), i = 0, html = '';
+      words.forEach(function(w, k){
+        html += '<span class="w" aria-hidden="true">';
+        for (var c = 0; c < w.length; c++) html += '<span class="ch" style="animation-delay:' + (0.15 + i++ * 0.06).toFixed(2) + 's">' + w[c] + '</span>';
+        html += '</span>' + (k < words.length - 1 ? ' ' : '');
+      });
+      h.innerHTML = html; h.classList.add('name-anim');
+    })();
+    </script>
     <p class="post"><strong>Institute Postdoctoral Fellow</strong><br>Department of Mathematics, Indian Institute of Technology Kanpur</p>
     <p class="lede">I build and analyse mathematical models of how infectious diseases spread and how they can be controlled.</p>
     <div class="profiles">
@@ -81,11 +104,10 @@
 
 <div class="block">
   <h2>Recent publications</h2>
-  <ul class="year" style="display:block;border:0;padding:0;max-width:860px;list-style:none;margin:0">
-<li><span class="ti">Impact of incubation delay and spatial diffusion on epidemic dynamics: Bifurcations and pattern formation in an SIR model with non-linear incidence</span><span class="au"><b>S. Majee</b>, S. Jana, R. Anand, J. Ramprabhakar, S. M. Venthan, N. Thakkar</span><span class="ve">Mathematics and Computers in Simulation 251 (2027) 854&ndash;872<a href="https://doi.org/10.1016/j.matcom.2026.08.035" target="_blank" rel="noopener">DOI</a></span></li>
-<li><span class="ti">Impact of fear effect and additional food on the spatio-temporal dynamics of a predator&ndash;prey system incorporating nonlinear harvesting</span><span class="au">S. Jana, S. Jana, <b>S. Majee</b>, T. K. Kar</span><span class="ve">The European Physical Journal Special Topics (2026)<a href="https://doi.org/10.1140/epjs/s11734-026-02623-1" target="_blank" rel="noopener">DOI</a></span></li>
-  </ul>
-  <p class="small" style="margin-top:14px"><a href="publications.html">See all publications</a></p>
+  <!-- Filled automatically with the newest papers from publications.html.
+       To show more or fewer, change data-count. -->
+  <ul class="year" id="recent-pubs" data-count="4" style="display:block;border:0;padding:0;max-width:860px;list-style:none;margin:0"></ul>
+  <p class="small" style="margin-top:14px"><a href="publications.html" id="all-pubs">See all publications</a></p>
 </div>
 
 <div class="block">
@@ -95,13 +117,15 @@
     <li><a href="publications.html"><b>Publications</b><span>Journal articles and conference papers, filterable by topic.</span></a></li>
     <li><a href="education.html"><b>Education</b><span>Ph.D. from IIEST Shibpur; M.Sc. and B.Sc. from Vidyasagar University.</span></a></li>
     <li><a href="teaching.html"><b>Teaching</b><span>Calculus, linear algebra, ODEs, nonlinear dynamics and programming.</span></a></li>
-    <li><a href="role-in-journals.html"><b>Role in journals</b><span>Reviewer for many international journals.</span></a></li>
+    <li><a href="role-in-journals.html"><b>Role in journals</b><span>Reviewer for 26 international journals.</span></a></li>
     <li><a href="book-suggestion.html"><b>Book suggestions</b><span>Textbooks I recommend to students, from analysis to mathematical biology.</span></a></li>
   </ul>
   <p class="small muted" style="margin-top:22px">For the lives of mathematicians, the <a href="https://mathshistory.st-andrews.ac.uk/" target="_blank" rel="noopener">MacTutor History of Mathematics archive</a> is a good place to start.</p>
 </div>
 </main>
+
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
-<script src="site.js"></script>
+<!-- When you change site.js or style.css, raise the ?v= number on every page so browsers load the new file. -->
+<script src="site.js?v=4"></script>
 </body>
 </html>

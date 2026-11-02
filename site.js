@@ -69,7 +69,7 @@ const MENU = [
   // Transparent bar over the banner; solid once the banner has scrolled away (or the phone menu is open)
   const banner = document.querySelector('.banner');
   const paint = () => {
-    const limit = banner ? banner.offsetHeight - bar.offsetHeight : 10;
+    const limit = 24;                     // transparent only at the very top, so the names never sit on top of the banner text
     bar.classList.toggle('solid', window.scrollY > limit || menu.classList.contains('show'));
   };
   addEventListener('scroll', paint, {passive: true}); addEventListener('resize', paint); paint();
