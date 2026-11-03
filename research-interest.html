@@ -9,7 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="SM-logo.png">
+<link rel="apple-touch-icon" href="SM-logo.png">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -19,7 +21,226 @@
   <div class="banner-in"><p class="crumb">Research &amp; publications</p><h1>Research interest</h1></div></div>
 <main id="content">
 <div>
+<style>
+  .ri-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:48px;align-items:center}
+  .ri-top p{max-width:none}
+  #spread .cap{font-family:var(--sans);font-size:13px;color:var(--muted);text-align:center;margin:8px 0 0}
+  @media (max-width:860px){.ri-top{grid-template-columns:1fr;gap:28px}#spread{max-width:460px;margin:0 auto}}
+
+  #spread .frame{width:100%;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(20,40,80,.15);background:#b9e0f4}
+  #spread svg{display:block;width:100%;height:auto}
+  #spread .bar{margin-top:12px;display:flex;gap:10px;justify-content:center}
+  #spread button{border:1px solid #c9cfdd;background:#fff;border-radius:8px;padding:7px 16px;font-size:.95rem;cursor:pointer;color:#1b2440}
+  #spread button:hover{background:#eef2fb}
+
+  /* people */
+  #spread .person path, #spread .person circle{stroke:#1f2b55;stroke-width:3.2;stroke-linejoin:round;transition:fill .6s ease, stroke .6s ease}
+  #spread .person .fill{fill:#ffffff}
+  #spread .person.infected .fill{fill:url(#orangeG)}
+  #spread .person.index .fill{fill:url(#indexG)}
+  #spread .person.index path, #spread .person.index circle{stroke:#fff6ec}
+
+  /* index-case glow */
+  #spread #indexGlow{animation:glow 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+
+  /* infection pulse ring */
+  #spread .ring{fill:none;stroke:#ff7a1a;stroke-width:4;transform-box:fill-box;transform-origin:center;opacity:0}
+  #spread .ring.go{animation:ring .9s ease-out forwards}
+  @keyframes ring{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+
+  /* arrows */
+  #spread .arrow{fill:none;stroke:url(#arrowG);stroke-width:4.5;stroke-linecap:round}
+  #spread .head{fill:#e8401c;opacity:0;transition:opacity .2s ease}
+  #spread .head.on{opacity:1}
+  #spread .fade{transition:opacity .8s ease}
+</style>
+<div class="ri-top">
 <p>My research lies at the interface of mathematics and biology, with a focus on infectious diseases. I use fractional-order systems, delay equations and optimal control theory to study how epidemics spread; how spatial heterogeneity, incubation delays and human behaviour shape disease progression; and how interventions can be designed and compared using chaos control, sensitivity analysis and cost-effectiveness analysis to support public-health decisions.</p>
+<figure id="spread" style="margin:0">
+<div class="frame">
+<svg id="scene" viewBox="0 0 520 500" aria-label="Animation of an infection spreading from person to person">
+  <defs>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c6e7f7"/><stop offset="1" stop-color="#a6d4ee"/>
+    </linearGradient>
+    <linearGradient id="orangeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffa53a"/><stop offset="1" stop-color="#ea5a1c"/>
+    </linearGradient>
+    <linearGradient id="indexG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff9a2e"/><stop offset="1" stop-color="#ff6a10"/>
+    </linearGradient>
+    <linearGradient id="arrowG" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="520" y2="500">
+      <stop offset="0" stop-color="#ffb02e"/><stop offset="1" stop-color="#e5351c"/>
+    </linearGradient>
+    <radialGradient id="haloG">
+      <stop offset="0" stop-color="#ff7a10" stop-opacity="1"/>
+      <stop offset=".35" stop-color="#ff9a33" stop-opacity=".9"/>
+      <stop offset=".6" stop-color="#ffffff" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <!-- person: centred at (0,0), roughly 100 units tall -->
+    <g id="body">
+      <circle class="fill" cx="0" cy="-39" r="9.5"/>
+      <path class="fill" d="M-12,-26 Q0,-29 12,-26 Q17,-25 18,-19 L20,10 Q20,13 17,13 Q14,13 14,10 L12,-12
+               L11,46 Q11,50 7,50 Q3,50 3,46 L2,14 L-2,14 L-3,46 Q-3,50 -7,50 Q-11,50 -11,46 L-12,-12
+               L-14,10 Q-14,13 -17,13 Q-20,13 -20,10 L-18,-19 Q-17,-25 -12,-26 Z"/>
+    </g>
+  </defs>
+
+  <!-- background -->
+  <rect width="520" height="500" fill="url(#bgG)"/>
+  <g opacity=".35" fill="none" stroke="#7fb6de" stroke-width="7">
+    <!-- faint globe -->
+    <circle cx="160" cy="330" r="190"/>
+    <ellipse cx="160" cy="330" rx="85" ry="190"/>
+    <line x1="160" y1="140" x2="160" y2="520"/>
+    <path d="M-25,250 Q160,215 345,250"/>
+    <path d="M-30,390 Q160,425 350,390"/>
+  </g>
+  <!-- faint flame -->
+  <path opacity=".35" fill="#7fb6de"
+        d="M70,240 C30,215 35,170 60,140 C62,165 75,170 82,160 C78,130 95,105 120,95 C110,125 135,150 130,185 C128,215 105,240 70,240 Z"/>
+
+  <!-- glow behind index case -->
+  <ellipse id="indexGlow" cx="380" cy="212" rx="62" ry="78" fill="url(#haloG)"/>
+
+  <g id="arrows"></g>
+  <g id="people"></g>
+</svg>
+</div>
+<div class="bar">
+  <button id="pause" type="button">Pause</button>
+  <button id="replay" type="button">Replay</button>
+</div>
+<figcaption class="cap">How an infection travels from one person to the next</figcaption>
+</figure>
+<script>
+
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const S = 0.82;                          // figure scale
+  // positions (x, y = figure centre)
+  const P = {
+    a:[100,90],  b:[243,82],  c:[340,82],  d:[400,100], e:[462,78],
+    f:[183,128], g:[295,168], X:[380,212],
+    h:[115,222], i:[243,210], j:[452,232],
+    k:[192,268], l:[310,290],
+    m:[62,330],  n:[262,368], o:[407,372], p:[455,345],
+    q:[115,412], r:[195,412], s:[328,418]
+  };
+  // transmission tree: [from, to, generation, bend]
+  const EDGES = [
+    ["X","g",1,-0.25], ["X","o",1, 0.25],
+    ["g","b",2,-0.15], ["g","c",2, 0.15], ["o","s",2, 0.3],
+    ["s","r",3, 0.3],
+    ["r","q",4, 0.25],
+    ["q","k",5,-0.35],
+    ["k","h",6, 0.2]
+  ];
+
+  const people = {}, rings = {};
+  const gPeople = document.getElementById("people"), gArrows = document.getElementById("arrows");
+  for (const [id,[x,y]] of Object.entries(P)){
+    const g = document.createElementNS(NS,"g");
+    g.setAttribute("class","person" + (id === "X" ? " index" : ""));
+    g.setAttribute("transform",`translate(${x},${y}) scale(${S})`);
+    for (const ch of document.getElementById("body").children) g.appendChild(ch.cloneNode(true));
+    gPeople.appendChild(g); people[id] = g;
+    const ring = document.createElementNS(NS,"circle");
+    ring.setAttribute("class","ring"); ring.setAttribute("cx",x); ring.setAttribute("cy",y); ring.setAttribute("r",34);
+    gPeople.insertBefore(ring, g); rings[id] = ring;
+  }
+
+  // build arrows (curved quadratic Béziers, trimmed at both ends)
+  const arrows = EDGES.map(([f,t,gen,bend]) => {
+    const [x1,y1] = P[f], [x2,y2] = P[t];
+    const dx = x2-x1, dy = y2-y1, L = Math.hypot(dx,dy), ux = dx/L, uy = dy/L;
+    // trim to an ellipse around each (tall, narrow) figure
+    const ell = (a,b) => 1/Math.hypot(ux/a, uy/b);
+    const trimA = ell(22,40), trimB = ell(26,46);
+    const sx = x1+ux*trimA, sy = y1+uy*trimA, ex = x2-ux*trimB, ey = y2-uy*trimB;
+    const mx = (sx+ex)/2 - uy*bend*L, my = (sy+ey)/2 + ux*bend*L;
+    const path = document.createElementNS(NS,"path");
+    path.setAttribute("class","arrow");
+    path.setAttribute("d",`M${sx},${sy} Q${mx},${my} ${ex},${ey}`);
+    gArrows.appendChild(path);
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    // arrow head oriented along end tangent
+    const ang = Math.atan2(ey-my, ex-mx) * 180/Math.PI;
+    const head = document.createElementNS(NS,"path");
+    head.setAttribute("class","head");
+    head.setAttribute("d","M0,0 L-13,-7.5 L-10,0 L-13,7.5 Z");
+    head.setAttribute("transform",`translate(${ex},${ey}) rotate(${ang})`);
+    gArrows.appendChild(head);
+    return {f,t,gen,path,head,len};
+  });
+
+  // ---------- timeline ----------
+  const GEN_GAP = 1.25, DRAW = 0.8;          // seconds
+  const lastGen = Math.max(...EDGES.map(e=>e[2]));
+  const CYCLE = 1.0 + lastGen*GEN_GAP + 3.0; // pause at the end, then restart
+  let t = 0, last = null, paused = false;
+  const state = new Map();                    // edge -> stage reached
+
+  function resetScene(){
+    arrows.forEach(a => {
+      a.path.style.transition = "none"; a.path.style.strokeDashoffset = a.len;
+      a.head.classList.remove("on"); state.set(a,0);
+    });
+    Object.entries(people).forEach(([id,g]) => { if (id !== "X") g.classList.remove("infected"); });
+    Object.values(rings).forEach(r => r.classList.remove("go"));
+    gArrows.style.opacity = 1;
+  }
+
+  function tick(now){
+    if (last === null) last = now;
+    const dt = (now - last)/1000; last = now;
+    if (!paused){
+      t += dt;
+      if (t >= CYCLE){ t = 0; resetScene(); }
+      for (const a of arrows){
+        const start = 0.8 + (a.gen-1)*GEN_GAP;
+        const st = state.get(a);
+        if (st === 0 && t >= start){
+          a.path.style.transition = `stroke-dashoffset ${DRAW}s ease-in-out`;
+          a.path.getBoundingClientRect();     // flush
+          a.path.style.strokeDashoffset = 0;
+          state.set(a,1);
+        }
+        if (st === 1 && t >= start + DRAW*0.9){
+          a.head.classList.add("on");
+          people[a.t].classList.add("infected");
+          const r = rings[a.t]; r.classList.remove("go"); void r.getBBox(); r.classList.add("go");
+          state.set(a,2);
+        }
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  document.getElementById("pause").onclick = e => {
+    paused = !paused; e.target.textContent = paused ? "Play" : "Pause";
+    document.getElementById("scene").getAnimations({subtree:true}).forEach(an => paused ? an.pause() : an.play());
+    gArrows.querySelectorAll(".arrow").forEach(p => {
+      if (paused){ const cs = getComputedStyle(p).strokeDashoffset; p.style.transition = "none"; p.style.strokeDashoffset = cs; }
+    });
+    if (!paused) arrows.forEach(a => {
+      if (state.get(a) === 1){ a.path.style.transition = `stroke-dashoffset ${DRAW*0.6}s ease-out`; a.path.getBoundingClientRect(); a.path.style.strokeDashoffset = 0; }
+    });
+  };
+  document.getElementById("replay").onclick = () => { t = 0; resetScene(); };
+
+  resetScene();
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches){   // show the finished spread, without motion
+    t = CYCLE - 3.05; arrows.forEach(a => { a.path.style.strokeDashoffset = 0; a.head.classList.add("on"); people[a.t].classList.add("infected"); state.set(a,2); });
+    paused = true; document.getElementById("pause").textContent = "Play";
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</div>
 <h3>Main themes</h3>
 <ul class="themes">
   <li><b>Infectious disease modelling</b><span>Monkeypox, dengue, Nipah, hand, foot and mouth disease (HFMD), COVID-19 and avian influenza.</span></li>
@@ -33,6 +254,7 @@
 </div>
 </main>
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
-<script src="site.js"></script>
+<!-- When you change site.js or style.css, raise the ?v= number on every page so browsers load the new file. -->
+<script src="site.js?v=4"></script>
 </body>
 </html>
