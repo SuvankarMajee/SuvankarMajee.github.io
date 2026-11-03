@@ -44,6 +44,25 @@
   <canvas id="rd" aria-hidden="true"></canvas>
   <div class="banner-in">
     <style>
+      /* Circular photo: above the caption box on laptops/desktops, above the name on phones */
+      .hero-photo{margin:0;aspect-ratio:1;border-radius:50%;padding:7px;
+        background:rgba(16,32,58,.85);box-shadow:0 0 0 2px #7FD1BE,0 12px 40px rgba(4,12,24,.45)}
+      .hero-photo img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 25%}
+      .hero-side{position:absolute;right:28px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:18px}
+      .hero-side .caption{position:static}
+      .hero-side .hero-photo{--d:clamp(190px,19vw,280px);width:var(--d);height:var(--d);flex:none}
+      .hero-photo.phone{display:none;width:124px;height:124px;padding:5px;margin:0 0 22px}
+      @media (max-width:820px){
+        .hero-side{left:20px;right:20px;bottom:16px;align-items:stretch}
+        .hero-side .hero-photo{display:none}
+        .hero-photo.phone{display:block}
+      }
+    </style>
+    <!-- Photo for phones (the laptop/desktop photo is above the caption, further down). -->
+    <figure class="hero-photo phone">
+      <img src="suvankar.jpg" alt="" onerror="this.closest('figure').remove()">
+    </figure>
+    <style>
       /* Name animation: each letter forms out of a blur, like a pattern emerging */
       @keyframes form-in{
         0%  {opacity:0;filter:blur(10px);color:#7FD1BE;transform:translateY(.25em) scale(1.15)}
@@ -79,7 +98,13 @@
       <!-- <a href="cv.pdf" target="_blank">CV</a> -->
     </div>
   </div>
-  <p class="caption">A Gray&ndash;Scott reaction&ndash;diffusion system. Click the pattern to add a perturbation, or <button type="button" id="reseed">start again</button>.</p>
+  <!-- Your photo, suvankar.jpg, above the caption. To move the face up or down in the circle, change the 25% in object-position. -->
+  <div class="hero-side">
+    <figure class="hero-photo">
+      <img src="suvankar.jpg" alt="Suvankar Majee" onerror="this.closest('figure').remove()">
+    </figure>
+    <p class="caption">A Gray&ndash;Scott reaction&ndash;diffusion system. Click the pattern to add a perturbation, or <button type="button" id="reseed">start again</button>.</p>
+  </div>
 </div>
 <main id="content">
 <div class="block">
