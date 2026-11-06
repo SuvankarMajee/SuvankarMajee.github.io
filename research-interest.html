@@ -52,7 +52,7 @@
   #spread .head.on{opacity:1}
   #spread .fade{transition:opacity .8s ease}
   /* "Details" buttons on the main themes */
-  .th-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font:500 13.5px var(--sans);color:var(--teal);background:none;border:1px solid var(--rule);border-radius:20px;padding:5px 13px;cursor:pointer}
+  .th-btn{margin-top:10px;display:flex;width:fit-content;align-items:center;gap:6px;font:500 13.5px var(--sans);color:var(--teal);background:none;border:1px solid var(--rule);border-radius:20px;padding:5px 13px;cursor:pointer}
   .th-btn::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
   .th-btn[aria-expanded="true"]::after{transform:rotate(-135deg) translateY(-1px)}
   .th-btn:hover{border-color:var(--teal)}
@@ -62,6 +62,10 @@
   .th-more li{padding:0 0 8px;border:0}
   .th-more li b{display:inline;font-size:inherit}
   .th-more a{font-family:var(--sans);font-size:13px;white-space:nowrap}
+  .themes li.th-row{grid-column:1/-1;border-top:0;padding:2px 0 18px}
+  .th-row .th-more{margin-top:0;font-size:17px}
+  .th-row .th-more p{max-width:none}
+  .themes li.th-open > b{color:var(--teal)}
   @media (prefers-reduced-motion:reduce){.th-btn::after{transition:none}}
 </style>
 <div class="ri-top">
@@ -308,16 +312,55 @@ Alongside the analysis, I use optimal control, sensitivity analysis and cost-eff
 </ul>
 </div>
 <script>
-/* Open/close the details under each main theme (works for any theme with a "Details" button) */
-document.querySelectorAll('.th-btn').forEach(function (btn) {
-  var panel = document.getElementById(btn.getAttribute('aria-controls'));
-  btn.addEventListener('click', function () {
-    var open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    btn.textContent = open ? 'Details' : 'Hide details';
-    panel.hidden = open;
+/* Main themes: open one theme at a time; its details appear full width under that row */
+(function () {
+  var list = document.querySelector('.themes'); if (!list) return;
+  var row = document.createElement('li');          // full-width holder for the open panel
+  row.className = 'th-row';
+  var open = null;                                  // {btn, panel, item}
+
+  function endOfRow(item) {                         // last theme in the same visual row
+    var end = item;
+    Array.prototype.forEach.call(list.children, function (li) {
+      if (li !== row && li.offsetTop === item.offsetTop) end = li;
+    });
+    return end;
+  }
+  function place() {
+    if (!open) return;
+    row.remove();
+    endOfRow(open.item).after(row);
+  }
+  function close() {
+    if (!open) return;
+    open.panel.hidden = true;
+    open.item.appendChild(open.panel);              // put the panel back in its theme
+    open.item.classList.remove('th-open');
+    open.btn.setAttribute('aria-expanded', 'false');
+    open.btn.textContent = 'Details';
+    row.remove();
+    open = null;
+  }
+  list.querySelectorAll('.th-btn').forEach(function (btn) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    var item = btn.closest('li');
+    btn.addEventListener('click', function () {
+      var wasOpen = open && open.btn === btn;
+      close();                                      // close whichever theme is open
+      if (wasOpen) return;
+      open = {btn: btn, panel: panel, item: item};
+      row.appendChild(panel);
+      place();
+      panel.hidden = false;
+      item.classList.add('th-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.textContent = 'Hide details';
+      var r = row.getBoundingClientRect();          // bring the panel into view if it opened off-screen
+      if (r.bottom > innerHeight) row.scrollIntoView({block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
   });
-});
+  var t; addEventListener('resize', function () { clearTimeout(t); t = setTimeout(place, 120); });
+})();
 </script>
 </main>
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
