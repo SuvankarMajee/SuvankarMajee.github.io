@@ -211,3 +211,9 @@ footer a{color:var(--morph)}
 .mcard details td,.mcard details th{padding:4px 18px 4px 0;text-align:left;border-bottom:1px solid var(--rule)}
 .mcard .go{display:inline-block;margin-top:14px;font-family:var(--sans);font-size:14px;font-weight:500}
 @media (max-width:900px){.metrics{grid-template-columns:1fr}.mcard{padding:22px 18px}}
+
+/* ---------- Scroll reveal: paragraphs and items fade in and rise as they come into view ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+@media print{.rv{opacity:1!important;transform:none!important}}

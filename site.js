@@ -195,10 +195,44 @@ const MENU = [
       const all = [...doc.querySelectorAll('main .year li')];
       list.innerHTML = '';
       journal.slice(0, n).forEach(li => { const c = document.importNode(li, true); c.removeAttribute('data-t'); list.appendChild(c); });
+      if (window.revealScan) window.revealScan(list);
       const conf = all.length - journal.length, link = document.getElementById('all-pubs');
       if (link) link.textContent = `See all ${journal.length} journal articles` + (conf > 0 ? ` and ${conf} conference paper${conf === 1 ? '' : 's'}` : '');
     })
     .catch(() => {
       list.innerHTML = '<li class="muted">Recent papers are listed on the <a href="publications.html">Publications</a> page.</li>';
     });
+})();
+
+/* ---------- 5. Scroll reveal: paragraphs and list items fade in and rise as they come into view ----------
+   Only runs when the browser supports it and the visitor has not asked for reduced motion,
+   so the text is always readable without it (and for search engines). */
+(function(){
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const SELECT = [
+    'main h2', 'main h3', 'main p', 'main address',
+    'main .tl > li', 'main .themes > li', 'main .year > ul > li', 'main ul.year > li', 'main .cols > li',
+    'main .tiles > li', 'main .cards > li', 'main .icons > li', 'main .tags', 'main .books > section',
+    'main .place > .pl-item', 'main .filters', 'main details', 'main .gallery figure', 'main .metrics > *'
+  ].join(',');
+  const SKIP = '.th-more, .th-row, #spread, #net, #chordWrap, .tl-tip, #netTip, .cm, .cm-note, .ca-wrap, .tlc';   // panels and charts keep their own behaviour
+  const io = new IntersectionObserver(entries => {
+    let i = 0;
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      el.style.transitionDelay = Math.min(i++ * 70, 350) + 'ms';      // items arriving together follow one another
+      el.classList.add('in');
+      io.unobserve(el);
+      setTimeout(() => { el.style.transitionDelay = ''; }, 1100);
+    });
+  }, {rootMargin: '0px 0px -8% 0px', threshold: 0.08});
+  window.revealScan = function (root) {
+    (root || document).querySelectorAll(SELECT).forEach(el => {
+      if (el.classList.contains('rv') || el.closest(SKIP)) return;
+      if (el.parentElement && el.parentElement.closest('.rv')) return;           // animate the outer item only
+      el.classList.add('rv'); io.observe(el);
+    });
+  };
+  window.revealScan();
 })();
