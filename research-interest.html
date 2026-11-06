@@ -60,7 +60,9 @@
   .th-more p{margin:0 0 10px}
   .th-more ul{margin:0 0 10px;padding-left:18px}
   .th-more li{padding:0 0 8px;border:0}
-  .th-more li b{display:inline;font-size:inherit}
+  /* keep bold letters and spans inside the panels inline (the theme-title style would otherwise stack them) */
+  .themes .th-more b{display:inline;font-size:inherit;color:inherit}
+  .themes .th-more span{display:inline;font-size:inherit;color:inherit;line-height:inherit}
   .th-more a{font-family:var(--sans);font-size:13px;white-space:nowrap}
   .themes li.th-row{grid-column:1/-1;border-top:0;padding:2px 0 18px}
   .th-row .th-more{margin-top:0;font-size:17px}
