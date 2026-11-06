@@ -51,6 +51,18 @@
   #spread .head{fill:#e8401c;opacity:0;transition:opacity .2s ease}
   #spread .head.on{opacity:1}
   #spread .fade{transition:opacity .8s ease}
+  /* "Details" buttons on the main themes */
+  .th-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font:500 13.5px var(--sans);color:var(--teal);background:none;border:1px solid var(--rule);border-radius:20px;padding:5px 13px;cursor:pointer}
+  .th-btn::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+  .th-btn[aria-expanded="true"]::after{transform:rotate(-135deg) translateY(-1px)}
+  .th-btn:hover{border-color:var(--teal)}
+  .th-more{margin-top:12px;padding:14px 16px;background:#fff;border:1px solid var(--rule);border-radius:6px;font-size:16px;line-height:1.55;color:var(--ink)}
+  .th-more p{margin:0 0 10px}
+  .th-more ul{margin:0 0 10px;padding-left:18px}
+  .th-more li{padding:0 0 8px;border:0}
+  .th-more li b{display:inline;font-size:inherit}
+  .th-more a{font-family:var(--sans);font-size:13px;white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){.th-btn::after{transition:none}}
 </style>
 <div class="ri-top">
 <p>My research lies at the interface of mathematics and biology, with a focus on how infectious diseases spread through populations and how they can be controlled. I build compartmental models of diseases such as monkeypox, dengue, Nipah virus, HFMD, COVID-19 and avian influenza. I formulate them with ordinary, fractional-order, delay and stochastic differential equations, partial differential equations, and analyse them with the tools of dynamical systems: stability and bifurcation theory, threshold dynamics and numerical simulation.
@@ -229,15 +241,84 @@ Alongside the analysis, I use optimal control, sensitivity analysis and cost-eff
 </div>
 <h3>Main themes</h3>
 <ul class="themes">
-  <li><b>Infectious disease modelling</b><span>Monkeypox, dengue, Nipah, hand, foot and mouth disease (HFMD), COVID-19 and avian influenza.</span></li>
-  <li><b>Fractional-order differential equations</b><span>Caputo-type models that carry memory effects into epidemic dynamics.</span></li>
-  <li><b>Optimal control</b><span>Treatment and vaccination strategies from Pontryagin&rsquo;s maximum principle, ranked by cost-effectiveness.</span></li>
-  <li><b>Spatio-temporal dynamics</b><span>Reaction&ndash;diffusion and cross-diffusion models, Turing instability and pattern formation.</span></li>
-  <li><b>Stability, chaos and bifurcation</b><span>Hopf bifurcation, delay-induced oscillations and chaos control in eco-epidemiological systems.</span></li>
-  <li><b>Sensitivity analysis</b><span>PRCC-based global sensitivity analysis and stochastic stability.</span></li>
-  <li><b>Data-driven methods</b><span>ANFIS and genetic-algorithm-based parameter estimation for epidemic trends.</span></li>
+  <li><b>Infectious disease modelling</b><span>Monkeypox, dengue, Nipah, hand, foot and mouth disease (HFMD), COVID-19 and avian influenza.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-1">Details</button>
+    <div class="th-more" id="th-1" hidden>
+      <p>I build compartmental models (SIR, SEIR, SEIQR and host&ndash;vector) that follow how people move between being susceptible, exposed, infected, quarantined and recovered. For each model I derive the basic reproduction number, study the stability of the disease-free and endemic equilibria, and use simulations to compare control strategies.</p>
+      <p>Across these models I include features that shape real outbreaks: media awareness, waning immunity, quarantine, and saturated or nonlinear incidence and treatment.</p>
+    </div>
+  </li>
+  <li><b>Fractional-order differential equations</b><span>Caputo-type models that carry memory effects into epidemic dynamics.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-2">Details</button>
+    <div class="th-more" id="th-2" hidden>
+      <p>In a classical epidemic model, the rate of change of each compartment depends only on the present state. Many biological processes, however, carry a memory: immunity wanes, behaviour adapts and infection responds to past exposure. I replace the ordinary derivative with the Caputo fractional derivative of order 0&nbsp;&lt;&nbsp;&alpha;&nbsp;&le;&nbsp;1,</p>
+      <p style="text-align:center"><sup>C</sup><i>D</i><sup>&alpha;</sup><i>x</i>(<i>t</i>) = <span style="white-space:nowrap">1&#8260;&Gamma;(1&minus;&alpha;) &int;<sub>0</sub><sup><i>t</i></sup> (<i>t</i>&minus;<i>s</i>)<sup>&minus;&alpha;</sup> <i>x</i>&prime;(<i>s</i>) d<i>s</i></span>, &nbsp; 0 &lt; &alpha; &lt; 1,</p>
+      <p>so that the present rate is a weighted average over the whole past, with weights that decay like a power law. At &alpha; = 1 the model reduces to the classical one. The Caputo form keeps initial conditions in their usual form, which makes the models easy to fit to data.</p>
+    </div>
+</li>
+  <li><b>Optimal control</b><span>Treatment and vaccination strategies from Pontryagin&rsquo;s maximum principle, ranked by cost-effectiveness.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-3">Details</button>
+    <div class="th-more" id="th-3" hidden>
+      <p>Once a model shows how a disease spreads, the next question is how best to stop it with limited resources. I treat interventions such as vaccination, treatment, quarantine and awareness as time-dependent controls <i>u</i><sub><i>i</i></sub>(<i>t</i>), bounded by 0 &le; <i>u</i><sub><i>i</i></sub>(<i>t</i>) &le; <i>u</i><sub><i>i</i></sub><sup>max</sup>, and look for the schedule that minimises a cost functional such as</p>
+      <p style="text-align:center"><i>J</i>(<i>u</i>) = &int;<sub>0</sub><sup><i>T</i></sup> [ <i>A</i><sub>1</sub><i>E</i>(<i>t</i>) + <i>A</i><sub>2</sub><i>I</i>(<i>t</i>) + &frac12; &sum;<sub><i>i</i></sub> <i>B</i><sub><i>i</i></sub><i>u</i><sub><i>i</i></sub><sup>2</sup>(<i>t</i>) ] d<i>t</i>,</p>
+      <p>which balances the burden of infection against the cost of the interventions.</p>
+      <p>The aim is practical guidance: which intervention to prioritise, when to start it, and how its intensity should change over the course of an outbreak.</p>
+    </div>
+</li>
+  <li><b>Spatio-temporal dynamics</b><span>Reaction&ndash;diffusion and cross-diffusion models, Turing instability and pattern formation.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-4">Details</button>
+    <div class="th-more" id="th-4" hidden>
+      <p>Diseases and populations do not mix uniformly: individuals move, habitats differ, and infection spreads from place to place. I model this with reaction&ndash;diffusion systems of the form</p>
+      <p style="text-align:center">&part;<b>u</b>/&part;<i>t</i> = <i>D</i>&Delta;<b>u</b> + <b>f</b>(<b>u</b>), &nbsp; <i>x</i> &isin; &Omega;, &nbsp; with zero-flux boundary conditions,</p>
+      <p>where <b>f</b> describes the local epidemic or ecological interactions and the diffusion matrix <i>D</i> describes movement. When <i>D</i> has off-diagonal terms, the system includes cross-diffusion: the movement of one group responds to the density of another, for example preys moving away from predators.</p>
+      <ul>
+        <li><b>Turing instability:</b> conditions under which an equilibrium that is stable without movement becomes unstable once diffusion is added. In practice, this means some spatial wavenumber <i>k</i> makes det(<i>J</i> &minus; <i>k</i><sup>2</sup><i>D</i>) &lt; 0, where <i>J</i> is the Jacobian of <b>f</b> at that equilibrium. This diffusion-driven instability gives rise to stationary spatial patterns such as spots, stripes and labyrinths.</li>
+        <li><b>Beyond stationary patterns:</b> Hopf and Turing&ndash;Hopf interactions, non-stationary and chaotic spatio-temporal patterns, and methods to control the chaos.</li>
+      </ul>
+    </div>
+  </li>
+    <li><b>Stability, chaos and bifurcation</b><span>Hopf bifurcation, delay-induced oscillations and chaos control in eco-epidemiological systems.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-5">Details</button>
+    <div class="th-more" id="th-5" hidden>
+      <p>A model is useful only if we understand its long-term behaviour: whether an infection dies out, settles to a steady level, keeps returning in waves, or behaves erratically. I study how this behaviour changes as parameters vary, and what each change means biologically.</p>
+      <ul>
+        <li><b>Stability:</b> local stability of the disease-free and endemic equilibria from the linearised system, using the Routh&ndash;Hurwitz criteria, and global stability through Lyapunov functions and LaSalle&rsquo;s invariance principle. The basic reproduction number <i>R</i><sub>0</sub> is the usual threshold: below 1 the infection dies out, above 1 it persists.</li>
+        <li><b>Hopf bifurcation:</b> the point at which a pair of complex eigenvalues crosses the imaginary axis and a steady state gives way to sustained oscillations, which in a population appear as recurring outbreaks. Normal-form analysis determines the direction of the bifurcation and the stability of the resulting periodic orbits.</li>
+        <li><b>Delay-induced oscillations:</b> incubation and gestation periods enter as time delays &tau;. From the transcendental characteristic equation I find the critical delay at which purely imaginary roots appear, check the transversality condition, and show how a longer delay can destabilise an otherwise stable equilibrium. <a href="https://doi.org/10.1038/s41598-025-02778-2" target="_blank" rel="noopener">Sci. Rep. 2025</a>, <a href="https://doi.org/10.1016/j.matcom.2026.08.035" target="_blank" rel="noopener">MATCOM 2027</a></li>
+        <li><b>Fractional order and delay together:</b> Hopf bifurcation in fractional-order systems, where both the memory order and the delay act as bifurcation parameters. <a href="https://doi.org/10.1007/s40435-026-02015-2" target="_blank" rel="noopener">IJDC 2026</a>, <a href="https://doi.org/10.1140/epjs/s11734-024-01221-3" target="_blank" rel="noopener">EPJ ST</a></li>
+        <li><b>Chaos and its control:</b> identifying chaotic behaviour through bifurcation diagrams, phase portraits and Lyapunov exponents, and designing controls that steer the system back to regular dynamics. <a href="https://doi.org/10.1016/j.matcom.2025.07.057" target="_blank" rel="noopener">MATCOM 2026</a>, <a href="https://doi.org/10.1142/S0218127423501924" target="_blank" rel="noopener">IJBC 2023</a></li>
+      </ul>
+      <p>In eco-epidemiological systems, where disease spreads within interacting predator and prey populations, these tools show how infection can stabilise or destabilise a community, and when small changes in a parameter lead to large changes in outcome.</p>
+    </div>
+  </li>
+    <li><b>Sensitivity analysis</b><span>PRCC-based global sensitivity analysis and stochastic stability.</span>
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-6">Details</button>
+    <div class="th-more" id="th-6" hidden>
+      <p>Epidemic parameters such as contact rates, recovery rates and vaccine efficacy are rarely known exactly, and real populations are subject to random fluctuations. I ask which parameters matter most for an outbreak, and whether the model&rsquo;s predictions still hold when the environment is noisy.</p>
+      <ul>
+        <li><b>Local sensitivity:</b> the normalised forward sensitivity index of the basic reproduction number,
+          <span style="white-space:nowrap">&Upsilon;<sub><i>p</i></sub> = (&part;<i>R</i><sub>0</sub>/&part;<i>p</i>)(<i>p</i>/<i>R</i><sub>0</sub>)</span>,
+          which gives the percentage change in <i>R</i><sub>0</sub> for a 1% change in a parameter <i>p</i>. </li>
+        <li><b>Global sensitivity (PRCC):</b> sampling all parameters together by Latin hypercube sampling, then computing partial rank correlation coefficients between each parameter and outputs such as <i>R</i><sub>0</sub> or the number infected, after removing the effects of the other parameters. Unlike local indices, this captures nonlinear, monotone effects across the whole plausible parameter range.</li>
+        <li><b>Stochastic stability:</b> adding environmental noise to the model as white-noise perturbations, which turns it into a system of stochastic differential equations. Using stochastic Lyapunov functions, I find conditions under which the equilibria remain stable under noise, and confirm them with numerical simulations of sample paths.</li>
+      </ul>
+      <p>Together, these methods show which parameters are the most effective targets for control, and how reliable the model&rsquo;s conclusions are when the data are uncertain.</p>
+    </div>
+  </li>
 </ul>
 </div>
+<script>
+/* Open/close the details under each main theme (works for any theme with a "Details" button) */
+document.querySelectorAll('.th-btn').forEach(function (btn) {
+  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  btn.addEventListener('click', function () {
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.textContent = open ? 'Details' : 'Hide details';
+    panel.hidden = open;
+  });
+});
+</script>
 </main>
 <footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
 <!-- When you change site.js or style.css, raise the ?v= number on every page so browsers load the new file. -->
