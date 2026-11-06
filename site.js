@@ -61,8 +61,9 @@ const MENU = [
       if (wide()) closeAll(li);
       li.classList.toggle('open', open); btn.setAttribute('aria-expanded', open);
     });
-    li.addEventListener('mouseenter', () => { if (wide()){ closeAll(li); li.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); } });
-    li.addEventListener('mouseleave', () => { if (wide()){ li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+    let shut;                                         // short delay before closing, so a slip of the mouse doesn't close it
+    li.addEventListener('mouseenter', () => { if (wide()){ clearTimeout(shut); closeAll(li); li.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); } });
+    li.addEventListener('mouseleave', () => { if (wide()){ shut = setTimeout(() => { li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }, 180); } });
   });
   // On phones, open the group that contains the current page
   menu.querySelectorAll('li.here > button').forEach(b => { if (!wide()){ b.parentElement.classList.add('open'); b.setAttribute('aria-expanded', 'true'); } });
@@ -88,10 +89,10 @@ const MENU = [
   const ctx = cv.getContext('2d');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const Du = 1.0, Dv = 0.5, F = 0.0545, k = 0.062, MAX = 9000;
-  let W, H, u, v, u2, v2, img, steps = 0, running = true, visible = true;
+  let W, H, u, v, u2, v2, img, steps = 0, running = true, visible = true, perFrame = 4;
 
   function size(){
-    const r = cv.getBoundingClientRect(), s = r.width < 700 ? 2.2 : 3;
+    const r = cv.getBoundingClientRect(), s = r.width < 700 ? 2.2 : (r.width > 1400 ? 3.6 : 3);
     W = Math.max(80, Math.round(r.width / s)); H = Math.max(50, Math.round(r.height / s));
     cv.width = W; cv.height = H;
     u = new Float32Array(W*H); v = new Float32Array(W*H); u2 = new Float32Array(W*H); v2 = new Float32Array(W*H);
@@ -133,8 +134,11 @@ const MENU = [
   const settle = n => { for (let i = 0; i < n; i++) step(); draw(); running = false; };
   function loop(){
     if (running && visible && !document.hidden){
-      for (let n = 0; n < 12; n++) step();
-      steps += 12; draw(); if (steps > MAX) running = false;
+      const t0 = performance.now();
+      for (let n = 0; n < perFrame; n++) step();
+      const ms = (performance.now() - t0) / perFrame;   // time per step on this device
+      perFrame = Math.max(2, Math.min(12, Math.floor(5 / Math.max(ms, 0.05))));   // keep the work under ~5 ms per frame
+      steps += perFrame; draw(); if (steps > MAX) running = false;
     }
     requestAnimationFrame(loop);
   }
