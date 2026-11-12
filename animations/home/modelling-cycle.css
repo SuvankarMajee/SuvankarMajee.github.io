@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Home page: "the modelling cycle" diagram beside the "About me" text
+   Used on: index.html
+   Each comment explains the line(s) directly below it.
+   ========================================================================== */
+
+/* "About me": text on the left, the cycle on the right (up to 440 px wide). */
+.about-cycle{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,440px);gap:44px;align-items:center}
+/* The box around the drawing. */
+.mc{margin:0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 10px 12px}
+/* The drawing fills the box width; its height is set by modelling-cycle.js. */
+.mc canvas{display:block;width:100%}
+/* One-line explanation of the highlighted step, under the drawing. */
+.mc-cap{font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--muted);text-align:center;margin:8px 6px 0;min-height:2.9em;max-width:none}
+.mc-cap b{color:var(--navy);font-weight:600}
+/* Narrow screens (tablets, phones): the cycle goes below the text, centred. */
+@media (max-width:900px){.about-cycle{grid-template-columns:1fr;gap:28px}.mc{max-width:440px;width:100%;margin:0 auto}}

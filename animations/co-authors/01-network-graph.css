@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Co-author network graph (also styles the "Show the numbers as a table" boxes)
+   Used on: research/co-authors.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* class="tlc": the network section, at most 920 px wide, centred, sans font. */
+.tlc{max-width:920px;margin:0 auto;font-family:var(--sans)}
+/* Section heading ("Co-author Network Graph*"): centred, 22 px, bold. */
+.tlc h3{font-family:Arial,sans-serif;text-align:center;font-size:22px;font-weight:600;color:#202124;margin:0 0 6px}
+/* The "how to read it" line under the heading: small grey centred text. */
+.tlc .how{text-align:center;font-size:14px;color:var(--muted);margin:0 auto 14px;max-width:64ch}
+/* The graph container (<div id="net">): the drawing is centred in it. */
+#net{position:relative;display:flex;justify-content:center}
+/* The drawing (SVG) shrinks to fit narrow screens and keeps its proportions. */
+#net svg{display:block;max-width:100%;height:auto}
+/* A co-author circle selected with the keyboard: no browser outline... */
+#net g[tabindex]:focus{outline:none}
+/* ...instead the circle gets a thick navy edge. */
+#net g[tabindex]:focus circle{stroke:#10203A;stroke-width:3}
+/* Thin pale border with rounded corners around the graph; anything outside it is hidden. */
+#net{border:1px solid #EEF1F0;border-radius:8px;overflow:hidden}
+/* Mouse pointer is an open hand over the graph (it can be dragged)... */
+#net svg{cursor:grab}
+/* ...and a closed hand while dragging. */
+#net svg:active{cursor:grabbing}
+/* Zoom buttons (+, −, reset): stacked in the top right corner of the graph. */
+.zbtns{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:4px;z-index:4}
+/* Each zoom button: 32 px white square with a thin border. */
+.zbtns button{width:32px;height:32px;border:1px solid #D9E0DE;background:#fff;border-radius:6px;font:500 18px/1 Arial,sans-serif;color:#10203A;cursor:pointer}
+/* Zoom button under the mouse: teal. */
+.zbtns button:hover{border-color:#0E7C7B;color:#0E7C7B}
+/* Phones (600 px or narrower): zoom buttons move to a row centred under the graph. */
+@media (max-width:600px){#net{padding-bottom:46px}.zbtns{top:auto;bottom:8px;right:50%;transform:translateX(50%);flex-direction:row;gap:8px}}
+/* Zoom hint text under the graph: small grey centred. */
+.zhint{text-align:center;font-size:12.5px;color:var(--muted);margin:8px auto 0;max-width:none}
+/* Tooltip box that appears above a co-author's circle on hover (hidden until then). */
+#netTip{position:absolute;pointer-events:none;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 9px;font:12.5px/1.4 Arial,sans-serif;color:#333;box-shadow:0 2px 8px rgba(0,0,0,.1);opacity:0;transform:translate(-50%,-100%);white-space:nowrap;z-index:5}
+/* The key under the graph (what the circles and lines mean): centred, wrapping row. */
+.net-key{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted);margin-top:6px}
+/* Each key entry: symbol + text side by side. */
+.net-key span{display:flex;align-items:center;gap:7px}
+/* Key symbols are circles. */
+.net-key i{display:inline-block;border-radius:50%}
+/* "Show the numbers as a table" fold-outs (used by both diagrams). */
+.tl-table{margin-top:12px;font-size:13px}
+/* The clickable line of the fold-out: teal, centred, no default marker. */
+.tl-table summary{cursor:pointer;color:var(--teal);font-weight:500;text-align:center;list-style:none}
+/* Hide the default triangle in Safari/Chrome (a custom ▸/▾ is added in chord-diagram.css). */
+.tl-table summary::-webkit-details-marker{display:none}
+/* The table: centred, digits aligned. */
+.tl-table table{border-collapse:collapse;margin:10px auto 0;font-variant-numeric:tabular-nums}
+/* Table cells: centred with a pale line below. */
+.tl-table th,.tl-table td{padding:4px 10px;border-bottom:1px solid #EEF1F0;text-align:center}
+/* First column (names): left-aligned. */
+.tl-table th:first-child,.tl-table td:first-child{text-align:left}

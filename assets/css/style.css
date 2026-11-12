@@ -1,0 +1,400 @@
+/* ================= Suvankar Majee — shared styles =================
+   This file controls how every page looks: fonts, colours, spacing and layout.
+   How to read a rule:   selector{property:value; property:value}
+     - the selector says WHICH elements (e.g. "h2" = all level-2 headings, ".tl" = elements with class="tl",
+       "#rd" = the element with id="rd", "a:hover" = a link while the mouse is over it);
+     - the properties inside { } say HOW they look.
+   Each comment explains the line (or lines) directly below it.
+   "@media (max-width:820px){ ... }" = rules that only apply on screens narrower than 820 px (phones/tablets). */
+
+/* Colour and font "variables", defined once and reused below as var(--name). Change a colour here to change it everywhere. */
+:root{
+  /* navy = banner/menu/headings; ink = body text; teal = links; morph = light mint accent (pattern colour) */
+  --navy:#10203A;  --ink:#1B2533;  --teal:#0E7C7B;  --morph:#7FD1BE;
+  /* paper = page background; rule = thin grey divider lines; muted = grey secondary text */
+  --paper:#F5F7F6; --rule:#D9E0DE; --muted:#5A6672;
+  /* serif = main text font (Newsreader; the others are fallbacks if it fails to load) */
+  --serif:"Newsreader","Iowan Old Style",Georgia,serif;
+  /* sans = font for menus, dates and small labels (IBM Plex Sans, with fallbacks) */
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+/* Width/height of every element include its padding and border (makes sizes predictable). */
+*{box-sizing:border-box}
+/* Clicking an in-page link (e.g. "Skip to content") scrolls smoothly instead of jumping. */
+html{scroll-behavior:smooth}
+/* ...but not for visitors who have asked their device for reduced motion. */
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Whole page: no outer margin, light background, dark text, 18 px serif font, line height 1.65. */
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.65 var(--serif)}
+/* Links: teal, thin underline sitting 3 px below the text. */
+a{color:var(--teal);text-decoration-thickness:1px;text-underline-offset:3px}
+/* Links turn navy when the mouse is over them. */
+a:hover{color:var(--navy)}
+/* Teal outline around whatever is selected with the keyboard (Tab key). */
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+/* "Skip to content" link: parked off-screen (left:-999px) until needed. */
+.skip{position:absolute;left:-999px;top:8px;background:#fff;padding:6px 10px;z-index:50}
+/* ...and moved on-screen when it receives keyboard focus. */
+.skip:focus{left:8px}
+
+/* ---------- Top bar & menu ---------- */
+/* The menu bar: fixed to the top of the window, transparent at first, white text; colour change is animated over 0.25 s. */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:transparent;color:#fff;font-family:var(--sans);transition:background-color .25s,box-shadow .25s}
+/* Once you scroll down, site.js adds class "solid": the bar gets a dark navy background. */
+.topbar.solid{background:rgba(16,32,58,.97);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+/* While the bar is transparent, a soft dark shadow behind the menu words keeps them readable over the pattern. */
+.topbar:not(.solid) .brand,.topbar:not(.solid) .menu>li>a,.topbar:not(.solid) .menu>li>button{text-shadow:0 1px 3px rgba(4,12,24,.75),0 0 12px rgba(4,12,24,.5)}
+/* No colour animation for reduced-motion visitors. */
+@media (prefers-reduced-motion:reduce){.topbar{transition:none}}
+/* Inner row of the bar: max 1180 px wide, centred, 60 px tall; name on the left, menu on the right. */
+.topbar-in{max-width:1180px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+/* Your name + logo at the top left (links to Home). */
+.brand{color:#fff;text-decoration:none;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+/* Name stays white on mouse-over. */
+.brand:hover{color:#fff}
+/* White box around the SM logo, 36 × 36 px. */
+.brand i.logo{width:36px;height:36px;border:0;background:#fff;padding:3px;overflow:hidden}
+/* The logo image fills its box without stretching. */
+.brand i.logo img{width:100%;height:100%;object-fit:contain;display:block}
+/* If SM-logo.png fails to load, site.js adds "nologo": show a mint circle instead of the white box... */
+.brand i.logo.nologo{background:none;border:1.5px solid var(--morph);padding:0}
+/* ...with the letters "SM" written inside it. */
+.brand i.logo.nologo::before{content:"SM"}
+/* Shape of the logo holder: a 30 px circle with a mint border, contents centred. */
+.brand i{font-style:normal;width:30px;height:30px;border:1.5px solid var(--morph);border-radius:50%;display:grid;place-items:center;font-size:12px;color:var(--morph)}
+/* The list of menu items, laid out in a row, no bullet points. */
+.menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:2px}
+/* Each menu item is the anchor point for its drop-down. */
+.menu>li{position:relative}
+/* Menu words (plain links and drop-down buttons): 14 px sans font, light grey-blue, padded, no underline. */
+.menu>li>a,.menu>li>button{display:flex;align-items:center;gap:5px;font:500 14px var(--sans);color:#C9D6D8;background:none;border:0;padding:8px 11px;border-radius:4px;cursor:pointer;text-decoration:none;white-space:nowrap}
+/* Mouse over a menu word, or its drop-down is open: white text on a faint highlight. */
+.menu>li>a:hover,.menu>li>button:hover,.menu>li.open>button{color:#fff;background:rgba(255,255,255,.07)}
+/* Menu item of the page you are on (class "here", set by site.js): white text with a mint underline. */
+.menu>li.here>a,.menu>li.here>button{color:#fff;box-shadow:inset 0 -2px 0 var(--morph);border-radius:4px 4px 0 0}
+/* Small arrow (caret) next to drop-down names; it turns smoothly. */
+.menu button svg{width:10px;height:10px;transition:transform .15s}
+/* When the drop-down is open the arrow points up. */
+.menu li.open>button svg{transform:rotate(180deg)}
+/* Drop-downs (style C: dark panel). The box fades in; an invisible strip bridges the gap to the button */
+/* Next 4 lines = one rule for the drop-down panel: placed just below its button, at least 280 px wide, */
+.sub{list-style:none;margin:0;padding:6px 0;position:absolute;top:calc(100% + 6px);left:0;min-width:280px;
+  /* dark navy background, rounded corners, thin mint edge and a shadow, */
+  background:#10203A;border-radius:6px;box-shadow:0 0 0 1px rgba(127,209,190,.25),0 14px 34px rgba(4,12,24,.45);
+  /* hidden and slightly raised when closed, */
+  visibility:hidden;opacity:0;transform:translateY(-4px);pointer-events:none;
+  /* and it fades/slides in over 0.15 s. */
+  transition:opacity .15s ease,transform .15s ease,visibility 0s linear .15s}
+/* Invisible 10 px strip above the panel, so moving the mouse from the button to the panel does not close it. */
+.sub::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+/* Open drop-down (class "open", set by site.js): visible, in place, clickable. */
+.menu li.open>.sub{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .15s ease,transform .15s ease,visibility 0s}
+/* Links inside a drop-down: one per line, with a transparent left bar that lights up on hover. */
+.sub a{display:block;padding:9px 16px 9px 14px;border-left:2px solid transparent;color:#DCE7E6;text-decoration:none;font-size:14.5px;white-space:nowrap}
+/* Drop-down link under the mouse/keyboard: white text, faint highlight, mint left bar. */
+.sub a:hover,.sub a:focus-visible{background:rgba(255,255,255,.06);color:#fff;border-left-color:#7FD1BE}
+/* Drop-down link of the current page: mint text and mint left bar. */
+.sub a[aria-current="page"]{color:#7FD1BE;border-left-color:#7FD1BE;font-weight:500}
+/* Reduced motion: drop-downs appear without fading or sliding. */
+@media (prefers-reduced-motion:reduce){.sub,.menu li.open>.sub{transition:none;transform:none}}
+/* The "Menu" button for phones: hidden on wide screens. */
+.burger{display:none;background:none;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:5px;padding:7px 12px;font:500 14px var(--sans);cursor:pointer}
+
+/* Rules for screens 980 px wide or less (tablets and phones): the menu becomes a fold-out list. */
+@media (max-width:980px){
+  /* Show the "Menu" button. */
+  .burger{display:block}
+  /* Hide the menu row; when shown, it is a full-width navy panel under the bar, items stacked vertically, scrollable if long. */
+  .menu{display:none;position:absolute;top:60px;left:0;right:0;background:var(--navy);flex-direction:column;align-items:stretch;padding:8px 16px 18px;max-height:calc(100vh - 60px);overflow:auto;gap:0}
+  /* Tapping "Menu" adds class "show" (site.js), which displays the panel. */
+  .menu.show{display:flex}
+  /* Each menu item takes the full width, larger text, with a thin line underneath. */
+  .menu>li>a,.menu>li>button{width:100%;justify-content:space-between;padding:12px 8px;font-size:15.5px;border-radius:0;border-bottom:1px solid rgba(255,255,255,.08)}
+  /* Current page: mint text instead of the underline. */
+  .menu>li.here>a,.menu>li.here>button{box-shadow:none;color:var(--morph)}
+  /* Sub-menus open inside the list (indented) rather than as floating panels. */
+  .sub{position:static;box-shadow:none;background:transparent;padding:0 0 8px 12px;min-width:0;display:none;visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:none}
+  /* The invisible hover strip is not needed on touch screens. */
+  .sub::before{display:none}
+  /* Show a sub-menu when its group is open. */
+  .menu li.open>.sub{display:block}
+  /* Long sub-menu names may wrap onto two lines. */
+  .sub a{white-space:normal}
+  /* Sub-menu link colour and spacing on phones. */
+  .sub a{color:#C9D6D8;padding:9px 8px}
+  /* Sub-menu link when touched/hovered. */
+  .sub a:hover{background:rgba(255,255,255,.06);color:#fff}
+  /* Sub-menu link of the current page: mint. */
+  .sub a[aria-current="page"]{color:var(--morph)}
+}
+
+/* ---------- Banner with the live pattern ---------- */
+/* The dark banner at the top of each page; anything spilling outside it is cut off. */
+.banner{position:relative;background:var(--navy);color:#EAF1F0;overflow:hidden}
+/* Home-page banner: at least 540 px tall, text sits at the bottom. */
+.banner.home{min-height:540px;display:flex;align-items:flex-end}
+/* Other pages: shorter banner (250 px), title at the bottom. */
+.banner.page{min-height:250px;display:flex;align-items:flex-end}
+/* Other pages: the pattern fades out towards the left, behind the title. */
+.banner.page canvas{-webkit-mask-image:linear-gradient(90deg,transparent 10%,rgba(0,0,0,.3) 45%,#000 80%);mask-image:linear-gradient(90deg,transparent 10%,rgba(0,0,0,.3) 45%,#000 80%)}
+/* Banner text block: above the pattern, max 1180 px wide and centred; clicks pass through it to the pattern... */
+.banner-in{position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto;padding:0 28px 34px;pointer-events:none}
+/* ...except links and buttons, which stay clickable. */
+.banner-in a,.banner-in button{pointer-events:auto}
+/* Extra space above and below the text on the Home banner. */
+.banner.home .banner-in{padding:100px 28px 56px}
+/* Page titles in the banner: medium weight, slightly tight letters. */
+.banner h1{font-weight:500;letter-spacing:-.015em;margin:0;line-height:1.05}
+/* Home: your name, between 46 and 88 px depending on screen width, max ~9 letters per line. */
+.banner.home h1{font-size:clamp(46px,7vw,88px);max-width:9ch;margin-bottom:22px}
+/* Other pages: title between 34 and 52 px depending on screen width. */
+.banner.page h1{font-size:clamp(34px,4.6vw,52px)}
+/* Small grey label above a page title (e.g. "Research & publications"). */
+.crumb{font-family:var(--sans);font-size:14px;color:#9FB4B8;margin:0 0 6px}
+/* Home: your position and department under your name. */
+.post{font-family:var(--sans);font-size:15px;line-height:1.5;color:#B9C8CC;margin:0 0 24px}
+/* "Institute Postdoctoral Fellow" in white. */
+.post strong{color:#fff;font-weight:500}
+/* Home: the one-sentence description ("I build and analyse..."). */
+.lede{font-size:21px;line-height:1.5;max-width:34ch;margin:0 0 32px;color:#DCE7E6}
+/* Home: row of profile links (Email, Google Scholar, ORCID...), wrapping onto new lines if needed. */
+.profiles{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--sans);font-size:14px}
+/* Each profile link: mint text with a faint mint underline. */
+.profiles a{color:var(--morph);text-decoration:none;border-bottom:1px solid rgba(127,209,190,.35);padding-bottom:1px}
+/* Profile link under the mouse: white. */
+.profiles a:hover{color:#fff;border-color:#fff}
+/* Home: the small caption box at the bottom right explaining the pattern. */
+.caption{position:absolute;right:28px;bottom:22px;z-index:1;margin:0;max-width:300px;font-family:var(--sans);font-size:12.5px;line-height:1.45;color:#B9C8CC;background:rgba(16,32,58,.88);padding:10px 14px;border-radius:3px;text-align:right}
+/* The "start again" button inside the caption looks like an underlined link. */
+.caption button{font:inherit;color:var(--morph);background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* ---------- Content ---------- */
+/* Main content area: max 1180 px wide, centred, with space above and below. */
+main{max-width:1180px;margin:0 auto;padding:52px 28px 72px}
+/* class="narrow": keeps a column of text to max 820 px wide (easier to read). */
+.narrow{max-width:820px}
+/* Section headings (h2): 32 px navy. */
+h2{font-weight:500;font-size:32px;line-height:1.2;letter-spacing:-.01em;color:var(--navy);margin:0 0 18px}
+/* Smaller headings (h3): 15.5 px bold sans, navy. */
+h3{font-family:var(--sans);font-weight:600;font-size:15.5px;color:var(--navy);margin:36px 0 10px}
+/* Paragraphs: at most ~70 characters per line, 16 px gap below. */
+p{max-width:70ch;margin:0 0 16px}
+/* class="muted": grey text. */
+.muted{color:var(--muted)}
+/* class="small": small sans text. */
+.small{font-family:var(--sans);font-size:14px}
+/* Home: each "block" after the first is separated by a thin line and extra space. */
+.block+.block{margin-top:56px;padding-top:44px;border-top:1px solid var(--rule)}
+/* class="updated": small grey "last updated" note (not used at present). */
+.updated{font-family:var(--sans);font-size:13px;color:var(--muted);margin-top:40px}
+
+/* Home */
+/* Two-column "about" layout: text + 210 px photo column (older layout; not used at present). */
+.about{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:44px;align-items:start}
+/* Portrait photo in that layout (not used at present). */
+.portrait{width:210px;aspect-ratio:4/5;object-fit:cover;border-radius:3px;display:block;background:#E3EAE8}
+/* Navy placeholder box if the portrait is missing (not used at present). */
+.portrait-fallback{width:210px;aspect-ratio:4/5;border-radius:3px;background:var(--navy);color:var(--morph);display:none;align-items:center;justify-content:center;font-size:54px;font-weight:500}
+/* Home: the list of research-topic tags under "About me", laid out as wrapping chips. */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0;list-style:none}
+/* Each tag chip: small sans text on a pale green background. */
+.tags li{font-family:var(--sans);font-size:13px;color:var(--navy);background:#E6EEEC;border-radius:3px;padding:3px 9px}
+/* Home "On this site": tiles in a grid, as many 250 px+ columns as fit. */
+.tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+/* Each tile: white box with a thin border, whole box clickable. */
+.tiles a{display:block;height:100%;padding:16px 18px;background:#fff;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink)}
+/* Tile under the mouse: teal border. */
+.tiles a:hover{border-color:var(--teal)}
+/* Tile title (the <b> part). */
+.tiles b{display:block;color:var(--navy);font-weight:600;font-size:18.5px;margin-bottom:2px}
+/* Tile description (the <span> part). */
+.tiles span{color:var(--muted);font-size:15.5px;line-height:1.45;display:block}
+
+/* Lists with dates / years */
+/* class="tl" (timeline): used on Education, Experience, Achievements, Teaching, Conferences, Workshops, FDPs. No bullets. */
+.tl{list-style:none;margin:0;padding:0}
+/* Each entry: two columns, 170 px for the date (<div class="d">) and the rest for the details; thin line on top. */
+.tl li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:24px;padding:14px 0;border-top:1px solid var(--rule)}
+/* No line above the first entry. */
+.tl li:first-child{border-top:0}
+/* The date column: small grey sans text. */
+.tl .d{font-family:var(--sans);font-size:14px;color:var(--muted);padding-top:3px}
+/* The entry's main title (<b>): bold navy. */
+.tl b{font-weight:600;color:var(--navy)}
+/* Each extra detail line (<span class="s">): grey, on its own line. */
+.tl .s{display:block;color:var(--muted);font-size:16.5px;line-height:1.5}
+
+/* Research interest "Main themes": grid of themes, as many 280 px+ columns as fit. */
+.themes{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0 40px}
+/* Each theme: thin line on top. */
+.themes li{padding:14px 0;border-top:1px solid var(--rule)}
+/* Theme title (<b>): 19 px bold navy, on its own line. */
+.themes b{display:block;font-weight:600;color:var(--navy);font-size:19px}
+/* Theme one-line summary (<span>): grey. */
+.themes span{color:var(--muted);font-size:16.5px;line-height:1.5}
+
+/* Publications */
+/* Row of topic filter buttons (All, Fractional-order, ...), wrapping if needed. */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+/* Each filter button: white pill with a thin border. */
+.filters button{font:500 13.5px var(--sans);color:var(--navy);background:#fff;border:1px solid var(--rule);border-radius:20px;padding:6px 14px;cursor:pointer}
+/* Filter button under the mouse: teal border. */
+.filters button:hover{border-color:var(--teal)}
+/* The selected filter (aria-pressed="true", set by site.js): filled navy. */
+.filters button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+/* "26 journal articles and 2 conference papers" counter line. */
+.count{font-family:var(--sans);font-size:13.5px;color:var(--muted);margin:10px 0 18px}
+/* One year of papers: 72 px column for the year, the rest for the papers; thin line on top. */
+.year{display:grid;grid-template-columns:72px minmax(0,1fr);gap:20px;border-top:1px solid var(--rule);padding-top:14px}
+/* The year number (<div class="y">): bold teal. */
+.year>.y{font-family:var(--sans);font-weight:600;font-size:15px;color:var(--teal);padding-top:4px}
+/* List of papers in a year: no bullets. */
+.year ul{list-style:none;margin:0;padding:0}
+/* Space below each paper. */
+.year li{padding:4px 0 18px}
+/* Paper title (<span class="ti">): 19 px navy. */
+.ti{display:block;font-size:19px;line-height:1.4;color:var(--navy);font-weight:500}
+/* Author list (<span class="au">): small grey sans. */
+.au{display:block;font-family:var(--sans);font-size:14px;color:var(--muted);margin-top:3px}
+/* Your own name in the author list (<b>): darker and bold. */
+.au b{color:var(--ink);font-weight:600}
+/* Journal / volume line (<span class="ve">): italic. */
+.ve{display:block;font-size:16px;font-style:italic;margin-top:1px}
+/* The DOI link at the end of the journal line: small, not italic. */
+.ve a{font-family:var(--sans);font-style:normal;font-size:13px;margin-left:8px}
+/* class="hidden": hides anything (used by the publication filter). */
+.hidden{display:none!important}
+
+/* Simple multi-column lists */
+/* class="cols": list split into 2 columns (each at least 300 px), e.g. Role in journals. */
+.cols{columns:2 300px;column-gap:44px;margin:0;padding:0;list-style:none}
+/* Each item: kept whole (never split between columns), thin line below. */
+.cols li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--rule);font-size:17.5px}
+/* Optional small grey note at the right end of an item (<span>). */
+.cols li span{font-family:var(--sans);font-size:13px;color:var(--muted);float:right;margin-left:12px;padding-top:4px}
+
+/* Profiles / contact */
+/* class="cards": grid of white link cards (as many 260 px+ columns as fit). */
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+/* Each card: white box, thin border, whole box clickable. */
+.cards a{display:block;padding:16px 18px;background:#fff;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink)}
+/* Card under the mouse: teal border. */
+.cards a:hover{border-color:var(--teal)}
+/* Card title (<b>). */
+.cards b{display:block;color:var(--navy);font-size:18.5px;font-weight:600}
+/* Card small text (<span>). */
+.cards span{font-family:var(--sans);font-size:13.5px;color:var(--muted)}
+/* class="contact": two equal columns (not used at present). */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+/* Postal address: not italic (browsers italicise <address> by default). */
+address{font-style:normal}
+
+/* Books */
+/* Book suggestions: grid of subject boxes (as many 330 px+ columns as fit). */
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:36px 44px}
+/* Subject heading (e.g. "Calculus") with a thick navy line under it. */
+.books h3{margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--navy)}
+/* Book list: no bullets. */
+.books ul{list-style:none;margin:0;padding:0}
+/* Each book: thin line below. */
+.books li{padding:6px 0;border-bottom:1px solid var(--rule);font-size:17px;line-height:1.4}
+/* Book title (<i>): navy italic. */
+.books li i{color:var(--navy)}
+/* Book author(s) (<span>): small grey, on its own line. */
+.books li span{display:block;font-family:var(--sans);font-size:13.5px;color:var(--muted);margin-top:1px}
+
+/* Gallery */
+/* Photo gallery: grid of photos (as many 260 px+ columns as fit). */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+/* Each photo block: no extra margin. */
+.gallery figure{margin:0}
+/* Photos: same 4:3 shape, cropped to fit, slightly rounded corners. */
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;display:block;background:#E3EAE8}
+/* Photo caption: small grey text under the photo. */
+.gallery figcaption{font-family:var(--sans);font-size:13.5px;color:var(--muted);margin-top:6px}
+/* "Photos will appear here soon" box with a dashed border. */
+.empty{border:1px dashed #B9C6C3;border-radius:4px;padding:36px;text-align:center;color:var(--muted);font-family:var(--sans);font-size:15px}
+
+/* Footer: navy strip, small light text. */
+footer{background:var(--navy);color:#9FB4B8;font-family:var(--sans);font-size:13px}
+/* Footer contents: centred, max 1180 px; copyright on the left, address/e-mail on the right (wrap on small screens). */
+footer div{max-width:1180px;margin:0 auto;padding:22px 28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+/* Footer e-mail link: mint. */
+footer a{color:var(--morph)}
+
+/* Rules for screens 820 px wide or less (phones and small tablets). */
+@media (max-width:820px){
+  /* Slightly less space at the left and right edges. */
+  .topbar-in,.banner-in,main,footer div{padding-left:20px;padding-right:20px}
+  /* Home banner a little taller (photo + caption stack under the text). */
+  .banner.home{min-height:560px}
+  /* Home banner text spacing on phones (room at the bottom for the caption). */
+  .banner.home .banner-in{padding:70px 20px 150px}
+  /* Home: the pattern fades from top to bottom instead of left to right. */
+  .banner.home canvas{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.25) 60%,rgba(0,0,0,.35));mask-image:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.25) 60%,rgba(0,0,0,.35))}
+  /* Other pages: the pattern is dimmer behind the title. */
+  .banner.page canvas{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.25),rgba(0,0,0,.6));mask-image:linear-gradient(90deg,rgba(0,0,0,.25),rgba(0,0,0,.6))}
+  /* Home caption box spans the width, text aligned left. */
+  .caption{left:20px;right:20px;bottom:16px;max-width:none;text-align:left}
+  /* Two-column layouts become one column. */
+  .about,.contact{grid-template-columns:1fr}
+  /* Photo moves above the text (older layout). */
+  .about figure{order:-1}
+  /* Timeline entries: date on top, details underneath. */
+  .tl li{grid-template-columns:1fr;gap:2px}
+  /* Publications: year on top, papers underneath. */
+  .year{grid-template-columns:1fr;gap:4px}
+  /* Section headings a little smaller. */
+  h2{font-size:28px}
+}
+
+/* ---------- Citation metrics ---------- */
+/* (Older citation-card layout; the Citations page now uses animations/citations/citation-charts.css. Kept in case it is reused.) */
+/* Two columns of metric cards. */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+/* Each metric card: white box with a thin border. */
+.mcard{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px 28px 22px}
+/* Card heading. */
+.mcard h2{font-size:26px;margin:0 0 4px}
+/* Card source line (e.g. "Google Scholar"). */
+.mcard .src{font-family:var(--sans);font-size:13.5px;color:var(--muted);margin:0 0 18px}
+/* Metrics table: full width, digits aligned. */
+.mtable{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;font-variant-numeric:tabular-nums}
+/* Table header cells: small grey, right-aligned, line below. */
+.mtable th{font-weight:600;color:var(--muted);font-size:13px;text-align:right;padding:6px 0;border-bottom:1px solid var(--rule)}
+/* First column (labels): left-aligned. */
+.mtable th:first-child,.mtable td:first-child{text-align:left}
+/* Table cells: right-aligned numbers, line below. */
+.mtable td{padding:9px 0;border-bottom:1px solid var(--rule);text-align:right;color:var(--ink)}
+/* Label column in grey. */
+.mtable td:first-child{color:var(--muted)}
+/* Highlighted numbers in the table. */
+.mtable td b{font-weight:600;font-size:17px;color:var(--navy)}
+/* Row of big headline numbers. */
+.big{display:flex;gap:30px;flex-wrap:wrap;margin:0 0 4px}
+/* Label under each big number. */
+.big div{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.35}
+/* The big number itself (30 px). */
+.big b{display:block;font-size:30px;font-weight:600;color:var(--navy);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+/* Small chart title. */
+.chart-t{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--navy);margin:24px 0 2px}
+/* Chart area, 200 px tall. */
+.chart{position:relative;height:200px}
+/* Chart drawing fills its area. */
+.chart svg{display:block;width:100%;height:100%;overflow:visible}
+/* Tooltip shown over a chart bar (hidden until hovered). */
+.chart .tip{position:absolute;pointer-events:none;background:var(--navy);color:#fff;font:500 12.5px/1.35 var(--sans);padding:6px 9px;border-radius:4px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .1s}
+/* Secondary text inside the tooltip. */
+.chart .tip span{color:#B9C8CC;font-weight:400}
+/* "Show details" fold-out inside a card. */
+.mcard details{border:0;margin-top:10px}
+/* The clickable "Show details" line. */
+.mcard summary{font:500 13px var(--sans);color:var(--teal);cursor:pointer;padding:4px 0}
+/* Table inside the fold-out. */
+.mcard details table{font-family:var(--sans);font-size:13.5px;border-collapse:collapse;margin-top:6px;font-variant-numeric:tabular-nums}
+/* Cells of that table. */
+.mcard details td,.mcard details th{padding:4px 18px 4px 0;text-align:left;border-bottom:1px solid var(--rule)}
+/* "Go to profile" link at the bottom of a card. */
+.mcard .go{display:inline-block;margin-top:14px;font-family:var(--sans);font-size:14px;font-weight:500}
+/* On screens 900 px or less: one card per row, less padding. */
+@media (max-width:900px){.metrics{grid-template-columns:1fr}.mcard{padding:22px 18px}}

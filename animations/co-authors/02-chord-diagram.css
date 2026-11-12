@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Co-author chord diagram (with year filter)
+   Used on: research/co-authors.html
+   Each comment explains the line(s) directly below it.
+   ========================================================================== */
+
+/* The chord-diagram section: at most 920 px wide, centred, Arial font. */
+.ca-wrap{max-width:920px;margin:auto;font-family:Arial, sans-serif}
+/* Year filter and diagram side by side, aligned at the top. */
+.ca-row{display:flex;gap:16px;align-items:flex-start}
+/* The year filter box on the left: 180 px wide, scrolls if very long, thin border. */
+.ca-years{width:180px;flex:none;max-height:520px;overflow:auto;border:1px solid #e0e0e0;border-radius:8px;padding:10px;font-size:15px}
+/* Each year: tick box and year number side by side; the whole line is clickable. */
+.ca-years label{display:flex;align-items:center;gap:8px;cursor:pointer}
+/* The diagram's frame (<div id="chordWrap">): takes the remaining width (max 700 px), thin border. */
+#chordWrap{position:relative;flex:1;min-width:0;max-width:700px;border:1px solid #eee;border-radius:8px;margin-top:30px}
+/* The diagram (SVG) fills the frame; labels may stick out past its edge. */
+#chordSvg{display:block;width:100%;height:auto;overflow:visible}
+/* The fold-out under the chord diagram: same width as the section. */
+.ca-toggle{max-width:920px;margin:14px auto 0;font-family:var(--sans)}
+/* Its clickable line: 13 px. */
+.ca-toggle>summary{font-size:13px}
+/* Closed fold-outs (both diagrams): a ▸ triangle before the text. */
+.tl-table summary::before,.ca-toggle>summary::before{content:"\25B8  "}
+/* Open fold-outs: a ▾ triangle instead. */
+.tl-table[open]>summary::before,.ca-toggle[open]>summary::before{content:"\25BE  "}
+/* The handwritten-style note at the bottom (Caveat font), centred, 24 px. */
+.ca-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:50px 0 0;max-width:none}
+/* Screens 760 px or narrower: */
+@media (max-width:760px){
+  /* year filter above the diagram instead of beside it; */
+  .ca-row{flex-direction:column}
+  /* year filter box full width, no height limit; */
+  .ca-years{width:100%;max-height:none}
+  /* years laid out in a wrapping row instead of a column; */
+  #yearFilters{flex-direction:row!important;flex-wrap:wrap;gap:6px 18px!important}
+  /* diagram full width, less space above. */
+  #chordWrap{width:100%;margin-top:6px}
+}

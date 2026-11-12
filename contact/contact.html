@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ↑ Line 1 tells the browser this is a modern HTML5 page. Line 2 starts the page; lang="en" says it is in English
+     (helps screen readers and search engines). In this file, a comment starting with ↓ explains the line(s) just below it. -->
+<!-- ↓ Start of the HEAD: information for the browser and search engines (nothing here shows on the page itself). -->
+<head>
+<!-- ↓ Text encoding: UTF-8 lets the page show any character (é, ö, –, Greek letters). -->
+<meta charset="UTF-8">
+<!-- ↓ Makes the page fit the screen width on phones instead of showing a zoomed-out desktop page. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ↓ Text shown on the browser tab and as the headline in Google results. -->
+<title>Contact | Suvankar Majee</title>
+<!-- ↓ Short summary that Google may show under the title in search results. -->
+<meta name="description" content="Dr. Suvankar Majee, Institute Postdoctoral Fellow, Department of Mathematics, IIT Kanpur. Mathematical epidemiology, fractional-order and delay differential equations, reaction-diffusion systems and optimal control.">
+<!-- ↓ Names the author of the page (used by search engines). -->
+<meta name="author" content="Suvankar Majee">
+<!-- ↓ Next 2 lines: open a connection to Google Fonts early, so the fonts download faster. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ↓ Downloads the two fonts used on the site: Newsreader (serif, for text) and IBM Plex Sans (for menus and small labels). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ↓ Small logo shown on the browser tab (favicon). -->
+<link rel="icon" type="image/png" href="../assets/images/SM-logo.png">
+<!-- ↓ Icon used when someone saves the page to an iPhone/iPad home screen. -->
+<link rel="apple-touch-icon" href="../assets/images/SM-logo.png">
+<!-- ↓ The main stylesheet: fonts, colours and layout shared by every page. "?v=8" is a version number: raise it after editing style.css so browsers fetch the new copy. -->
+<link rel="stylesheet" href="../assets/css/style.css?v=8">
+<!-- ↓ Animation loader: loads every animation named by a data-anim="..." on this page (see animations/animations.js). -->
+<script src="../animations/animations.js"></script>
+<!-- ↓ End of the HEAD. -->
+</head>
+<!-- ↓ Start of the BODY: everything visitors see. -->
+<body>
+<!--
+  PAGE:  Contact | Suvankar Majee
+  FILE:  contact/contact.html
+  MENU:  Contact
+  To change the words on this page, scroll to "MAIN CONTENT".
+-->
+<!-- ↓ Hidden "Skip to content" link: appears only when using the keyboard (Tab key), letting screen-reader and keyboard users jump past the menu. -->
+<a class="skip" href="#content">Skip to content</a>
+<!-- ============ TOP MENU (built automatically) ============================== -->
+<!-- The menu is built by assets/js/site.js (edit MENU there) -->
+<!-- ↓ The top menu bar. It is empty here: assets/js/site.js fills it with the menu. The <noscript> part shows just your name as a link if JavaScript is turned off. -->
+<header class="topbar" id="topbar"><noscript><div class="topbar-in"><a class="brand" href="../index.html">Suvankar Majee</a></div></noscript></header>
+<!-- ============ BANNER: page title at the top =============================== -->
+<!-- ↓ Dark banner at the top, with the moving Gray–Scott pattern behind it. -->
+<div class="banner page" data-anim="all-pages/banner-pattern">
+  <!-- ↓ Banner text: <h1> = the page title. -->
+  <div class="banner-in"><h1>Contact</h1></div></div>
+<!-- ============ MAIN CONTENT: edit the text of this page below ============== -->
+<!-- ↓ <main> holds the page's own content. id="content" is where the "Skip to content" link jumps to. -->
+<main id="content">
+<!-- ↓ Wrapper that keeps this page's content in a narrower column (max 820 px) so lines are easy to read. -->
+<div class="narrow">
+<!-- ↓ Next 3 lines: icon fonts — Academicons (Google Scholar, ResearchGate, Scopus, ORCID, Web of Science icons) and Font Awesome (LinkedIn icon). -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/brands.min.css">
+<!-- ============ STYLES: colours & layout for this page ====================== -->
+<!-- ↓ Styles used only on the Contact page (each line is explained inside). -->
+<style>
+  /* class "ct" (the contact block): paragraphs may use the full width. */
+  .ct{max-width:none}
+  /* Map and institute photo: two equal columns, 56 px below the icons. */
+  .place{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:56px 0 0}
+  /* Each of the two columns (map / photo): no extra margin. */
+  .pl-item{margin:0;min-width:0}
+  /* Frame around the map and the photo: 4:3 shape, thin border, rounded corners. */
+  .frame{position:relative;width:100%;aspect-ratio:4/3;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#E3EAE8}
+  /* The map and the photo fill their frame completely. */
+  .frame iframe,.frame img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block}
+  /* Small grey caption under the map and under the photo. */
+  .pl-cap{font-family:var(--sans);font-size:13.5px;color:var(--muted);margin:8px 0 0}
+  /* Screens 760 px or narrower: map and photo stacked instead of side by side. */
+  @media (max-width:760px){.place{grid-template-columns:1fr;gap:24px}}
+  /* Your postal address: 20 px, not italic. */
+  .ct address{font-style:normal;font-size:20px;line-height:1.7;color:var(--ink)}
+  /* Your name in the address: bold navy. */
+  .ct address b{font-weight:600;color:var(--navy)}
+  /* The e-mail line: 20 px. */
+  .ct .mail{font-size:20px;margin:14px 0 0}
+  /* The heading "To visit my profile...": 26 px with space around it. */
+  .ct h2{font-size:26px;margin:52px 0 22px}
+  /* Row of profile icons, wrapping onto new lines if needed. */
+  .icons{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:22px 26px}
+  /* Each icon link: icon above, name below, 96 px wide. */
+  .icons a{display:flex;flex-direction:column;align-items:center;gap:8px;width:96px;text-decoration:none;color:var(--ink);font-family:var(--sans);font-size:13.5px;text-align:center;line-height:1.3}
+  /* The round white badge holding each icon (68 px); it moves smoothly on hover. */
+  .icons .ic{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--rule);font-size:34px;transition:transform .15s,border-color .15s}
+  /* Mouse over (or keyboard focus): the badge lifts 2 px and its border takes the icon colour. */
+  .icons a:hover .ic,.icons a:focus-visible .ic{transform:translateY(-2px);border-color:currentColor}
+  /* Mouse over: the name turns navy. */
+  .icons a:hover{color:var(--navy)}
+  /* Reduced motion: no lifting effect. */
+  @media (prefers-reduced-motion:reduce){.icons .ic{transition:none}.icons a:hover .ic{transform:none}}
+    /* Phones (600 px or narrower): slightly smaller address text; icons in a grid of 3 per row. */
+    @media (max-width:600px){.ct address,.ct .mail{font-size:18px}.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 8px}.icons a{width:auto}}
+</style>
+
+<!-- ↓ The contact block (class "ct"). -->
+<div class="ct">
+  <!-- ↓ Your postal address. Each <br> starts a new line. -->
+  <address>
+    <b>Dr. Suvankar Majee</b><br>
+    Post Doctoral Fellow<br>
+    Department of Mathematics<br>
+    Indian Institute of Technology, Kanpur<br>
+    Uttar Pradesh-208016, India
+  </address>
+  <!-- ↓ Your e-mail address as a clickable link (mailto: opens the visitor's e-mail program). -->
+  <p class="mail">Email: <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></p>
+
+  <!-- ============ SECTION: To visit my profile, click on the icon: ============ -->
+  <h2>To visit my profile, click on the icon:</h2>
+  <!-- ↓ Profile icons. Each line: <li><a href="PROFILE LINK" target="_blank"><span class="ic"><i class="ICON NAME" style="color:ICON COLOUR"></i></span>LABEL</a></li>. target="_blank" opens the profile in a new tab. To add a profile, copy a line and change the link, icon and label. -->
+  <ul class="icons">
+    <li><a href="https://scholar.google.com/citations?user=3tO4zNkAAAAJ&amp;hl=en" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-google-scholar" style="color:#4285F4" aria-hidden="true"></i></span>Google Scholar</a></li>
+    <li><a href="https://www.researchgate.net/profile/Suvankar-Majee-2" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-researchgate" style="color:#00CCBB" aria-hidden="true"></i></span>ResearchGate</a></li>
+    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=57418706300" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-scopus" style="color:#E9711C" aria-hidden="true"></i></span>Scopus</a></li>
+    <li><a href="https://orcid.org/0000-0002-7470-4831" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-orcid" style="color:#A6CE39" aria-hidden="true"></i></span>ORCID</a></li>
+    <li><a href="https://www.linkedin.com/in/dr-suvankar-majee-95169328b/" target="_blank" rel="noopener"><span class="ic"><i class="fa-brands fa-linkedin-in" style="color:#0A66C2" aria-hidden="true"></i></span>LinkedIn</a></li>
+    <li><a href="https://www.webofscience.com/wos/author/record/JNQ-9995-2023" target="_blank" rel="noopener"><span class="ic"><i class="ai ai-clarivate" style="color:#5E33BF" aria-hidden="true"></i></span>Web of Science</a></li>
+  </ul>
+
+  <!-- Map and institute photo, side by side (stacked on phones).
+       The photo is iitk.png next to this file; if it is missing, the copy on the Google Site is used. -->
+  <!-- ↓ Map (left) and institute photo (right). -->
+  <div class="place">
+    <div class="pl-item">
+      <!-- ↓ Frame holding the Google map. -->
+      <div class="frame map">
+        <!-- ↓ Embedded Google map centred on the Department of Mathematics, IIT Kanpur (q = latitude,longitude; z = zoom level). It loads only when scrolled near (loading="lazy"). -->
+        <iframe src="https://www.google.com/maps?q=26.512325,80.233334&amp;z=14&amp;hl=en&amp;output=embed"
+                title="Map: Department of Mathematics, IIT Kanpur" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <!-- ↓ Link under the map that opens it in Google Maps. -->
+      <p class="pl-cap"><a href="https://www.google.com/maps?q=26.512325,80.233334&amp;z=16" target="_blank" rel="noopener">Open in Google Maps</a></p>
+    </div>
+    <!-- ↓ The institute photo with its caption. -->
+    <figure class="pl-item">
+      <div class="frame">
+        <!-- ↓ Photo of IIT Kanpur (assets/images/iitk.png). If it fails to load, onerror switches once to the copy on your old Google Site. -->
+        <img src="../assets/images/iitk.png" alt="Indian Institute of Technology Kanpur" loading="lazy"
+             onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://sites.google.com/sitesv-images-rt/AMxu72sgyeB7GXNKi8VvVIBVAa1rGAlc2Swt5zh3WVuXfypSzyzV8wyp-u0-owsIhsQfi-aIVd3K9X3zsqSZUJHuYYkC8KfsWuXVsQKV3cXCJ6AQ_NXIv_L3bz1mjp8oQE9bSEVBkfnh6ubVeIGB58-Iz4liu1BxNyAKwaSjk5lveglzXtYMmotfXq19cYExGZe2xXPnL4H9b1givlP8CWkL5WiwfU_0eeuU-vnWAK7KoQk=w1280';}else{this.closest('.pl-item').remove();}">
+      </div>
+      <!-- ↓ Caption under the photo. -->
+      <figcaption class="pl-cap">Indian Institute of Technology Kanpur</figcaption>
+    </figure>
+  </div>
+</div>
+
+</div>
+<!-- ↓ End of the page's own content. -->
+</main>
+<!-- ============ END OF MAIN CONTENT ========================================= -->
+<!-- ============ FOOTER ====================================================== -->
+<!-- ↓ Footer at the bottom of every page: copyright line (the year in <span id="yr"> is updated automatically by site.js) and your e-mail address. -->
+<footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
+<!-- When you change assets/js/site.js or assets/css/style.css, raise the ?v= number on every page so browsers load the new file. -->
+<!-- ↓ Shared script: builds the top menu, the publication filter and the recent papers on Home. -->
+<script src="../assets/js/site.js?v=8"></script>
+<!-- ↓ End of the BODY. -->
+</body>
+</html>

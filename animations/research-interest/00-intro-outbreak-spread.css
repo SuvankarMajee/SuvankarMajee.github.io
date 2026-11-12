@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Intro picture: an outbreak spreading from one person (top of the page)
+   Used on: research/research-interest.html
+   Each comment explains the line(s) directly below it. "#spread" = the picture's container.
+   ========================================================================== */
+
+/* Caption under the picture: small grey centred text. */
+#spread .cap{font-family:var(--sans);font-size:13px;color:var(--muted);text-align:center;margin:10px 0 0}
+/* On screens 860 px or narrower, the picture is at most 460 px wide and centred. */
+@media (max-width:860px){#spread{max-width:460px;margin:0 auto}}
+
+/* Rounded frame with a soft shadow and a light-blue background behind the drawing. */
+#spread .frame{width:100%;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(20,40,80,.15);background:#b9e0f4}
+/* The drawing (SVG) fills the frame's width and keeps its proportions. */
+#spread svg{display:block;width:100%;height:auto}
+
+/* people */
+/* Outline of each person figure: dark blue lines, rounded joins; colour changes fade over 0.6 s. */
+#spread .person path, #spread .person circle{stroke:#1f2b55;stroke-width:3.2;stroke-linejoin:round;transition:fill .6s ease, stroke .6s ease}
+/* Healthy person: white body. */
+#spread .person .fill{fill:#ffffff}
+/* Infected person (class "infected", added by the script): orange gradient body (#orangeG is defined in the SVG). */
+#spread .person.infected .fill{fill:url(#orangeG)}
+/* The first case ("index"): red gradient body. */
+#spread .person.index .fill{fill:url(#indexG)}
+/* The index case has a light outline so it stands out. */
+#spread .person.index path, #spread .person.index circle{stroke:#fff6ec}
+
+/* index-case glow */
+/* Glow behind the index case pulses for ever, 1.6 s per pulse, growing from its own centre. */
+#spread #indexGlow{animation:glow 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+/* The pulse: slightly faint and normal size at the start/end, fully bright and 8% bigger halfway. */
+@keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+
+/* infection pulse ring */
+/* Orange ring around a person, invisible until they are infected. */
+#spread .ring{fill:none;stroke:#ff7a1a;stroke-width:4;transform-box:fill-box;transform-origin:center;opacity:0}
+/* When infected (class "go"), the ring plays the "ring" animation once in 0.9 s. */
+#spread .ring.go{animation:ring .9s ease-out forwards}
+/* The ring starts small and visible and expands to 1.6× while fading out. */
+@keyframes ring{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+
+/* arrows */
+/* Transmission arrows: thick curved lines with an orange-red gradient (#arrowG, defined in the SVG). */
+#spread .arrow{fill:none;stroke:url(#arrowG);stroke-width:4.5;stroke-linecap:round}
+/* Arrow heads: red triangles, hidden until the line reaches them; they fade in over 0.2 s. */
+#spread .head{fill:#e8401c;opacity:0;transition:opacity .2s ease}
+/* Arrow head shown (class "on", added by the script). */
+#spread .head.on{opacity:1}
+/* Anything with class "fade" changes opacity smoothly over 0.8 s. */
+#spread .fade{transition:opacity .8s ease}

@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Scroll reveal: start state (.rv) and end state (.rv.in)
+   Used on: every page
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* ---------- Scroll reveal: paragraphs and items fade in and rise as they come into view ---------- */
+/* Start state (class "rv", added by scroll-reveal.js): invisible and 18 px lower; changes animate over 0.6 s. */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+/* End state (class "in", added when it scrolls into view): fully visible, in its normal place. */
+.rv.in{opacity:1;transform:none}
+/* Reduced motion: always visible, no movement. */
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* When printing: always visible (otherwise unscrolled parts would print blank). */
+@media print{.rv{opacity:1!important;transform:none!important}}

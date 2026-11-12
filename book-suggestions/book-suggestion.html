@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ↑ Line 1 tells the browser this is a modern HTML5 page. Line 2 starts the page; lang="en" says it is in English
+     (helps screen readers and search engines). In this file, a comment starting with ↓ explains the line(s) just below it. -->
+<!-- ↓ Start of the HEAD: information for the browser and search engines (nothing here shows on the page itself). -->
+<head>
+<!-- ↓ Text encoding: UTF-8 lets the page show any character (é, ö, –, Greek letters). -->
+<meta charset="UTF-8">
+<!-- ↓ Makes the page fit the screen width on phones instead of showing a zoomed-out desktop page. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ↓ Text shown on the browser tab and as the headline in Google results. -->
+<title>Book suggestions | Suvankar Majee</title>
+<!-- ↓ Short summary that Google may show under the title in search results. -->
+<meta name="description" content="Dr. Suvankar Majee, Institute Postdoctoral Fellow, Department of Mathematics, IIT Kanpur. Mathematical epidemiology, fractional-order and delay differential equations, reaction-diffusion systems and optimal control.">
+<!-- ↓ Names the author of the page (used by search engines). -->
+<meta name="author" content="Suvankar Majee">
+<!-- ↓ Next 2 lines: open a connection to Google Fonts early, so the fonts download faster. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ↓ Downloads the two fonts used on the site: Newsreader (serif, for text) and IBM Plex Sans (for menus and small labels). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ↓ Small logo shown on the browser tab (favicon). -->
+<link rel="icon" type="image/png" href="../assets/images/SM-logo.png">
+<!-- ↓ Icon used when someone saves the page to an iPhone/iPad home screen. -->
+<link rel="apple-touch-icon" href="../assets/images/SM-logo.png">
+<!-- ↓ The main stylesheet: fonts, colours and layout shared by every page. "?v=8" is a version number: raise it after editing style.css so browsers fetch the new copy. -->
+<link rel="stylesheet" href="../assets/css/style.css?v=8">
+<!-- ↓ Animation loader: loads every animation named by a data-anim="..." on this page (see animations/animations.js). -->
+<script src="../animations/animations.js"></script>
+<!-- ↓ End of the HEAD. -->
+</head>
+<!-- ↓ Start of the BODY: everything visitors see. -->
+<body>
+<!--
+  PAGE:  Book suggestions | Suvankar Majee
+  FILE:  book-suggestions/book-suggestion.html
+  MENU:  Book suggestions
+  To change the words on this page, scroll to "MAIN CONTENT".
+-->
+<!-- ↓ Hidden "Skip to content" link: appears only when using the keyboard (Tab key), letting screen-reader and keyboard users jump past the menu. -->
+<a class="skip" href="#content">Skip to content</a>
+<!-- ============ TOP MENU (built automatically) ============================== -->
+<!-- The menu is built by assets/js/site.js (edit MENU there) -->
+<!-- ↓ The top menu bar. It is empty here: assets/js/site.js fills it with the menu. The <noscript> part shows just your name as a link if JavaScript is turned off. -->
+<header class="topbar" id="topbar"><noscript><div class="topbar-in"><a class="brand" href="../index.html">Suvankar Majee</a></div></noscript></header>
+<!-- ============ BANNER: page title at the top =============================== -->
+<!-- ↓ Dark banner at the top, with the moving Gray–Scott pattern behind it. -->
+<div class="banner page" data-anim="all-pages/banner-pattern">
+  <!-- ↓ Banner text: <h1> = the page title. -->
+  <div class="banner-in"><h1>Book suggestions</h1></div></div>
+<!-- ============ MAIN CONTENT: edit the text of this page below ============== -->
+<!-- ↓ <main> holds the page's own content. id="content" is where the "Skip to content" link jumps to. -->
+<main id="content">
+<!-- ↓ Wrapper for this page's content. -->
+<div>
+<!-- ↓ Introductory sentence. -->
+<p>Textbooks I recommend to students, grouped by subject.</p>
+<!-- ↓ Grid of subject boxes (class "books"); 30 px gap above it. -->
+<div class="books" style="margin-top:30px">
+<!-- ↓ Each line below is one subject box: <section><h3>SUBJECT</h3><ul> then one <li><i>BOOK TITLE</i><span>AUTHORS</span></li> per book, then </ul></section>. To add a book, copy one <li>...</li> inside the right line; to add a subject, copy a whole line. -->
+<section><h3>Mathematical biology</h3><ul><li><i>Mathematical Biology I: An Introduction</i><span>J. D. Murray</span></li><li><i>Mathematical Biology II: Spatial Models and Biomedical Applications</i><span>J. D. Murray</span></li><li><i>An Introduction to Mathematical Epidemiology</i><span>M. Martcheva</span></li><li><i>Modeling Infectious Diseases in Humans and Animals</i><span>M. J. Keeling, P. Rohani</span></li><li><i>Elements of Mathematical Ecology</i><span>M. Kot</span></li><li><i>Mathematical Ecology of Populations and Ecosystems</i><span>J. Pastor</span></li><li><i>Mathematical Modelling</i><span>J. N. Kapur</span></li></ul></section>
+<section><h3>Dynamical systems</h3><ul><li><i>Nonlinear Dynamics and Chaos</i><span>S. H. Strogatz</span></li><li><i>Differential Equations and Dynamical Systems</i><span>L. Perko</span></li><li><i>Chaos: An Introduction to Dynamical Systems</i><span>K. T. Alligood, T. D. Sauer, J. A. Yorke</span></li><li><i>An Introduction to Dynamical Systems: Continuous and Discrete</i><span>R. C. Robinson</span></li><li><i>An Introduction to Dynamical Systems and Chaos</i><span>G. C. Layek</span></li></ul></section>
+<section><h3>Differential equations</h3><ul><li><i>Differential Equations (3rd ed.)</i><span>S. L. Ross</span></li><li><i>Ordinary and Partial Differential Equations</i><span>M. D. Raisinghania</span></li><li><i>Differential Equations</i><span>J. G. Chakravorty, P. R. Ghosh</span></li><li><i>An Introduction to Differential Equations</i><span>R. K. Ghosh, K. C. Maity</span></li><li><i>An Elementary Course in Partial Differential Equations</i><span>T. Amaranath</span></li><li><i>An Introduction to Partial Differential Equations</i><span>Y. Pinchover, J. Rubinstein</span></li></ul></section>
+<section><h3>Real analysis</h3><ul><li><i>Introduction to Real Analysis</i><span>S. K. Mapa</span></li><li><i>Real Analysis</i><span>H. L. Royden</span></li><li><i>A Course of Mathematical Analysis</i><span>Shanti Narayan, P. K. Mittal</span></li><li><i>Mathematical Analysis</i><span>T. M. Apostol</span></li></ul></section>
+<section><h3>Calculus</h3><ul><li><i>Calculus, Vol. I: One-Variable Calculus with an Introduction to Linear Algebra</i><span>T. M. Apostol</span></li><li><i>Calculus, Vol. II: Multi-Variable Calculus and Linear Algebra</i><span>T. M. Apostol</span></li><li><i>Differential Calculus</i><span>Shanti Narayan, P. K. Mittal</span></li><li><i>Integral Calculus</i><span>Shanti Narayan, P. K. Mittal</span></li><li><i>Differential Calculus</i><span>R. K. Maity, K. C. Ghosh</span></li><li><i>An Introduction to Analysis: Integral Calculus</i><span>R. K. Ghosh, K. C. Maity</span></li></ul></section>
+<section><h3>Linear algebra</h3><ul><li><i>Linear Algebra</i><span>S. H. Friedberg, A. J. Insel, L. E. Spence</span></li><li><i>Linear Algebra</i><span>K. Hoffman, R. Kunze</span></li><li><i>Linear Algebra: Challenging Problems for Students</i><span>F. Zhang</span></li><li><i>Higher Algebra: Abstract and Linear</i><span>S. K. Mapa</span></li></ul></section>
+<section><h3>Abstract algebra</h3><ul><li><i>Contemporary Abstract Algebra</i><span>J. A. Gallian</span></li><li><i>Fundamentals of Abstract Algebra</i><span>D. S. Malik, J. N. Mordeson, M. K. Sen</span></li><li><i>Higher Algebra: Abstract and Linear</i><span>S. K. Mapa</span></li></ul></section>
+<section><h3>Complex analysis</h3><ul><li><i>Complex Variables and Applications</i><span>J. W. Brown, R. V. Churchill</span></li><li><i>Complex Variables with Applications</i><span>S. Ponnusamy, H. Silverman</span></li><li><i>Complex Analysis: A First Course with Applications</i><span>D. G. Zill, P. D. Shanahan</span></li><li><i>Complex Analysis</i><span>S. Lang</span></li></ul></section>
+<section><h3>Numerical analysis</h3><ul><li><i>Introduction to Numerical Analysis</i><span>F. B. Hildebrand</span></li><li><i>Numerical Analysis</i><span>R. Kress</span></li><li><i>Introductory Numerical Analysis</i><span>N. Datta, R. N. Jana</span></li><li><i>Numerical Analysis for Scientists and Engineers: Theory and C Programs</i><span>M. Pal</span></li></ul></section>
+<section><h3>Probability and statistics</h3><ul><li><i>Introduction to Mathematical Statistics</i><span>R. V. Hogg, J. W. McKean, A. T. Craig</span></li><li><i>Ground Work of Mathematical Probability and Statistics</i><span>A. Gupta</span></li><li><i>Mathematical Probability and Statistics</i><span>A. P. Baisnab, M. S. Jas</span></li><li><i>Mathematical Probability</i><span>A. Banerjee, S. K. De, S. Sen</span></li></ul></section>
+<section><h3>Functional analysis</h3><ul><li><i>Introductory Functional Analysis with Applications</i><span>E. Kreyszig</span></li><li><i>Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras</i><span>J. Muscat</span></li><li><i>Functional Analysis: An Introduction to Banach Space Theory</i><span>T. J. Morrison</span></li></ul></section>
+<section><h3>Topology</h3><ul><li><i>Introduction to General Topology</i><span>K. D. Joshi</span></li><li><i>A Topological Introduction to Nonlinear Analysis</i><span>R. F. Brown</span></li></ul></section>
+<section><h3>Geometry</h3><ul><li><i>Advanced Analytical Geometry</i><span>J. G. Chakravorty, P. R. Ghosh</span></li><li><i>Analytical Geometry of Two and Three Dimensions and Vector Analysis</i><span>R. M. Khan</span></li></ul></section>
+<section><h3>Vector analysis</h3><ul><li><i>Vector Analysis (Schaum&rsquo;s Outline)</i><span>M. R. Spiegel, S. Lipschutz, D. Spellman</span></li><li><i>Vector Analysis</i><span>K. C. Maity, R. K. Ghosh</span></li><li><i>Vector Analysis</i><span>B. Spain</span></li><li><i>Elementary Vector Analysis</i><span>C. E. Weatherburn</span></li></ul></section>
+<section><h3>Discrete mathematics and graph theory</h3><ul><li><i>Discrete and Combinatorial Mathematics</i><span>R. P. Grimaldi</span></li><li><i>Discrete Mathematics</i><span>R. Johnsonbaugh</span></li><li><i>Discrete Mathematics (Schaum&rsquo;s Outline)</i><span>S. Lipschutz, M. L. Lipson, V. H. Patil</span></li><li><i>Discrete Mathematics</i><span>J. K. Sharma</span></li><li><i>Discrete Mathematics</i><span>Babu Ram</span></li><li><i>Elementary Number Theory and Its Applications</i><span>K. H. Rosen</span></li><li><i>Introduction to Graph Theory</i><span>R. J. Wilson</span></li></ul></section>
+<!-- ↓ End of the subject grid. -->
+</div>
+</div>
+<!-- ↓ End of the page's own content. -->
+</main>
+<!-- ============ END OF MAIN CONTENT ========================================= -->
+<!-- ============ FOOTER ====================================================== -->
+<!-- ↓ Footer at the bottom of every page: copyright line (the year in <span id="yr"> is updated automatically by site.js) and your e-mail address. -->
+<footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
+<!-- When you change assets/js/site.js or assets/css/style.css, raise the ?v= number on every page so browsers load the new file. -->
+<!-- ↓ Shared script: builds the top menu, the publication filter and the recent papers on Home. -->
+<script src="../assets/js/site.js?v=8"></script>
+<!-- ↓ End of the BODY. -->
+</body>
+</html>

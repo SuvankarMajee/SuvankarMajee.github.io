@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ↑ Line 1 tells the browser this is a modern HTML5 page. Line 2 starts the page; lang="en" says it is in English
+     (helps screen readers and search engines). In this file, a comment starting with ↓ explains the line(s) just below it. -->
+<!-- ↓ Start of the HEAD: information for the browser and search engines (nothing here shows on the page itself). -->
+<head>
+<!-- ↓ Text encoding: UTF-8 lets the page show any character (é, ö, –, Greek letters). -->
+<meta charset="UTF-8">
+<!-- ↓ Makes the page fit the screen width on phones instead of showing a zoomed-out desktop page. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ↓ Text shown on the browser tab and as the headline in Google results. -->
+<title>Workshops | Suvankar Majee</title>
+<!-- ↓ Short summary that Google may show under the title in search results. -->
+<meta name="description" content="Dr. Suvankar Majee, Institute Postdoctoral Fellow, Department of Mathematics, IIT Kanpur. Mathematical epidemiology, fractional-order and delay differential equations, reaction-diffusion systems and optimal control.">
+<!-- ↓ Names the author of the page (used by search engines). -->
+<meta name="author" content="Suvankar Majee">
+<!-- ↓ Next 2 lines: open a connection to Google Fonts early, so the fonts download faster. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ↓ Downloads the two fonts used on the site: Newsreader (serif, for text) and IBM Plex Sans (for menus and small labels). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ↓ Small logo shown on the browser tab (favicon). -->
+<link rel="icon" type="image/png" href="../assets/images/SM-logo.png">
+<!-- ↓ Icon used when someone saves the page to an iPhone/iPad home screen. -->
+<link rel="apple-touch-icon" href="../assets/images/SM-logo.png">
+<!-- ↓ The main stylesheet: fonts, colours and layout shared by every page. "?v=8" is a version number: raise it after editing style.css so browsers fetch the new copy. -->
+<link rel="stylesheet" href="../assets/css/style.css?v=8">
+<!-- ↓ Animation loader: loads every animation named by a data-anim="..." on this page (see animations/animations.js). -->
+<script src="../animations/animations.js"></script>
+<!-- ↓ End of the HEAD. -->
+</head>
+<!-- ↓ Start of the BODY: everything visitors see. -->
+<body>
+<!--
+  PAGE:  Workshops | Suvankar Majee
+  FILE:  conferences/workshops.html
+  MENU:  Conferences > Workshops
+  To change the words on this page, scroll to "MAIN CONTENT".
+-->
+<!-- ↓ Hidden "Skip to content" link: appears only when using the keyboard (Tab key), letting screen-reader and keyboard users jump past the menu. -->
+<a class="skip" href="#content">Skip to content</a>
+<!-- ============ TOP MENU (built automatically) ============================== -->
+<!-- The menu is built by assets/js/site.js (edit MENU there) -->
+<!-- ↓ The top menu bar. It is empty here: assets/js/site.js fills it with the menu. The <noscript> part shows just your name as a link if JavaScript is turned off. -->
+<header class="topbar" id="topbar"><noscript><div class="topbar-in"><a class="brand" href="../index.html">Suvankar Majee</a></div></noscript></header>
+<!-- ============ BANNER: page title at the top =============================== -->
+<!-- ↓ Dark banner at the top, with the moving Gray–Scott pattern behind it. -->
+<div class="banner page" data-anim="all-pages/banner-pattern">
+  <!-- ↓ Banner text. <p class="crumb"> = small grey label above the title (the menu group); <h1> = the page title. -->
+  <div class="banner-in"><p class="crumb">Conferences &amp; workshops</p><h1>Workshops</h1></div></div>
+<!-- ============ MAIN CONTENT: edit the text of this page below ============== -->
+<!-- ↓ <main> holds the page's own content. id="content" is where the "Skip to content" link jumps to. -->
+<main id="content">
+<!-- ↓ Wrapper that keeps this page's content in a narrower column (max 820 px) so lines are easy to read. -->
+<div class="narrow">
+<!-- ↓ Timeline list (class "tl"). One <li> per entry, newest first. Format of each entry: <li><div class="d">DATE</div><div><b>TITLE</b><span class="s">DETAIL LINE</span>...</div></li> — add as many <span class="s"> detail lines as you like. To add an entry, copy a whole <li>...</li> line and edit it. -->
+<ul class="tl">
+  <li><div class="d">March 3&ndash;4, 2026</div><div><b>Harnessing AI Tools for Advanced Research &amp; Modern Teaching and Learning</b><span class="s">Indian Mathematics Professors Association and Infinity Research &amp; Development Institute, Coimbatore (online)</span></div></li>
+  <li><div class="d">February 3&ndash;7, 2026</div><div><b>Recent Trends in Differential Equations: Theory, Computation and AI/ML (DE-TCM 2026)</b><span class="s">Department of Mathematics and Computing, Dr B R Ambedkar National Institute of Technology, Jalandhar</span></div></li>
+  <li><div class="d">April 9&ndash;11, 2025</div><div><b>Theoretical and Computational Dynamics of Biological Systems (TCDBS 2025)</b><span class="s">Department of Engineering Sciences, ABV-Indian Institute of Information Technology and Management, Gwalior</span></div></li>
+  <li><div class="d">April 7&ndash;11, 2025</div><div><b>Mastering Graph Theory with Advanced Tools: Python, SageMath, MATLAB &amp; LaTeX (TikZ/Draw)</b><span class="s">Indian Mathematics Professors Association and Infinity Research &amp; Development Institute, Coimbatore</span></div></li>
+  <li><div class="d">April 4&ndash;8, 2025</div><div><b>Theory and Applications of Optimization in Machine Learning (international workshop)</b><span class="s">Department of Mathematics, School of Advanced Sciences, VIT-AP University, Andhra Pradesh</span></div></li>
+  <li><div class="d">March 7&ndash;9, 2024</div><div><b>Mathematical Python (online)</b><span class="s">Department of Mathematics, Atma Ram Sanatan Dharma College, University of Delhi</span></div></li>
+  <li><div class="d">June 17&ndash;18, 2022</div><div><b>Mathematical Ecology and Epidemiology</b><span class="s">Department of Mathematics, Indian Institute of Technology Indore</span></div></li>
+<!-- ↓ End of the list. -->
+</ul>
+<!-- ↓ End of the narrow column. -->
+</div>
+<!-- ↓ End of the page's own content. -->
+</main>
+<!-- ============ END OF MAIN CONTENT ========================================= -->
+<!-- ============ FOOTER ====================================================== -->
+<!-- ↓ Footer at the bottom of every page: copyright line (the year in <span id="yr"> is updated automatically by site.js) and your e-mail address. -->
+<footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
+<!-- When you change assets/js/site.js or assets/css/style.css, raise the ?v= number on every page so browsers load the new file. -->
+<!-- ↓ Shared script: builds the top menu, the publication filter and the recent papers on Home. -->
+<script src="../assets/js/site.js?v=8"></script>
+<!-- ↓ End of the BODY. -->
+</body>
+</html>

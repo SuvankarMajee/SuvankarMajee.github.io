@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Stochastic differential equations: stochastic SIS sample paths
+   Used on: research/research-interest.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* Stochastic differential equations: sample paths and distribution */
+/* The block holding this animation's text and drawing: small space above and below. */
+.sde{margin:4px 0 10px}
+/* The model equation (<p class="sde-eq">): centred, 18 px. */
+.sde-eq{text-align:center;font-size:18px;margin:6px 0 10px!important}
+/* White rounded box around the drawing, at most 820 px wide, centred. */
+.sde-box{max-width:820px;margin:10px auto 0;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px}
+/* The drawing area (<canvas id="sdeCv">) fills the box's width. */
+.sde-box canvas{display:block;width:100%}

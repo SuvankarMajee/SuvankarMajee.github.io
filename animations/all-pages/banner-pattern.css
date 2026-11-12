@@ -1,0 +1,10 @@
+/* ==========================================================================
+   Gray–Scott pattern in the banner: the drawing area
+   Used on: every page (with banner-pattern.js)
+   Each comment explains the line(s) directly below it.
+   ========================================================================== */
+
+/* The pattern canvas fills the whole banner; the mouse shows a crosshair (clicking adds a spot). */
+.banner canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+/* Home: the pattern fades out towards the left so your name stays readable (mask = transparency gradient). */
+.banner.home canvas{-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 62%)}

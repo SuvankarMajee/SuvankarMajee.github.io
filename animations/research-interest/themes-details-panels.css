@@ -1,0 +1,40 @@
+/* ==========================================================================
+   "Details" buttons on the Main themes (open one theme at a time)
+   Used on: research/research-interest.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* "Details" buttons on the main themes */
+/* The "Details" button under each theme: small teal pill with a thin border. */
+.th-btn{margin-top:10px;display:flex;width:fit-content;align-items:center;gap:6px;font:500 13.5px var(--sans);color:var(--teal);background:none;border:1px solid var(--rule);border-radius:20px;padding:5px 13px;cursor:pointer}
+/* A small arrow after the button text, drawn as two borders of a tiny square turned 45° (points down); it turns smoothly. */
+.th-btn::after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+/* When the panel is open (aria-expanded="true"), the arrow points up. */
+.th-btn[aria-expanded="true"]::after{transform:rotate(-135deg) translateY(-1px)}
+/* Button under the mouse: teal border. */
+.th-btn:hover{border-color:var(--teal)}
+/* The details panel: white box with a thin border, 16 px text. */
+.th-more{margin-top:12px;padding:14px 16px;background:#fff;border:1px solid var(--rule);border-radius:6px;font-size:16px;line-height:1.55;color:var(--ink)}
+/* Paragraphs inside a panel: 10 px apart. */
+.th-more p{margin:0 0 10px}
+/* Bulleted lists inside a panel: slight indent. */
+.th-more ul{margin:0 0 10px;padding-left:18px}
+/* List items inside a panel: no divider lines (the theme list's own lines are removed). */
+.th-more li{padding:0 0 8px;border:0}
+/* keep bold letters and spans inside the panels inline (the theme-title style would otherwise stack them) */
+/* Bold text inside a panel stays in the line, normal size and colour. */
+.themes .th-more b{display:inline;font-size:inherit;color:inherit}
+/* <span> text inside a panel stays in the line, normal size and colour. */
+.themes .th-more span{display:inline;font-size:inherit;color:inherit;line-height:inherit}
+/* Links inside a panel (e.g. to a paper): small sans text, never broken over two lines. */
+.th-more a{font-family:var(--sans);font-size:13px;white-space:nowrap}
+/* The full-width row that holds the open panel: spans all columns of the themes grid, no top line. */
+.themes li.th-row{grid-column:1/-1;border-top:0;padding:2px 0 18px}
+/* The open panel in that row: no top gap, 17 px text. */
+.th-row .th-more{margin-top:0;font-size:17px}
+/* Paragraphs in the open panel may use the full width. */
+.th-row .th-more p{max-width:none}
+/* The title of the theme that is open turns teal. */
+.themes li.th-open > b{color:var(--teal)}
+/* Reduced motion: the arrow flips without turning. */
+@media (prefers-reduced-motion:reduce){.th-btn::after{transition:none}}

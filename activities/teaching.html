@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ↑ Line 1 tells the browser this is a modern HTML5 page. Line 2 starts the page; lang="en" says it is in English
+     (helps screen readers and search engines). In this file, a comment starting with ↓ explains the line(s) just below it. -->
+<!-- ↓ Start of the HEAD: information for the browser and search engines (nothing here shows on the page itself). -->
+<head>
+<!-- ↓ Text encoding: UTF-8 lets the page show any character (é, ö, –, Greek letters). -->
+<meta charset="UTF-8">
+<!-- ↓ Makes the page fit the screen width on phones instead of showing a zoomed-out desktop page. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ↓ Text shown on the browser tab and as the headline in Google results. -->
+<title>Teaching | Suvankar Majee</title>
+<!-- ↓ Short summary that Google may show under the title in search results. -->
+<meta name="description" content="Dr. Suvankar Majee, Institute Postdoctoral Fellow, Department of Mathematics, IIT Kanpur. Mathematical epidemiology, fractional-order and delay differential equations, reaction-diffusion systems and optimal control.">
+<!-- ↓ Names the author of the page (used by search engines). -->
+<meta name="author" content="Suvankar Majee">
+<!-- ↓ Next 2 lines: open a connection to Google Fonts early, so the fonts download faster. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ↓ Downloads the two fonts used on the site: Newsreader (serif, for text) and IBM Plex Sans (for menus and small labels). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ↓ Small logo shown on the browser tab (favicon). -->
+<link rel="icon" type="image/png" href="../assets/images/SM-logo.png">
+<!-- ↓ Icon used when someone saves the page to an iPhone/iPad home screen. -->
+<link rel="apple-touch-icon" href="../assets/images/SM-logo.png">
+<!-- ↓ The main stylesheet: fonts, colours and layout shared by every page. "?v=8" is a version number: raise it after editing style.css so browsers fetch the new copy. -->
+<link rel="stylesheet" href="../assets/css/style.css?v=8">
+<!-- ↓ Animation loader: loads every animation named by a data-anim="..." on this page (see animations/animations.js). -->
+<script src="../animations/animations.js"></script>
+<!-- ↓ End of the HEAD. -->
+</head>
+<!-- ↓ Start of the BODY: everything visitors see. -->
+<body>
+<!--
+  PAGE:  Teaching | Suvankar Majee
+  FILE:  activities/teaching.html
+  MENU:  Activities > Teaching
+  To change the words on this page, scroll to "MAIN CONTENT".
+-->
+<!-- ↓ Hidden "Skip to content" link: appears only when using the keyboard (Tab key), letting screen-reader and keyboard users jump past the menu. -->
+<a class="skip" href="#content">Skip to content</a>
+<!-- ============ TOP MENU (built automatically) ============================== -->
+<!-- The menu is built by assets/js/site.js (edit MENU there) -->
+<!-- ↓ The top menu bar. It is empty here: assets/js/site.js fills it with the menu. The <noscript> part shows just your name as a link if JavaScript is turned off. -->
+<header class="topbar" id="topbar"><noscript><div class="topbar-in"><a class="brand" href="../index.html">Suvankar Majee</a></div></noscript></header>
+<!-- ============ BANNER: page title at the top =============================== -->
+<!-- ↓ Dark banner at the top, with the moving Gray–Scott pattern behind it. -->
+<div class="banner page" data-anim="all-pages/banner-pattern">
+  <!-- ↓ Banner text. <p class="crumb"> = small grey label above the title (the menu group); <h1> = the page title. -->
+  <div class="banner-in"><p class="crumb">Academic activities</p><h1>Teaching</h1></div></div>
+<!-- ============ MAIN CONTENT: edit the text of this page below ============== -->
+<!-- ↓ <main> holds the page's own content. id="content" is where the "Skip to content" link jumps to. -->
+<main id="content">
+<!-- ↓ Wrapper that keeps this page's content in a narrower column (max 820 px) so lines are easy to read. -->
+<div class="narrow">
+<!-- ↓ Timeline list (class "tl"). One <li> per entry, newest first. Format of each entry: <li><div class="d">DATE</div><div><b>TITLE</b><span class="s">DETAIL LINE</span>...</div></li> — add as many <span class="s"> detail lines as you like. To add an entry, copy a whole <li>...</li> line and edit it. -->
+<ul class="tl">
+  <li><div class="d">IIT Kanpur</div><div><b>MTH111M: Single Variable Calculus</b><span class="s">Tutor</span></div></li>
+  <li><div class="d">IIT Kanpur</div><div><b>MTH113M: Introduction to Linear Algebra</b><span class="s">Teaching assistant</span></div></li>
+  <li><div class="d">IIT Kanpur</div><div><b>MTH114M: Introduction to Ordinary Differential Equations</b><span class="s">Teaching assistant</span></div></li>
+  <li><div class="d">SR University</div><div><b>Problem Solving using Python Programming</b><span class="s">Assistant Professor</span></div></li>
+  <li><div class="d">Narasimha Datta College</div><div><b>AMATH531 (Gr-C): Non-Linear Dynamics</b><span class="s">Guest faculty</span></div></li>
+  <li><div class="d">IIEST Shibpur</div><div><b>Programming Lab (MATLAB)</b><span class="s">Teaching assistant</span></div></li>
+<!-- ↓ End of the list. -->
+</ul>
+<!-- ↓ End of the narrow column. -->
+</div>
+<!-- ↓ End of the page's own content. -->
+</main>
+<!-- ============ END OF MAIN CONTENT ========================================= -->
+<!-- ============ FOOTER ====================================================== -->
+<!-- ↓ Footer at the bottom of every page: copyright line (the year in <span id="yr"> is updated automatically by site.js) and your e-mail address. -->
+<footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
+<!-- When you change assets/js/site.js or assets/css/style.css, raise the ?v= number on every page so browsers load the new file. -->
+<!-- ↓ Shared script: builds the top menu, the publication filter and the recent papers on Home. -->
+<script src="../assets/js/site.js?v=8"></script>
+<!-- ↓ End of the BODY. -->
+</body>
+</html>

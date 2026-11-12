@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Google Scholar and Scopus citation charts (layout of the two chart boxes)
+   Used on: research/citations.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* class="cm": the two modules (Google Scholar, Scopus) side by side in two equal columns; Times font, 18 px, near-black text. */
+.cm{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;font-family:"Times New Roman",Times,serif;color:#202124;font-size:18px}
+/* Module headings ("Google Scholar Citation Metrics"...): bold Times, 28 px. */
+.cm h2{font-family:"Times New Roman",Times,serif;font-weight:700;font-size:28px;letter-spacing:0}
+/* class="mbox": each white card, at most 550 px wide and 350 px tall, thin border, faint shadow. */
+.mbox{width:100%;max-width:550px;height:350px;margin:auto;border:1px solid #eee;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.04);overflow:hidden;background:#fff;box-sizing:border-box}
+/* Google Scholar card: contents stacked vertically (table on top, chart below). */
+.gsbox{display:flex;flex-direction:column;padding:10px 14px 10px}
+/* The Google Scholar metrics table text: 17 px. */
+.gsbox table{font-size:17px}
+/* Table cells: 4 px padding. */
+.gsbox td{padding:4px!important}
+/* The chart area takes all the height left under the table. */
+.gsbox .gs-chart{position:relative;flex:1;min-height:0}
+/* Module headings: 15 px space below. */
+.cm h2{margin:0 0 15px!important}
+/* The handwritten-style note under the charts (Caveat font), centred, 24 px. */
+.cm-note{text-align:center;font-family:Caveat,"Comic Sans MS",cursive;font-size:24px;color:#333;margin:60px 0 0;max-width:none}
+/* Screens 900 px or narrower: one module per row, smaller headings. */
+@media (max-width:900px){.cm{grid-template-columns:1fr;gap:40px}.cm h2{font-size:24px}}
+/* Phones (560 px or narrower): cards grow to fit, Google Scholar chart 220 px tall, Scopus summary numbers rearranged and smaller. */
+@media (max-width:560px){.mbox{height:auto}.gsbox .gs-chart{flex:none;height:220px}#scopusModule{height:auto!important}#scopusSummary{height:auto!important;gap:18px!important;padding:0 10px 10px}#scopusSummary>div>div:first-child{font-size:22px!important}}

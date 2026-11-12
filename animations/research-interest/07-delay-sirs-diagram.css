@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Delay differential equations: delayed SIRS flow diagram
+   Used on: research/research-interest.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* Delay differential equations: delayed SIRS flow diagram (styles limited to .dde) */
+/* The block holding this animation's text and diagram: small space above and below. */
+.dde{margin:6px 0 10px}
+/* The model equations (<p class="dde-eq">): centred, 17 px, extra line spacing for the fractions. */
+.dde-eq{text-align:center;font-size:17px;line-height:1.9;margin:6px 0 10px!important}
+/* White rounded card around the diagram, at most 880 px wide, centred. */
+.dde-card{max-width:880px;margin:10px auto 0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px}
+/* The diagram (SVG) fills the card's width and keeps its proportions. */
+.dde svg{width:100%;height:auto;display:block}
+/* Compartment labels in the diagram (class "boxlbl", e.g. "Susceptible"): bold 17 px. */
+.dde .boxlbl{font-weight:700;font-size:17px;font-family:"Segoe UI",system-ui,sans-serif}
+/* Colour key under the diagram: small grey centred text. */
+.dde-key{text-align:center;font-family:var(--sans);font-size:13px;color:var(--muted);margin:8px 0 0!important}

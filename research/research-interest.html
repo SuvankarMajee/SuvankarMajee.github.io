@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ↑ Line 1 tells the browser this is a modern HTML5 page. Line 2 starts the page; lang="en" says it is in English
+     (helps screen readers and search engines). In this file, a comment starting with ↓ explains the line(s) just below it. -->
+<!-- ↓ Start of the HEAD: information for the browser and search engines (nothing here shows on the page itself). -->
+<head>
+<!-- ↓ Text encoding: UTF-8 lets the page show any character (é, ö, –, Greek letters). -->
+<meta charset="UTF-8">
+<!-- ↓ Makes the page fit the screen width on phones instead of showing a zoomed-out desktop page. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ↓ Text shown on the browser tab and as the headline in Google results. -->
+<title>Research interest | Suvankar Majee</title>
+<!-- ↓ Short summary that Google may show under the title in search results. -->
+<meta name="description" content="Dr. Suvankar Majee, Institute Postdoctoral Fellow, Department of Mathematics, IIT Kanpur. Mathematical epidemiology, fractional-order and delay differential equations, reaction-diffusion systems and optimal control.">
+<!-- ↓ Names the author of the page (used by search engines). -->
+<meta name="author" content="Suvankar Majee">
+<!-- ↓ Next 2 lines: open a connection to Google Fonts early, so the fonts download faster. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ↓ Downloads the two fonts used on the site: Newsreader (serif, for text) and IBM Plex Sans (for menus and small labels). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ↓ Small logo shown on the browser tab (favicon). -->
+<link rel="icon" type="image/png" href="../assets/images/SM-logo.png">
+<!-- ↓ Icon used when someone saves the page to an iPhone/iPad home screen. -->
+<link rel="apple-touch-icon" href="../assets/images/SM-logo.png">
+<!-- ↓ The main stylesheet: fonts, colours and layout shared by every page. "?v=8" is a version number: raise it after editing style.css so browsers fetch the new copy. -->
+<link rel="stylesheet" href="../assets/css/style.css?v=8">
+<!-- ↓ Animation loader: loads every animation named by a data-anim="..." on this page (see animations/animations.js). -->
+<script src="../animations/animations.js"></script>
+<!-- ↓ End of the HEAD. -->
+</head>
+<!-- ↓ Start of the BODY: everything visitors see. -->
+<body>
+<!--
+  PAGE:  Research interest | Suvankar Majee
+  FILE:  research/research-interest.html
+  MENU:  Research > Research interest
+  To change the words on this page, scroll to "MAIN CONTENT".
+-->
+<!-- ↓ Hidden "Skip to content" link: appears only when using the keyboard (Tab key), letting screen-reader and keyboard users jump past the menu. -->
+<a class="skip" href="#content">Skip to content</a>
+<!-- ============ TOP MENU (built automatically) ============================== -->
+<!-- The menu is built by assets/js/site.js (edit MENU there) -->
+<!-- ↓ The top menu bar. It is empty here: assets/js/site.js fills it with the menu. The <noscript> part shows just your name as a link if JavaScript is turned off. -->
+<header class="topbar" id="topbar"><noscript><div class="topbar-in"><a class="brand" href="../index.html">Suvankar Majee</a></div></noscript></header>
+<!-- ============ BANNER: page title at the top =============================== -->
+<!-- ↓ Dark banner at the top, with the moving Gray–Scott pattern behind it. -->
+<div class="banner page" data-anim="all-pages/banner-pattern">
+  <!-- ↓ Banner text. <p class="crumb"> = small grey label above the title (the menu group); <h1> = the page title. -->
+  <div class="banner-in"><p class="crumb">Research &amp; publications</p><h1>Research interest</h1></div></div>
+<!-- ============ MAIN CONTENT: edit the text of this page below ============== -->
+<!-- ↓ <main> holds the page's own content. id="content" is where the "Skip to content" link jumps to. -->
+<main id="content">
+<!-- ↓ Wrapper for the introduction. -->
+<div>
+<!-- ============ STYLES: layout of the intro (text beside picture) =========== -->
+<!-- ↓ Layout of the introduction: text and picture side by side. -->
+<style>
+  /* Two columns: text (flexible) and picture (280–420 px), 48 px apart, vertically centred. */
+  .ri-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:48px;align-items:center}
+  /* Introduction paragraphs may use the full column width. */
+  .ri-top p{max-width:none}
+  /* Screens 860 px or narrower: picture below the text. */
+  @media (max-width:860px){.ri-top{grid-template-columns:1fr;gap:28px}}
+</style>
+<!-- ============ SECTION: Introduction (text + picture at the top) =========== -->
+<!-- ↓ Introduction: text (left) and animated picture (right). -->
+<div class="ri-top">
+<!-- ↓ The introduction text: three paragraphs in one <p>, separated by <br><br> (a blank line). -->
+<p>My research lies at the interface of mathematics and biology, with a focus on how infectious diseases spread through populations and how they can be controlled. I build compartmental models of diseases such as monkeypox, dengue, Nipah virus, HFMD, COVID-19 and avian influenza. I formulate them with ordinary, fractional-order, delay and stochastic differential equations, partial differential equations, and analyse them with the tools of dynamical systems: stability and bifurcation theory, threshold dynamics and numerical simulation.
+<br><br>
+A central question in my work is how features of real infections change the course of an outbreak. These include memory effects, captured through Caputo fractional derivatives, and incubation and gestation delays. They also include the movement of individuals across space, which can produce Turing patterns, and seasonal variation in transmission. To study seasonality, I am developing non-autonomous models with time-periodic coefficients, in which the basic reproduction number is defined through the next-generation operator of the periodic system. I also work on predator–prey and eco-epidemic systems, where fear, harvesting and disease interact.
+<br><br>
+Alongside the analysis, I use optimal control, sensitivity analysis and cost-effectiveness analysis to design and compare interventions such as vaccination, treatment and awareness campaigns, with the aim of supporting public-health decisions.</p>
+<!-- ↓ Animation: an outbreak spreading from one person. -->
+<div data-anim="research-interest/00-intro-outbreak-spread"></div>
+</div>
+<!-- ============ SECTION: Main themes ======================================== -->
+<h3>Main themes</h3>
+<!-- ↓ The 8 research themes. Each theme: <li><b>TITLE</b><span>SUMMARY</span>, a "Details" button, and a hidden panel <div class="th-more" id="th-N"> with the full text and an animation. -->
+<ul class="themes" data-anim="research-interest/themes-details-panels">
+  <!-- ============ THEME: Infectious disease modelling ========================= -->
+  <li><b>Infectious disease modelling</b><span>Monkeypox, dengue, Nipah, hand, foot and mouth disease (HFMD), COVID-19 and avian influenza.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-1">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-1" hidden>
+      <p>I build compartmental models (SIR, SEIR, SEIQR and host&ndash;vector) that follow how people move between being susceptible, exposed, infected, quarantined and recovered. For each model I derive the basic reproduction number, study the stability of the disease-free and endemic equilibria, and use simulations to compare control strategies.</p>
+      <!-- ↓ Animation: agent-based outbreak. -->
+      <div data-anim="research-interest/01-infectious-disease-agents"></div>
+      <p>Across these models I include features that shape real outbreaks: media awareness, waning immunity, quarantine, and saturated or nonlinear incidence and treatment.</p>
+    </div>
+  </li>
+  <!-- ============ THEME: Fractional-order differential equations ============== -->
+  <li><b>Fractional-order differential equations</b><span>Caputo-type models that carry memory effects into epidemic dynamics.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-2">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-2" hidden>
+      <p>In a classical epidemic model, the rate of change of each compartment depends only on the present state. Many biological processes, however, carry a memory: immunity wanes, behaviour adapts and infection responds to past exposure. I replace the ordinary derivative with the Caputo fractional derivative of order 0&nbsp;&lt;&nbsp;&alpha;&nbsp;&le;&nbsp;1,</p>
+      <!-- ↓ A centred equation. -->
+      <p style="text-align:center"><sup>C</sup><i>D</i><sup>&alpha;</sup><i>x</i>(<i>t</i>) = <span style="white-space:nowrap">1&#8260;&Gamma;(1&minus;&alpha;) &int;<sub>0</sub><sup><i>t</i></sup> (<i>t</i>&minus;<i>s</i>)<sup>&minus;&alpha;</sup> <i>x</i>&prime;(<i>s</i>) d<i>s</i></span>, &nbsp; 0 &lt; &alpha; &lt; 1,</p>
+      <p>so that the present rate is a weighted average over the whole past, with weights that decay like a power law. At &alpha; = 1 the model reduces to the classical one. The Caputo form keeps initial conditions in their usual form, which makes the models easy to fit to data.</p>
+      <!-- ↓ Animation: fractional SIR model (memory effect). -->
+      <div data-anim="research-interest/02-fractional-sir"></div>
+    </div>
+</li>
+  <!-- ============ THEME: Optimal control ====================================== -->
+  <li><b>Optimal control</b><span>Treatment and vaccination strategies from Pontryagin&rsquo;s maximum principle, ranked by cost-effectiveness.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-3">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-3" hidden>
+      <p>Once a model shows how a disease spreads, the next question is how best to stop it with limited resources. I treat interventions such as vaccination, treatment, quarantine and awareness as time-dependent controls <i>u</i><sub><i>i</i></sub>(<i>t</i>), bounded by 0 &le; <i>u</i><sub><i>i</i></sub>(<i>t</i>) &le; <i>u</i><sub><i>i</i></sub><sup>max</sup>, and look for the schedule that minimises a cost functional such as</p>
+      <!-- ↓ A centred equation. -->
+      <p style="text-align:center"><i>J</i>(<i>u</i>) = &int;<sub>0</sub><sup><i>T</i></sup> [ <i>A</i><sub>1</sub><i>E</i>(<i>t</i>) + <i>A</i><sub>2</sub><i>I</i>(<i>t</i>) + &frac12; &sum;<sub><i>i</i></sub> <i>B</i><sub><i>i</i></sub><i>u</i><sub><i>i</i></sub><sup>2</sup>(<i>t</i>) ] d<i>t</i>,</p>
+      <p>which balances the burden of infection against the cost of the interventions.</p>
+      <!-- ↓ Animation: comparing control strategies. -->
+      <div data-anim="research-interest/03-optimal-control"></div>
+      <p>The aim is practical guidance: which intervention to prioritise, when to start it, and how its intensity should change over the course of an outbreak.</p>
+    </div>
+</li>
+  <!-- ============ THEME: Spatio-temporal dynamics ============================= -->
+  <li><b>Spatio-temporal dynamics</b><span>Reaction&ndash;diffusion and cross-diffusion models, Turing instability and pattern formation.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-4">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-4" hidden>
+      <p>Diseases and populations do not mix uniformly: individuals move, habitats differ, and infection spreads from place to place. I model this with reaction&ndash;diffusion systems of the form</p>
+      <!-- ↓ A centred equation. -->
+      <p style="text-align:center">&part;<b>u</b>/&part;<i>t</i> = <i>D</i>&Delta;<b>u</b> + <b>f</b>(<b>u</b>), &nbsp; <i>x</i> &isin; &Omega;, &nbsp; with zero-flux boundary conditions,</p>
+      <p>where <b>f</b> describes the local epidemic or ecological interactions and the diffusion matrix <i>D</i> describes movement. When <i>D</i> has off-diagonal terms, the system includes cross-diffusion: the movement of one group responds to the density of another, for example preys moving away from predators.</p>
+      <!-- ↓ Animation: Turing pattern (Schnakenberg model). -->
+      <div data-anim="research-interest/04-turing-pattern"></div>
+      <!-- ↓ Bulleted list of methods for this theme. Each <li><b>Topic:</b> text</li> is one bullet. -->
+      <ul>
+        <li><b>Turing instability:</b> conditions under which an equilibrium that is stable without movement becomes unstable once diffusion is added. In practice, this means some spatial wavenumber <i>k</i> makes det(<i>J</i> &minus; <i>k</i><sup>2</sup><i>D</i>) &lt; 0, where <i>J</i> is the Jacobian of <b>f</b> at that equilibrium. This diffusion-driven instability gives rise to stationary spatial patterns such as spots, stripes and labyrinths.</li>
+        <li><b>Beyond stationary patterns:</b> Hopf and Turing&ndash;Hopf interactions, non-stationary and chaotic spatio-temporal patterns, and methods to control the chaos.</li>
+      </ul>
+    </div>
+  </li>
+    <!-- ============ THEME: Stability, chaos and bifurcation ===================== -->
+    <li><b>Stability, chaos and bifurcation</b><span>Hopf bifurcation, delay-induced oscillations and chaos control in eco-epidemiological systems.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-5">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-5" hidden>
+      <p>A model is useful only if we understand its long-term behaviour: whether an infection dies out, settles to a steady level, keeps returning in waves, or behaves erratically. I study how this behaviour changes as parameters vary, and what each change means biologically.</p>
+      <!-- ↓ Animation: Rössler system, route to chaos. -->
+      <div data-anim="research-interest/05-rossler-chaos"></div>
+      <!-- ↓ Bulleted list of methods for this theme. Each <li><b>Topic:</b> text</li> is one bullet. -->
+      <ul>
+        <li><b>Stability:</b> local stability of the disease-free and endemic equilibria from the linearised system, using the Routh&ndash;Hurwitz criteria, and global stability through Lyapunov functions and LaSalle&rsquo;s invariance principle. The basic reproduction number <i>R</i><sub>0</sub> is the usual threshold: below 1 the infection dies out, above 1 it persists.</li>
+        <li><b>Hopf bifurcation:</b> the point at which a pair of complex eigenvalues crosses the imaginary axis and a steady state gives way to sustained oscillations, which in a population appear as recurring outbreaks. Normal-form analysis determines the direction of the bifurcation and the stability of the resulting periodic orbits.</li>
+        <li><b>Delay-induced oscillations:</b> incubation and gestation periods enter as time delays &tau;. From the transcendental characteristic equation I find the critical delay at which purely imaginary roots appear, check the transversality condition, and show how a longer delay can destabilise an otherwise stable equilibrium. <a href="https://doi.org/10.1038/s41598-025-02778-2" target="_blank" rel="noopener">Sci. Rep. 2025</a>, <a href="https://doi.org/10.1016/j.matcom.2026.08.035" target="_blank" rel="noopener">MATCOM 2027</a></li>
+        <li><b>Fractional order and delay together:</b> Hopf bifurcation in fractional-order systems, where both the memory order and the delay act as bifurcation parameters. <a href="https://doi.org/10.1007/s40435-026-02015-2" target="_blank" rel="noopener">IJDC 2026</a>, <a href="https://doi.org/10.1140/epjs/s11734-024-01221-3" target="_blank" rel="noopener">EPJ ST</a></li>
+        <li><b>Chaos and its control:</b> identifying chaotic behaviour through bifurcation diagrams, phase portraits and Lyapunov exponents, and designing controls that steer the system back to regular dynamics. <a href="https://doi.org/10.1016/j.matcom.2025.07.057" target="_blank" rel="noopener">MATCOM 2026</a>, <a href="https://doi.org/10.1142/S0218127423501924" target="_blank" rel="noopener">IJBC 2023</a></li>
+      </ul>
+      <p>In eco-epidemiological systems, where disease spreads within interacting predator and prey populations, these tools show how infection can stabilise or destabilise a community, and when small changes in a parameter lead to large changes in outcome.</p>
+    </div>
+  </li>
+    <!-- ============ THEME: Sensitivity analysis ================================= -->
+    <li><b>Sensitivity analysis</b><span>PRCC-based global sensitivity analysis and stochastic stability.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-6">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-6" hidden>
+      <p>Epidemic parameters such as contact rates, recovery rates and vaccine efficacy are rarely known exactly, and real populations are subject to random fluctuations. I ask which parameters matter most for an outbreak, and whether the model&rsquo;s predictions still hold when the environment is noisy.</p>
+      <!-- ↓ Animation: PRCC and sensitivity indices of R0. -->
+      <div data-anim="research-interest/06-sensitivity-analysis"></div>
+      <!-- ↓ Bulleted list of methods for this theme. Each <li><b>Topic:</b> text</li> is one bullet. -->
+      <ul>
+        <li><b>Local sensitivity:</b> the normalised forward sensitivity index of the basic reproduction number,
+          <span style="white-space:nowrap">&Upsilon;<sub><i>p</i></sub> = (&part;<i>R</i><sub>0</sub>/&part;<i>p</i>)(<i>p</i>/<i>R</i><sub>0</sub>)</span>,
+          which gives the percentage change in <i>R</i><sub>0</sub> for a 1% change in a parameter <i>p</i>. </li>
+        <li><b>Global sensitivity (PRCC):</b> sampling all parameters together by Latin hypercube sampling, then computing partial rank correlation coefficients between each parameter and outputs such as <i>R</i><sub>0</sub> or the number infected, after removing the effects of the other parameters. Unlike local indices, this captures nonlinear, monotone effects across the whole plausible parameter range.</li>
+        <li><b>Stochastic stability:</b> adding environmental noise to the model as white-noise perturbations, which turns it into a system of stochastic differential equations. Using stochastic Lyapunov functions, I find conditions under which the equilibria remain stable under noise, and confirm them with numerical simulations of sample paths.</li>
+      </ul>
+      <p>Together, these methods show which parameters are the most effective targets for control, and how reliable the model&rsquo;s conclusions are when the data are uncertain.</p>
+    </div>
+  </li>
+  <!-- ============ THEME: Delay differential equations ========================= -->
+  <li><b>Delay differential equations</b><span>Incubation and gestation delays, the characteristic equation, critical delays and delay-induced Hopf bifurcation.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-7">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-7" hidden>
+      <p>Many biological processes do not act instantly: an infected person becomes infectious only after an incubation period, and a predator&rsquo;s consumption turns into new predators only after a gestation period. I build these lags into the models as time delays &tau;, which turns ordinary differential equations into delay differential equations. Their state depends on the past, so the phase space is infinite-dimensional and the characteristic equation is transcendental, with infinitely many roots.</p>
+      <!-- ↓ Animation: delayed SIRS flow diagram. -->
+      <div data-anim="research-interest/07-delay-sirs-diagram"></div>
+      <!-- ↓ Bulleted list of methods for this theme. Each <li><b>Topic:</b> text</li> is one bullet. -->
+      <ul>
+        <li><b>Stability analysis:</b> linearising about an equilibrium gives a characteristic equation of the form <i>P</i>(&lambda;) + <i>Q</i>(&lambda;)<i>e</i><sup>&minus;&lambda;&tau;</sup> = 0. I look for purely imaginary roots &lambda; = <i>i&omega;</i>, find the critical delays &tau;<sub><i>k</i></sub> at which they appear, and check the transversality condition.</li>
+        <li><b>Delay-induced oscillations:</b> as &tau; passes a critical value, a stable equilibrium can lose stability through a Hopf bifurcation, producing sustained oscillations, which in a population appear as recurring outbreaks. <a href="https://doi.org/10.1038/s41598-025-02778-2" target="_blank" rel="noopener">Sci. Rep. 2025</a>, <a href="https://doi.org/10.1016/j.matcom.2026.08.035" target="_blank" rel="noopener">MATCOM 2027</a></li>
+        <li><b>Delay with memory:</b> fractional-order systems with delay, where both the order &alpha; and the delay &tau; act as bifurcation parameters. <a href="https://doi.org/10.1007/s40435-026-02015-2" target="_blank" rel="noopener">IJDC 2026</a>, <a href="https://doi.org/10.1140/epjs/s11734-024-01221-3" target="_blank" rel="noopener">EPJ ST</a></li>
+      </ul>
+    </div>
+  </li>
+  <!-- ============ THEME: Stochastic differential equations ==================== -->
+  <li><b>Stochastic differential equations</b><span>Environmental noise, Itô calculus, extinction and persistence, and stationary distributions.</span>
+    <!-- ↓ "Details" button: aria-controls names the panel it opens (handled by animations/research-interest/themes-details-panels.js). -->
+    <button type="button" class="th-btn" aria-expanded="false" aria-controls="th-8">Details</button>
+    <!-- ↓ The details panel, hidden until the button is clicked. Opening it also starts its animation. -->
+    <div class="th-more" id="th-8" hidden>
+      <p>Real populations are exposed to random fluctuations in weather, contact patterns and behaviour, so transmission and other rates are never exactly constant. I model this environmental noise by perturbing the parameters with white noise, which turns a deterministic model d<i>x</i> = <i>f</i>(<i>x</i>)&nbsp;d<i>t</i> into a system of It&ocirc; stochastic differential equations,</p>
+      <!-- ↓ A centred equation. -->
+      <p style="text-align:center">d<i>x</i> = <i>f</i>(<i>x</i>)&nbsp;d<i>t</i> + <i>g</i>(<i>x</i>)&nbsp;d<i>W</i>(<i>t</i>),</p>
+      <p>where <i>W</i>(<i>t</i>) is a Brownian motion. The questions then become probabilistic: does the infection die out with probability one, persist on average, or settle into a stationary distribution?</p>
+      <!-- ↓ Animation: stochastic SIS sample paths. -->
+      <div data-anim="research-interest/08-stochastic-sis"></div>
+      <!-- ↓ Bulleted list of methods for this theme. Each <li><b>Topic:</b> text</li> is one bullet. -->
+      <ul>
+        <li><b>Well-posedness:</b> existence and uniqueness of a global positive solution, so that the model stays biologically meaningful for all time.</li>
+        <li><b>Extinction and persistence:</b> threshold conditions, often expressed through a stochastic reproduction number, under which the disease goes extinct almost surely or persists in mean. Noise can change the answer: strong enough noise may drive an infection to extinction even when the deterministic <i>R</i><sub>0</sub> exceeds 1.</li>
+        <li><b>Stochastic stability:</b> conditions, found with stochastic Lyapunov functions, under which the equilibria remain stable in the presence of noise. <a href="https://doi.org/10.1016/j.chaos.2022.112291" target="_blank" rel="noopener">Chaos Solitons Fractals 2022</a>, <a href="https://doi.org/10.1016/j.rico.2024.100419" target="_blank" rel="noopener">RICO 2024</a></li>
+        <li><b>Simulation:</b> numerical sample paths computed with the Euler&ndash;Maruyama and Milstein schemes, to illustrate and test the analytical results.</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+</div>
+<!-- ↓ End of the page's own content. -->
+</main>
+<!-- ============ END OF MAIN CONTENT ========================================= -->
+<!-- ============ FOOTER ====================================================== -->
+<!-- ↓ Footer at the bottom of every page: copyright line (the year in <span id="yr"> is updated automatically by site.js) and your e-mail address. -->
+<footer><div><span>&copy; <span id="yr">2026</span> Suvankar Majee</span><span>Department of Mathematics, IIT Kanpur &middot; <a href="mailto:suvankarmajee2@gmail.com">suvankarmajee2@gmail.com</a></span></div></footer>
+<!-- When you change assets/js/site.js or assets/css/style.css, raise the ?v= number on every page so browsers load the new file. -->
+<!-- ↓ Shared script: builds the top menu, the publication filter and the recent papers on Home. -->
+<script src="../assets/js/site.js?v=8"></script>
+<!-- ↓ End of the BODY. -->
+</body>
+</html>

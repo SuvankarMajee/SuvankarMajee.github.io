@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Sensitivity analysis: PRCC and sensitivity indices of R0
+   Used on: research/research-interest.html
+   Each comment explains the line directly below it.
+   ========================================================================== */
+
+/* Sensitivity analysis: PRCC and sensitivity indices */
+/* The block holding this animation's text and drawings: small space above and below. */
+.sens{margin:4px 0 12px}
+/* The R0 formula (<p class="sens-eq">): centred, 18 px. */
+.sens-eq{text-align:center;font-size:18px;margin:6px 0 10px!important}
+/* The bold captions above each drawing ("Global sensitivity (PRCC)...", "Local sensitivity indices..."): extra space above. */
+.sens-cap{margin-top:18px!important}
+/* White rounded box around each drawing, at most 820 px wide, centred. */
+.sens-box{max-width:820px;margin:10px auto 0;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:10px}
+/* The drawing areas (<canvas id="prccCv"> and <canvas id="idxCv">) fill their boxes' width. */
+.sens-box canvas{display:block;width:100%}

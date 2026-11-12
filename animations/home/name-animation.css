@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Name in the banner: each letter forms out of a blur
+   Used on: index.html
+   Each comment explains the line(s) directly below it.
+   ========================================================================== */
+
+/* Name animation: each letter forms out of a blur, like a pattern emerging */
+/* The animation "form-in", described as three moments in time: */
+@keyframes form-in{
+  /* 0% (start): invisible, very blurred, mint, a little lower and 15% bigger; */
+  0%  {opacity:0;filter:blur(10px);color:#7FD1BE;transform:translateY(.25em) scale(1.15)}
+  /* 60%: visible, almost sharp, still mint; */
+  60% {opacity:1;filter:blur(1px);color:#7FD1BE}
+  /* 100% (end): sharp, normal colour, normal size and place. */
+  100%{opacity:1;filter:none;color:inherit;transform:none}
+}
+/* Each letter (<span class="ch">, created by name-animation.js) starts invisible and plays form-in once over 0.9 s, keeping the end state. */
+.name-anim .ch{display:inline-block;opacity:0;animation:form-in .9s cubic-bezier(.2,.7,.3,1) forwards}
+/* Each word (<span class="w">) is kept together so it never breaks across two lines. */
+.name-anim .w{display:inline-block;white-space:nowrap}
+/* Reduced motion: letters are simply shown, no animation. */
+@media (prefers-reduced-motion:reduce){.name-anim .ch{opacity:1;animation:none}}
